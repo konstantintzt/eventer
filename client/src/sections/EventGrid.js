@@ -2,8 +2,10 @@ import * as React from 'react';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 
 function EventGrid() {
+    const theme = useTheme();
     return (
         <Box sx={{ width: '100%'}}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
