@@ -5,7 +5,7 @@ function Header() {
     return (
       <>
         <Typography variant="h1">
-            eventer
+            eventer.
         </Typography>
         <Typography variant="h3">
             Discover LA
