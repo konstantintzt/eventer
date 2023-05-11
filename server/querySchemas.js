@@ -8,4 +8,8 @@ const fetchEventsSchema = Joi.object({
     before: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER)
 })
 
-module.exports = { fetchEventsSchema }
+const fetchSingleEventSchema = Joi.object({
+    uuid: Joi.string().guid().required()
+}).unknown(false)
+
+module.exports = { fetchEventsSchema, fetchSingleEventSchema }
