@@ -1,6 +1,6 @@
 const Joi = require("joi")
 
-const fetchEventsSchema = Joi.object({
+const fetchEventsQuerySchema = Joi.object({
     organizer: Joi.string(),
     zip: Joi.number().integer().min(1).max(99950),
     type: Joi.number().integer().min(0).max(5),
@@ -8,8 +8,14 @@ const fetchEventsSchema = Joi.object({
     before: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER)
 })
 
-const fetchSingleEventSchema = Joi.object({
+const fetchSingleEventParamsSchema = Joi.object({
     uuid: Joi.string().guid().required()
 }).unknown(false)
 
-module.exports = { fetchEventsSchema, fetchSingleEventSchema }
+const addEventAttendeeBodySchema = Joi.object({
+    user: Joi.string().required(),
+    uuid: Joi.string().guid().required(),
+
+})
+
+module.exports = { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema }
