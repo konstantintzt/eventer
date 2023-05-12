@@ -5,8 +5,9 @@ const fetchEventsQuerySchema = Joi.object({
     zip: Joi.number().integer().min(1).max(99950),
     type: Joi.number().integer().min(0).max(5),
     after: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER),
-    before: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER)
-})
+    before: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER),
+    search: Joi.string()
+}).unknown(false)
 
 const fetchSingleEventParamsSchema = Joi.object({
     uuid: Joi.string().guid().required()
