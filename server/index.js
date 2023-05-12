@@ -32,8 +32,16 @@ async function main() {
         else {
             if (value.before != undefined) value.date = { $lte: value.before }
             if (value.after != undefined) value.date = { ...value.date, $gte: value.after }
+            if (value.search != undefined) {
+                value.$or = [
+                    { title: { $regex: new RegExp(value.search, "i") } },
+                    { description: { $regex: new RegExp(value.search, "i") } }
+                ]
+            }
+            value.search = undefined
             value.before = undefined
             value.after = undefined
+            console.log(value.$or)
             const results = await database.collection("events").find(value).toArray()
             return res.status(200).json(results)
         }
