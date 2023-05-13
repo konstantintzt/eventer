@@ -18,5 +18,20 @@ const addEventAttendeeBodySchema = Joi.object({
     uuid: Joi.string().guid().required(),
 
 })
+const addNewEvent = Joi.object(
+    {
+        organizer: Joi.string().required(),
+        address: Joi.string().required(),
+        zip: Joi.number().integer().min(1).max(99950).required(),
+        type:  Joi.number().integer().min(0).max(5).required(),
+        date: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER).required(),
+        description: Joi.string().required(),
+        title: Joi.string().required(),
+    }
+)
 
-module.exports = { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema }
+module.exports = { 
+    fetchEventsQuerySchema, 
+    fetchSingleEventParamsSchema, 
+    addEventAttendeeBodySchema,
+    addNewEvent }
