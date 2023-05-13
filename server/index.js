@@ -1,6 +1,6 @@
 const express = require("express")
 const dotenv = require("dotenv")
-const { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema } = require("./querySchemas")
+const { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema, addNewEvent } = require("./querySchemas")
 const { MongoClient } = require("mongodb")
 const { joi } = require("joi")
 const bodyParser = require("body-parser")
@@ -11,6 +11,8 @@ const mongoURI = process.env.MONGO_URI
 
 const app = express()
 
+app.use(bodyParser.json())
+    
 async function main() {
     const mongoClient = new MongoClient(mongoURI)
     var database = undefined
@@ -25,32 +27,18 @@ async function main() {
         process.exit(-1)
     }
 
-    app.use(bodyParser.json())
-    
-    app.post("/newEvent", async (req, res) => {
 
-        try{
-            let newEvent = req.body
-            const db = mongoClient.db("eventer-dev")
-            const events = db.collection("events")
-            const doc = {
-                organizer: newEvent["organizer"],
-                address: newEvent["address"],
-                zip: newEvent["zip"],
-                type: newEvent["type"],
-                date: newEvent["date"],
-                desc: newEvent["desc"]
+    app.post("/newEvents", async (req, res) => {
+        const { error, value } = addNewEvent.validate(req.body)
+        if (error) return res.status(400).json({ error: error.details[0].message })
+        else{
+            console.log(req.body)
+            const results = await database.collection("events").insertOne({...value, uuid: crypto.randomUUID()})
+            return res.status(200).json(results)
             }
-            console.log(doc)
-            console.log(newEvent)
-            await events.insertOne(doc)
-        }
-        finally {
-            res.sendStatus(200)
-        }
-    })
-    }
+        })
 
+        
     app.get("/events", async (req, res) => {
         const { error, value } = fetchEventsQuerySchema.validate(req.query)
         if (error) return res.status(400).json({ error: error.details[0].message })
