@@ -4,6 +4,7 @@ const { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBo
 const { MongoClient } = require("mongodb")
 const { joi } = require("joi")
 const bodyParser = require("body-parser")
+const { v4: uuidv4 } = require('uuid')
 
 dotenv.config()
 
@@ -33,8 +34,8 @@ async function main() {
         if (error) return res.status(400).json({ error: error.details[0].message })
         else{
             console.log(req.body)
-            const results = await database.collection("events").insertOne({...value, uuid: uuid()})
-            return res.status(200)
+            const results = await database.collection("events").insertOne({...value, uuid: uuidv4()})
+            return res.status(200).json({ success: true })
             }
         })
 
