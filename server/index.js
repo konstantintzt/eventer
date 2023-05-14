@@ -1,8 +1,10 @@
 const express = require("express")
 const dotenv = require("dotenv")
-const { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema } = require("./querySchemas")
+const { fetchEventsQuerySchema, fetchSingleEventParamsSchema, addEventAttendeeBodySchema, addNewEvent } = require("./querySchemas")
 const { MongoClient } = require("mongodb")
+const { joi } = require("joi")
 const bodyParser = require("body-parser")
+const { v4: uuidv4 } = require('uuid')
 
 dotenv.config()
 
@@ -10,6 +12,8 @@ const mongoURI = process.env.MONGO_URI
 
 const app = express()
 
+app.use(bodyParser.json())
+    
 async function main() {
     const mongoClient = new MongoClient(mongoURI)
     var database = undefined
@@ -24,8 +28,18 @@ async function main() {
         process.exit(-1)
     }
 
-    app.use(bodyParser.json())
 
+    app.post("/newEvents", async (req, res) => {
+        const { error, value } = addNewEvent.validate(req.body)
+        if (error) return res.status(400).json({ error: error.details[0].message })
+        else{
+            console.log(req.body)
+            const results = await database.collection("events").insertOne({...value, uuid: uuidv4()})
+            return res.status(200).json({ success: true })
+            }
+        })
+
+        
     app.get("/events", async (req, res) => {
         const { error, value } = fetchEventsQuerySchema.validate(req.query)
         if (error) return res.status(400).json({ error: error.details[0].message })
