@@ -33,8 +33,8 @@ async function main() {
         if (error) return res.status(400).json({ error: error.details[0].message })
         else{
             console.log(req.body)
-            const results = await database.collection("events").insertOne({...value, uuid: crypto.randomUUID()})
-            return res.status(200).json(results)
+            const results = await database.collection("events").insertOne({...value, uuid: uuid()})
+            return res.status(200)
             }
         })
 
