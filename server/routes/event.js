@@ -10,8 +10,13 @@ router.get("/:uuid", async (req, res) => {
     const { error, value } = fetchSingleEventParamsSchema.validate(req.params)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
+        console.log("uuid")
+        console.log(value)
+        const attendees = await database.getDB().collection("attendances").find(value).toArray()
         const results = await database.getDB().collection("events").findOne(value)
-        return res.status(200).json(results)
+        console.log(results)
+        console.log(attendees)
+        return res.status(200).json({event: results, attendees: attendees})
     }
 })
 
