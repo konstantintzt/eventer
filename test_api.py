@@ -32,15 +32,13 @@ end_points =  {
         [
             {
                 "type":"get",
-                "url":"/8fc1e95c-3ce5-4167-a75d-3accc5403c1c",
-                "data":"",
+                "url":"/44df4b3d-2ea8-4334-b836-0bd8e64c2aeb",
                 "response":200
             },
             {
                 "type":"get",
                 "url":"/44df4b3d-2ea8-4334-b836-0bd8e64c2aec",
-                "data":"",
-                "response":200
+                "response":400
             },
             {
                 "type":"post",
@@ -103,18 +101,16 @@ end_points =  {
     }
 
 def test_client():    
+    apiz = requests.session()
     for i in end_points.keys():
         for x in end_points[i]:
             if (x["type"] == "post"):
                 # print(url+i+x["url"])
                 # print(x["data"])
                 response = requests.post(url+i+x["url"], data=json.dumps(x["data"]),  headers={"Content-Type": "application/json"})
-                # print(response.json())
             if (x["type"] == "get"):
                 try:
-                    print(x)
                     response = requests.get(url+i+x["url"], data=x["data"])
-                    print(response.json())
                 except KeyError:
                     continue
             if (response.status_code != x["response"]):
