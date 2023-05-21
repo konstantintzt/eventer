@@ -24,6 +24,7 @@
     "express-session": "^1.17.3",
     "flash": "^1.1.0",
     "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.3.0",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
