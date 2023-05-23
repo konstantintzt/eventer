@@ -45,12 +45,15 @@ const opts = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('Bearer'),
     // jwtFromRequest: ExtractJWT.fromHeader("Authorization"),
     secretOrKey: "foobar",
+    passReqToCallback: true
   };
 
 passport.use(
     'jwt',
-    new JWTstrategy (opts, (jwt_payload, done) => {
+    new JWTstrategy (opts, (req, jwt_payload, done) => {
+        console.log(req)
         console.log("foo")
+        req.user = "foobar"
         done(null, jwt_payload)
     })
 );
@@ -96,7 +99,7 @@ router.get( '/google/failure',
 
 
 router.get('/test', (req, res, next) => {
-    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    passport.authenticate('jwt', { session: true}, (err, user, info) => {
     if (err) {
         console.log(err);
         res.status(401).send("foobar");
@@ -105,12 +108,13 @@ router.get('/test', (req, res, next) => {
         console.log(info.message);
         res.status(401).send(info.message);
     } 
-    // else {
-    //     console.error('jwt id and username do not match');
-    //     res.status(403).send('username and jwt token do not match');
-    // }
+    else {
+        console.error('jwt id and username do not match');
+        res.status(403).send('username and jwt token do not match');
+    }
     })(req, res, next);
-    return res.status(200)
+    console.log(req.user)
+    return res.status(200).json({foo:"bar"})
 });
 
 module.exports = router
