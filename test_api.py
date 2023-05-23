@@ -120,5 +120,17 @@ def test_client():
     print("passed all test")
     return 1
 
+
+def test_oauth():
+    apiz = requests.session()
+    headers = {"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQ3MDkzNDEsImV4cCI6MTY4NDcxMjk0MX0.E0Aem8jOCuUmQQhuO8LjItiKFtY9puljtB4gj7mmF78"}
+    # headers = {"Authorization":""+a["token_type"]+" "+a["access_token"]+""}
+    b = apiz.get("http://127.0.0.1:2902/auth/test", headers=headers)
+    print(b)
+    print(b.content)
+
+
+
 if __name__ == "__main__":
-    test_client()
+    # test_client()
+    test_oauth()

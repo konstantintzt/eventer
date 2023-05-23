@@ -2,6 +2,8 @@ const express = require("express")
 const passport = require("passport")
 const database = require("../database")
 const jwt =  require('jsonwebtoken');
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 const { ref } = require("joi");
 
 const router = express.Router()
@@ -39,6 +41,20 @@ passport.use(new GoogleStrategy({
     }
 ));
 
+const opts = {
+    jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('Bearer'),
+    // jwtFromRequest: ExtractJWT.fromHeader("Authorization"),
+    secretOrKey: "foobar",
+  };
+
+passport.use(
+    'jwt',
+    new JWTstrategy (opts, (jwt_payload, done) => {
+        console.log("foo")
+        done(null, jwt_payload)
+    })
+);
+
 
 router.get('/google',
 passport.authenticate('google', { scope:
@@ -56,15 +72,46 @@ router.get( '/google/callback',
 router.get( '/google/success', (req, res) => {
     console.log(req.user)
     console.log(JSON.parse(req.sessionStore.sessions[Object.keys(req.sessionStore.sessions)[0]])["passport"])
-    return res.status(200).json({success: true})
+
+    const user = JSON.parse(req.sessionStore.sessions[Object.keys(req.sessionStore.sessions)[0]])["passport"]
+
+    const token = jwt.sign({ id: user.id }, "foobar", {
+        expiresIn: 60 * 60,
+      })
+    return res.status(200).json({success: true, token})
     }
 )
 
 router.get( '/google/failure',    
-passport.authenticate('google'),
-async (req, res) => {
+    async (req, res) => {
+        return res.status(200)
+    }
+)
+
+// router.get( '/test',    
+//     passport.authenticate( 'jwt'),{ session: false },
+//     (req, res) => {
+//     }
+// )
+
+
+router.get('/test', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    if (err) {
+        console.log(err);
+        res.status(401).send("foobar");
+    }
+    if (info !== undefined) {
+        console.log(info.message);
+        res.status(401).send(info.message);
+    } 
+    // else {
+    //     console.error('jwt id and username do not match');
+    //     res.status(403).send('username and jwt token do not match');
+    // }
+    })(req, res, next);
     return res.status(200)
-})
+});
 
 module.exports = router
 
