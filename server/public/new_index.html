@@ -1,0 +1,46 @@
+<!-- <html>
+    <head>
+        <meta name="google-signin-client_id" content="588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<script>
+    function onSignIn(googleUser) {
+        console.log('Signing in');
+        console.log(googleUser.getAuthResponse());
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://b8db-2607-f010-2a7-c-253-5e26-ffe9-4603.ngrok-free.app/test/verify_token');
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.onload = function() {
+        };
+        xhr.send(JSON.stringify(googleUser.getAuthResponse()));
+    }    
+</script>
+
+
+
+</body></html> -->
+
+
+<html>
+<head>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com">
+    <script>
+        function onSignIn(googleUser) {
+            console.log(googleUser.getAuthResponse().id_token)
+        }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+</body>
+</html>

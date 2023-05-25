@@ -1,10 +1,10 @@
 const express = require("express")
 const database = require("../database")
 const { addEventAttendeeBodySchema } = require("../requestSchemas")
-
+const passport = require("passport")
 const router = express.Router()
 
-router.post("/", async (req, res) => {
+router.post("/", passport.authenticate( 'jwt',{ session: false }),  async (req, res) => {
     const { error, value } = addEventAttendeeBodySchema.validate(req.body)
     console.log(req.body)
     if (error) return res.status(400).json({ error: error.details[0].message })
