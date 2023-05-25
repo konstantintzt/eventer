@@ -53,7 +53,6 @@ passport.use(
     new JWTstrategy (opts, (req, jwt_payload, done) => {
         console.log(req)
         console.log("foo")
-        req.user = "foobar"
         done(null, jwt_payload)
     })
 );
@@ -91,31 +90,31 @@ router.get( '/google/failure',
     }
 )
 
-// router.get( '/test',    
-//     passport.authenticate( 'jwt'),{ session: false },
-//     (req, res) => {
+router.get( '/test',    
+    passport.authenticate( 'jwt',{ session: false }),
+    (req, res) => {
+        return res.status(200).json({foo:"bar"})
+    }
+)
+
+
+// router.get('/test', (req, res, next) => {
+//     passport.authenticate('jwt', { session: false }, (err, user, info) => {
+//     if (err) {
+//         console.log(err);
+//         res.status(401).send("foobar");
 //     }
-// )
-
-
-router.get('/test', (req, res, next) => {
-    passport.authenticate('jwt', { session: true}, (err, user, info) => {
-    if (err) {
-        console.log(err);
-        res.status(401).send("foobar");
-    }
-    if (info !== undefined) {
-        console.log(info.message);
-        res.status(401).send(info.message);
-    } 
-    else {
-        console.error('jwt id and username do not match');
-        res.status(403).send('username and jwt token do not match');
-    }
-    })(req, res, next);
-    console.log(req.user)
-    return res.status(200).json({foo:"bar"})
-});
+//     if (info !== undefined) {
+//         console.log(info.message);
+//         res.status(401).send(info.message);
+//     } 
+//     // else {
+//     //     console.error('jwt id and username do not match');
+//     //     res.status(403).send('username and jwt token do not match');
+//     // }
+//     })(req, res, next);
+//     return res.status(200)
+// });
 
 module.exports = router
 
