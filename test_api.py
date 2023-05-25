@@ -3,7 +3,7 @@ import requests, json
 import jwt
 
 
-url="http://localhost:2902"
+url="http://localhost:2512"
 
 end_points =  {
     "/attend":
@@ -125,7 +125,7 @@ def test_oauth_old():
     apiz = requests.session()
     headers = {"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQ4NzMyMTEsImV4cCI6MTY4NDg3NjgxMX0.u9O4aFa1MRuhJrQ0f5AK2Xntmw9A78mzpBLnz2s643c"}
     # headers = {"Authorization":""+a["token_type"]+" "+a["access_token"]+""}
-    b = apiz.get("http://127.0.0.1:2902/auth/test", headers=headers)
+    b = apiz.get("http://localhost:2512/auth/test", headers=headers)
     print(b)
     print(b.content)
 
@@ -133,11 +133,11 @@ def test_oauth_new():
     apiz = requests.session()
 
     data = {
-        "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkOWE1ZWY1YjEyNjIzYzkxNjcxYTcwOTNjYjMyMzMzM2NkMDdkMDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTQxNzAyMDc3ODYzMDk3NTEwMzciLCJlbWFpbCI6InNlYW50YW5nMDAxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiV0FHTmlnazdIQThzYldObmNTajV3dyIsIm5vbmNlIjoiZm9vYmEiLCJuYW1lIjoiU2VhbiBUYW5nIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBY0hUdGZ3b1EzZjJvU2U0LW9aTDgxemp4Q0J3ckFIUF9acDZKN25QT01sPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlNlYW4iLCJmYW1pbHlfbmFtZSI6IlRhbmciLCJsb2NhbGUiOiJlbiIsImlhdCI6MTY4NTAxMjMxNiwiZXhwIjoxNjg1MDE1OTE2LCJqdGkiOiJmNTA1NDFlNmJmMGM5YzAzOGQ2YWJhODNhZTA2MGMwZGI1MjNmYmU3In0.z_8U9Wde3z2oE4UM_CTC3iwPydSBx2fA32CfWP_bApJikgmLp1Vb7YXTFJ8NmPBNstNqt0ln4mgB_BHxB8tW9KbosbDPe4ymh2sQl9vjxW98Eve1pnxReJk9P9Y3naCd0rZL8TsemzNaw8jWyeU6QLwtuhTNr7evmx6QMDa-1GzZeagFtEQ0-OtPtB6fTD_rTLOMwTqTp1sQJu23FBwEZiMeyo-HdGRSMwKSy3hvvPzXhT2Brqg4MQsenAvfJyfaBZck1yF64TRWx-H_HD2ekkSKr4-4eTYJf3FKfmWNTUI-YnhwaLbdhYsRYftzDaRG5U_w3fkVuxOHbglNC5ZoGA"
+        "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkOWE1ZWY1YjEyNjIzYzkxNjcxYTcwOTNjYjMyMzMzM2NkMDdkMDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDMwMzM0MzEwNzE4MTM0MTcxMzUiLCJoZCI6ImcudWNsYS5lZHUiLCJlbWFpbCI6InNlYW50YW5nMDAxQGcudWNsYS5lZHUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6ImMtS3JiRmRhOHlMV3B4LTkwcjhydXciLCJub25jZSI6ImZvb2JhIiwibmFtZSI6IlNFQU4gVEFORyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQWNIVHRjRmRZTU9mZk94ZktJb0VkX1pLT3Zqd3NwWmRKUVZMcXVkMWVzOT1zOTYtYyIsImdpdmVuX25hbWUiOiJTRUFOIiwiZmFtaWx5X25hbWUiOiJUQU5HIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2ODUwNDk2MjUsImV4cCI6MTY4NTA1MzIyNSwianRpIjoiYzk1NmQ5NWM0N2Q3ODk1NjdlN2E1NTA1OWQ2YTQ4ZTE0Zjc4ZDhiNiJ9.BMFtDjOLme2iftZSov3LAXdz15pDhN3F9q620_D4oPaBxGwdADd5e0cuatsoqQfgEuinAqxiJONCLKrE86aN0rVTmRRJhxSJKPrcet47Gsoh78GqiWLR6uPZeKnvn5L9MKe3osM35V6KrlVMbtk-r-I6RmFp8fkFcC4GaklPQUDo5v-GIu3A-3d75pVFha9RMt2mkb-WZhVU-IGG8UwWcCNGs54mnXUkJX77bPs2KqN6aLnbzokX0RUFsIeJsOVQ22ZJwwi9sImhYXL1jS4WKeSOIv9tFjm96Bt2e4W1WoTNErtoBXK7ovFmMr_GVzZ_Rh4dvhF6Ax1DPjlU7dAZ1w"
         }
 
 
-    b = apiz.post("http://127.0.0.1:2902/auth/verify_token", json=data)
+    b = apiz.post("http://localhost:2512/auth/verify_token", json=data)
     b = b.json()
     print(type(b))
     print(b)

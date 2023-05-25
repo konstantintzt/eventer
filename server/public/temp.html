@@ -23,7 +23,7 @@
     if (params && params['access_token']) {
       var xhr = new XMLHttpRequest();
       xhr.open('POST',
-          'https://b8db-2607-f010-2a7-c-253-5e26-ffe9-4603.ngrok-free.app/auth/verify_token');
+          'http://tzantchev.com:2512/auth/verify_token');
       xhr.onreadystatechange = function (e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
           console.log(xhr.response);
