@@ -1,59 +1,67 @@
-import * as React from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
-
-import bagus_prakoso from '../images/bagus_prakoso.jpg';
 import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
 
 const styles = {
     paperContainer: {
         backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: "repeat",
+        backgroundRepeat: 'repeat',
         backgroundSize: '300px',
         width: '100%',
-        height: '100vh'
+        height: '100vh',
     },
     gridContainer: {
         backgroundColor: alpha('#FFFFFF', 0.7),
         width: '80%',
         height: '100vh',
         margin: 'auto',
-        borderRadius: '0px'
+        borderRadius: '0px',
     },
     darkenBackground: {
         width: '100%',
         height: '100vh',
-        backgroundColor: alpha('#000000', 0)
-    }
+        backgroundColor: alpha('#000000', 0),
+    },
 };
 
 function EventGrid() {
+    const navigate = useNavigate();
+
+    const handleEventClick = (id) => {
+        navigate(`/event/${id}`);
+    };
+
     return (
         <Paper container style={styles.paperContainer}>
             <Paper container style={styles.darkenBackground}>
-                <Paper container style={styles.gridContainer} position='fixed' elevation={0}>
-                    <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin='auto'>
+                <Paper container style={styles.gridContainer} position="fixed" elevation={0}>
+                    <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
                         <Grid item>
                             <EventCard
-                            url='https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg'
-                            title='This is a cat.'
-                            desc='This is a description of a cat.'
-                                />
+                                id={1}
+                                url="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                                title="This is a cat."
+                                desc="This is a description of a cat."
+                                onClick={() => handleEventClick(1)}
+                            />
                         </Grid>
                         <Grid item>
                             <EventCard
-                            title='This card has no image.'
-                            desc='How sad...'
-                                />
+                                id={2}
+                                title="This card has no image."
+                                desc="How sad..."
+                                onClick={() => handleEventClick(2)}
+                            />
                         </Grid>
                     </Grid>
                 </Paper>
             </Paper>
         </Paper>
     );
-  }
-  
-  export default EventGrid;  
+}
+
+export default EventGrid;
