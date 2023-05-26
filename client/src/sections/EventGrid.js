@@ -1,12 +1,8 @@
 import * as React from 'react';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
-import Header from './Header'; // Import the Header component
-
-import bagus_prakoso from '../images/bagus_prakoso.jpg';
 import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
 
 const styles = {

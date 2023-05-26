@@ -3,7 +3,6 @@ import { TextField, Button } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
-import Header from './sections/Header'; // Import the Header component
 
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 

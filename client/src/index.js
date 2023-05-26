@@ -10,16 +10,14 @@ import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/event-post" element={<EventPostPage />} />
-          {/* Insert other routes here */}
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/event-post" element={<EventPostPage />} />
+        {/* Insert other routes here */}
+      </Routes>
+    </Router>
   );
 };
 
@@ -31,5 +29,5 @@ const Home = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<ThemeProvider theme={theme}>   <App />    </ThemeProvider>, document.getElementById('root'));
 reportWebVitals();
