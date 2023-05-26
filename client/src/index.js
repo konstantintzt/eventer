@@ -5,23 +5,31 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './Themes';
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
-import EventPostPage from './sections/EventPostPage.js';
+import EventPostPage from './EventPostPage.js';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Router>
-      <React.StrictMode>
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<EventGrid />} />
-          <Route path='/event-post' element={<EventPostPage />} />
-          {/* insert here other routes in the future*/}
+          <Route path="/" element={<Home />} />
+          <Route path="/event-post" element={<EventPostPage />} />
+          {/* Insert other routes here */}
         </Routes>
-      </React.StrictMode>
-    </Router>
-  </ThemeProvider>,
-  document.getElementById('root')
-);
+      </Router>
+    </ThemeProvider>
+  );
+};
 
+const Home = () => {
+  return (
+    <div>
+      <EventGrid />
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
 reportWebVitals();

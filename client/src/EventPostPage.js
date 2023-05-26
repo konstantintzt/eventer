@@ -1,46 +1,13 @@
 import React, { useState } from 'react';
-import { TextField, Button, makeStyles } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
-import Header from './Header'; // Import the Header component
+import Header from './sections/Header'; // Import the Header component
 
-import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
-
-const useStyles = makeStyles((theme) => ({
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '400px',
-    margin: '0 auto',
-    marginTop: theme.spacing(4),
-  },
-  formField: {
-    marginBottom: theme.spacing(2),
-  },
-  paperContainer: {
-    backgroundImage: `url(${katerina_stepanenko})`,
-    backgroundRepeat: 'repeat',
-    backgroundSize: '300px',
-    width: '100%',
-    height: '100vh',
-  },
-  gridContainer: {
-    backgroundColor: alpha('#FFFFFF', 0.7),
-    width: '80%',
-    height: '100vh',
-    margin: 'auto',
-    borderRadius: '0px',
-  },
-  darkenBackground: {
-    width: '100%',
-    height: '100vh',
-    backgroundColor: alpha('#000000', 0),
-  },
-}));
+import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 
 const EventPostPage = () => {
-  const classes = useStyles();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -62,14 +29,41 @@ const EventPostPage = () => {
   };
 
   return (
-    <Paper container className={classes.paperContainer}>
-      <Paper container className={classes.darkenBackground}>
-        <Paper container className={classes.gridContainer} position="fixed" elevation={0}>
+    <div>
+      <Paper
+        style={{
+          backgroundImage: `url(${katerina_stepanenko})`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '300px',
+          width: '100%',
+          height: '100vh',
+        }}
+      >
+        <Paper
+          style={{
+            width: '80%',
+            height: '100vh',
+            margin: 'auto',
+            borderRadius: '0px',
+            backgroundColor: alpha('#FFFFFF', 0.7),
+          }}
+          position="fixed"
+          elevation={0}
+        >
           <Grid container justifyContent="center" alignItems="top" height="100%">
             <Grid item xs={12} md={6}>
-              <form className={classes.formContainer} onSubmit={handleSubmit}>
+              <form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  maxWidth: '400px',
+                  margin: '0 auto',
+                  marginTop: '4rem',
+                }}
+                onSubmit={handleSubmit}
+              >
                 <TextField
-                  className={classes.formField}
+                  style={{ marginBottom: '2rem' }}
                   label="Event Title"
                   name="title"
                   value={eventData.title}
@@ -77,7 +71,7 @@ const EventPostPage = () => {
                   required
                 />
                 <TextField
-                  className={classes.formField}
+                  style={{ marginBottom: '2rem' }}
                   label="Event Description"
                   name="description"
                   value={eventData.description}
@@ -87,7 +81,7 @@ const EventPostPage = () => {
                   rows={4}
                 />
                 <TextField
-                  className={classes.formField}
+                  style={{ marginBottom: '2rem' }}
                   label="Event Date"
                   type="date"
                   name="date"
@@ -99,7 +93,7 @@ const EventPostPage = () => {
                   }}
                 />
                 <TextField
-                  className={classes.formField}
+                  style={{ marginBottom: '2rem' }}
                   label="Event Time"
                   type="time"
                   name="time"
@@ -121,7 +115,7 @@ const EventPostPage = () => {
           </Grid>
         </Paper>
       </Paper>
-    </Paper>
+    </div>
   );
 };
 

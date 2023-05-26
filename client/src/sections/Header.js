@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import EventPostPage from './EventPostPage';
+import EventPostPage from '../EventPostPage';
 import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
