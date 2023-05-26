@@ -3,17 +3,37 @@ import { TextField, Button } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
-import { useParams } from 'react-router-dom';
-
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${katerina_stepanenko})`,
+    backgroundRepeat: 'repeat',
+    backgroundSize: '300px',
+    width: '100%',
+    height: '100vh',
+  },
+  gridContainer: {
+    backgroundColor: alpha('#FFFFFF', 0.7),
+    width: '80%',
+    height: '100vh',
+    margin: 'auto',
+    borderRadius: '0px',
+  },
+  darkenBackground: {
+    width: '100%',
+    height: '100vh',
+    backgroundColor: alpha('#000000', 0),
+  },
+};
+
 const EventPostPage = () => {
-  const { eventId } = useParams();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
     date: '',
-    time: '',
+    zip: '',
+    type: 1,
   });
 
   const handleInputChange = (e) => {
@@ -25,15 +45,8 @@ const EventPostPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //perform form submission logic like sending data to backend or updating in a database
-    console.log(`Updating event with ID: ${eventId}`, eventData);
-    // reset the form fields after submission
-    setEventData({
-      title: '',
-      description: '',
-      date: '',
-      time: '',
-    });
+    // Perform form submission logic like send data to backend or store in a database
+    console.log(eventData);
   };
 
   return (
@@ -102,21 +115,30 @@ const EventPostPage = () => {
                 />
                 <TextField
                   style={{ marginBottom: '2rem' }}
-                  label="Event Time"
-                  type="time"
-                  name="time"
-                  value={eventData.time}
+                  label="Event ZIP"
+                  name="zip"
+                  value={eventData.zip}
                   onChange={handleInputChange}
                   required
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
                   inputProps={{
-                    step: 300, // 5 minutes
+                    pattern: '\\d{5}',
+                  }}
+                />
+                <TextField
+                  style={{ marginBottom: '2rem' }}
+                  label="Event Type"
+                  type="number"
+                  name="type"
+                  value={eventData.type}
+                  onChange={handleInputChange}
+                  required
+                  inputProps={{
+                    min: 1,
+                    max: 5,
                   }}
                 />
                 <Button variant="contained" color="primary" type="submit">
-                  Create Event
+                  Post Event
                 </Button>
               </form>
             </Grid>
