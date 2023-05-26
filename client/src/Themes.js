@@ -3,17 +3,23 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 export const theme = createTheme({
     palette: {
       mode: 'light',
-      colors: {
+      primary: {
         main: '#3f51b5',
-        red: '#d0312d',
-        white: '#ffffff'
+        accent: '#f50057'
       },
+      secondary: {
+        main: '#f50057',
+      },
+      text: {
+        black: '#000000',
+        white: '#ffffff',
+      },
+      red: '#f50057',
     },
     typography: {
       h1: {
         fontFamily: 'Montserrat',
         fontWeight: 800,
-        color: '#FF0000'
       },
       h2: {
         fontFamily: 'Montserrat',

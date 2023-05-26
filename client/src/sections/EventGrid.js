@@ -22,6 +22,7 @@ function EventGrid() {
                         url="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
                         title="This is a cat."
                         desc="This is a description of a cat."
+                        likes={24}
                         onClick={() => handleEventClick(1)}
                     />
             </Grid>
@@ -30,6 +31,7 @@ function EventGrid() {
                         id={2}
                         title="This card has no image."
                         desc="How sad..."
+                        likes={829}
                         onClick={() => handleEventClick(2)}
                     />
             </Grid>
