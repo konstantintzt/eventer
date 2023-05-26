@@ -7,6 +7,8 @@ import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
 import EventPostPage from './EventPostPage.js';
 import reportWebVitals from './reportWebVitals';
+import EventPage from './EventsPage'
+
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/event-post" element={<EventPostPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
         {/* Insert other routes here */}
       </Routes>
     </Router>

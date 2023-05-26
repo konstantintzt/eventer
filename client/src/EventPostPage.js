@@ -3,10 +3,12 @@ import { TextField, Button } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
+import { useParams } from 'react-router-dom';
 
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 
 const EventPostPage = () => {
+  const { eventId } = useParams();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -23,8 +25,15 @@ const EventPostPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic, e.g., send data to backend or store in a database
-    console.log(eventData);
+    //perform form submission logic like sending data to backend or updating in a database
+    console.log(`Updating event with ID: ${eventId}`, eventData);
+    // reset the form fields after submission
+    setEventData({
+      title: '',
+      description: '',
+      date: '',
+      time: '',
+    });
   };
 
   return (
@@ -107,7 +116,7 @@ const EventPostPage = () => {
                   }}
                 />
                 <Button variant="contained" color="primary" type="submit">
-                  Post Event
+                  Create Event
                 </Button>
               </form>
             </Grid>
