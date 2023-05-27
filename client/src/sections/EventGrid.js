@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
@@ -29,7 +29,23 @@ const styles = {
 };
 
 function EventGrid() {
+    const [events, setEvents] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getAllEvents = async () => {
+            try {
+                const response = await fetch('http://tzantchev.com:2512/events');
+                const data = await response.json();
+                setEvents(data);
+                console.log("Events: ", data);
+            } catch (error) {
+                console.error("Error fetching events: ", error);
+            }
+        };
+
+        getAllEvents();
+    }, []);
 
     const handleEventClick = (id) => {
         navigate(`/event/${id}`);
@@ -40,23 +56,17 @@ function EventGrid() {
             <Paper container style={styles.darkenBackground}>
                 <Paper container style={styles.gridContainer} position="fixed" elevation={0}>
                     <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
-                        <Grid item>
-                            <EventCard
-                                id={1}
-                                url="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                                title="This is a cat."
-                                desc="This is a description of a cat."
-                                onClick={() => handleEventClick(1)}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <EventCard
-                                id={2}
-                                title="This card has no image."
-                                desc="How sad..."
-                                onClick={() => handleEventClick(2)}
-                            />
-                        </Grid>
+                        {events.map((event) => (
+                            <Grid item key={event.id}>
+                                <EventCard
+                                    id={event.id}
+                                    title={event.title}
+                                    desc={event.desc}
+                                    description={event.description}
+                                    onClick={() => handleEventClick(event.id)}
+                                />
+                            </Grid>
+                        ))}
                     </Grid>
                 </Paper>
             </Paper>

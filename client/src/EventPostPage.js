@@ -1,52 +1,61 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { alpha } from '@material-ui/core/styles/colorManipulator';
+import { alpha, makeStyles } from '@material-ui/core/styles';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 
-const styles = {
-  paperContainer: {
-    backgroundImage: `url(${katerina_stepanenko})`,
-    backgroundRepeat: 'repeat',
-    backgroundSize: '300px',
-    width: '100%',
-    height: '100vh',
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    marginBottom: '2rem',
+    minWidth: 200,
   },
-  gridContainer: {
-    backgroundColor: alpha('#FFFFFF', 0.7),
-    width: '80%',
-    height: '100vh',
-    margin: 'auto',
-    borderRadius: '0px',
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
-  darkenBackground: {
-    width: '100%',
-    height: '100vh',
-    backgroundColor: alpha('#000000', 0),
-  },
-};
+}));
 
 const EventPostPage = () => {
+  const classes = useStyles();
+
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
     date: '',
     zip: '',
     type: 1,
+    organizer: 'charles',
   });
 
   const handleInputChange = (e) => {
+    let value = e.target.value;
+    if (e.target.name === 'type') {
+      value = parseInt(value);
+    }
+
     setEventData({
       ...eventData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic like send data to backend or store in a database
-    console.log(eventData);
+    addNewEvent(eventData);
+  };
+
+  const addNewEvent = async (eventData) => {
+    eventData.date = Math.floor(new Date(eventData.date).valueOf());
+    console.log(JSON.stringify({ event: eventData }));
+    const response = await fetch('http://tzantchev.com:2512/event/new', {
+      method: 'POST',
+      body: JSON.stringify({ event: eventData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response.json());
+    console.log(response.json());
   };
 
   return (
@@ -124,19 +133,21 @@ const EventPostPage = () => {
                     pattern: '\\d{5}',
                   }}
                 />
-                <TextField
-                  style={{ marginBottom: '2rem' }}
-                  label="Event Type"
-                  type="number"
-                  name="type"
-                  value={eventData.type}
-                  onChange={handleInputChange}
-                  required
-                  inputProps={{
-                    min: 1,
-                    max: 5,
-                  }}
-                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel>Event Type</InputLabel>
+                  <Select
+                    name="type"
+                    value={eventData.type}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <MenuItem value={1}>Concert</MenuItem>
+                    <MenuItem value={2}>Play</MenuItem>
+                    <MenuItem value={3}>Movie Screening</MenuItem>
+                    <MenuItem value={4}>Sports Game</MenuItem>
+                    <MenuItem value={5}>Party</MenuItem>
+                  </Select>
+                </FormControl>
                 <Button variant="contained" color="primary" type="submit">
                   Post Event
                 </Button>
