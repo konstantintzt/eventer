@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -106,7 +107,10 @@ export default function SearchAppBar() {
           >
             Eventer
           </Typography>
-          <Button variant="contained" color="secondary">
+          <Button
+            color="inherit"
+            component={Link}
+            to="/event-post">
             Post
           </Button>
           <Search>
