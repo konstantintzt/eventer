@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div>
-      <EventGrid events={events} /> // Pass events data as a prop to EventGrid
+      <EventGrid events={events} />
     </div>
   );
 };
