@@ -2,6 +2,7 @@ tensorflow
 keras
 numpy
 pandas
+torch
 transformers
 sentence-transformers
 pgeocode
