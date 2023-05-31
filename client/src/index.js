@@ -11,18 +11,21 @@ import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 import { getAllEvents } from './EventsPage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/event-post" element={<EventPostPage />} />
-        <Route path="/event/:id" element={<EventPage />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <GoogleOAuthProvider clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g">
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/event-post" element={<EventPostPage />} />
+          <Route path="/event/:id" element={<EventPage />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+    </GoogleOAuthProvider>
   );
 };
 const Home = () => {
