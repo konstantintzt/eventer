@@ -64,7 +64,7 @@ export default function SearchAppBar() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    // Perform search functionality here with the 'searchValue' state
+    //figure out search functionality later
     console.log('Searching for:', searchValue);
   };
 

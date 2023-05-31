@@ -1,66 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
-
-const styles = {
-    paperContainer: {
-        backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '300px',
-        width: '100%',
-        height: '100vh',
-    },
-    gridContainer: {
-        backgroundColor: alpha('#FFFFFF', 0.7),
-        width: '80%',
-        height: '100vh',
-        margin: 'auto',
-        borderRadius: '0px',
-    },
-    darkenBackground: {
-        width: '100%',
-        height: '100vh',
-        backgroundColor: alpha('#000000', 0),
-    },
-};
+import Paper from '@material-ui/core/Paper';
+import Background from '../components/Background';
 
 function EventGrid() {
+    const [events, setEvents] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getAllEvents = async () => {
+            try {
+                const response = await fetch('http://tzantchev.com:2512/events');
+                const data = await response.json();
+                setEvents(data);
+                console.log("Events: ", data);
+            } catch (error) {
+                console.error("Error fetching events: ", error);
+            }
+        };
+
+        getAllEvents();
+    }, []);
 
     const handleEventClick = (id) => {
         navigate(`/event/${id}`);
     };
 
     return (
-        <Paper container style={styles.paperContainer}>
-            <Paper container style={styles.darkenBackground}>
-                <Paper container style={styles.gridContainer} position="fixed" elevation={0}>
-                    <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
-                        <Grid item>
-                            <EventCard
-                                id={1}
-                                url="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                                title="This is a cat."
-                                desc="This is a description of a cat."
-                                onClick={() => handleEventClick(1)}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <EventCard
-                                id={2}
-                                title="This card has no image."
-                                desc="How sad..."
-                                onClick={() => handleEventClick(2)}
-                            />
-                        </Grid>
+        <Background>
+            <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+                {events.map((event) => (
+                    <Grid item key={event.id}>
+                        <EventCard
+                            id={event.id}
+                            title={event.title}
+                            desc={event.desc}
+                            likes={event.likes}
+                            onClick={() => handleEventClick(event.id)}
+                        />
                     </Grid>
-                </Paper>
-            </Paper>
-        </Paper>
+                ))}
+            </Grid>
+        </Background>
     );
 }
 
