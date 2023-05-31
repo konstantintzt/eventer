@@ -1,0 +1,1 @@
+### To get started, do pip install --user -r requirements.txt. Then, run python main.py.
