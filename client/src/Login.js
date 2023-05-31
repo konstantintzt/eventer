@@ -4,14 +4,15 @@ import { Typography, Box, Button, Container } from '@mui/material';
 const Login = () => {
     const handleLoginSuccess = async (credentialResponse) => {
         console.log(credentialResponse);
-        const response = await fetch('https://c800-2607-f010-2a7-c-7999-8b6e-8e4-1e70.ngrok-free.app/auth/verify_token', {
+        const response = await fetch('https://7c54-2607-f010-2a7-c-7999-8b6e-8e4-1e70.ngrok-free.app/auth/verify_token', {
             method: 'POST',
             body: JSON.stringify(credentialResponse),
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        console.log(response);
+        const data = await response.json();
+        localStorage.setItem('token', data.token); // Store the token in local storage
     };
 
     const handleLoginError = () => {
