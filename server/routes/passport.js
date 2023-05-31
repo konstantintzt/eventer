@@ -52,25 +52,26 @@ router.post( '/verify_token',
         const exists = await database.getDB().collection("users").countDocuments({"email":payload["email"]})
         console.log(exists)
         console.log("foo")
+        var token = 0
         if (exists > 0){
             console.log("found")
             const user = await database.getDB().collection("users").findOne({"email":payload["email"]});
-            const token = jwt.sign({ uuid: user.uuid }, "foobar", {
+            token = jwt.sign({ uuid: user.uuid }, "foobar", {
                 expiresIn: 60*60
               })
-              return res.status(200).json({token})
+            //   return res.status(200).json({token})
             }
         else{
             console.log("inserting")
             const newuuid = uuidv4()
-            const foo = await database.getDB().collection("users").insertOne({"email":payload["email"], uuid: newuuid})
+            const foo = await database.getDB().collection("users").insertOne({"name": payload["name"],"email":payload["email"], uuid: newuuid})
             console.log(foo)
-            const token = jwt.sign({ uuid: newuuid }, "foobar", {
+            token = jwt.sign({ uuid: newuuid }, "foobar", {
                 expiresIn: 60*60,
               })
-              return res.status(200).json({token})
         }
-
+        console.log(token)
+        return res.status(200).json({token})
     }
 )
 

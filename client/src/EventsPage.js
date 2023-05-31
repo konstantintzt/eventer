@@ -76,7 +76,7 @@ function getEventType(type) {
 
 export const getAllEvents = async () => {
     try {
-        const response = await fetch('http://tzantchev.com:2512/events');
+        const response = await fetch('http://localhost:2902/events');
         const data = await response.json();
         console.log(data);
         return data;
