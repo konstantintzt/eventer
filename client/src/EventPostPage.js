@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { alpha, makeStyles } from '@material-ui/core/styles';
-import katerina_stepanenko from './images/katerina_stepanenko.jpg';
+import { makeStyles } from '@material-ui/core/styles';
 import Background from './components/Background';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,6 +11,15 @@ const useStyles = makeStyles((theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+  title: {
+    marginBottom: theme.spacing(1),
+  },
+  subtitle: {
+    marginBottom: theme.spacing(1),
+  },
+  paper: {
+    padding: theme.spacing(2),
   },
 }));
 
@@ -27,6 +34,8 @@ const EventPostPage = () => {
     type: 1,
     organizer: 'charles',
   });
+
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     let value = e.target.value;
@@ -55,84 +64,105 @@ const EventPostPage = () => {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response.json());
-    console.log(response.json());
+
+    const data = await response.json();
+    if (response.ok) {
+      setSubmitted(true);
+    } else {
+      console.error('Failed to post event', data);
+    }
   };
 
   return (
     <Background>
-      <Grid container justifyContent="center" alignItems="top" height="100%">
+      <Grid container justifyContent="center" spacing={2} style={{ height: '90vh', textAlign: 'center' }}>
+        <Grid item xs={12}>
+          <Typography variant="h4" className={classes.title}>
+            Post a New Event
+          </Typography>
+          <Typography variant="subtitle1" className={classes.subtitle}>
+            Share your events with your UCLA community and attract more attendees. Fill out the form below to get started.
+          </Typography>
+        </Grid>
         <Grid item xs={12} md={6}>
-          <form
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              maxWidth: '400px',
-              margin: '0 auto',
-              marginTop: '4rem',
-            }}
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              style={{ marginBottom: '2rem' }}
-              label="Event Title"
-              name="title"
-              value={eventData.title}
-              onChange={handleInputChange}
-              required
-            />
-            <TextField
-              style={{ marginBottom: '2rem' }}
-              label="Event Description"
-              name="description"
-              value={eventData.description}
-              onChange={handleInputChange}
-              required
-              multiline
-              rows={4}
-            />
-            <TextField
-              style={{ marginBottom: '2rem' }}
-              label="Event Date"
-              type="date"
-              name="date"
-              value={eventData.date}
-              onChange={handleInputChange}
-              required
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              style={{ marginBottom: '2rem' }}
-              label="Event ZIP"
-              name="zip"
-              value={eventData.zip}
-              onChange={handleInputChange}
-              required
-              inputProps={{
-                pattern: '\\d{5}',
-              }}
-            />
-            <FormControl className={classes.formControl}>
-              <InputLabel>Event Type</InputLabel>
-              <Select
-                name="type"
-                value={eventData.type}
-                onChange={handleInputChange}
-                required
+          <Paper className={classes.paper}>
+            {submitted ? (
+              <Typography variant="h6" style={{ color: 'green' }}>
+                Successfully posted event!
+              </Typography>
+            ) : (
+              <form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  maxWidth: '400px',
+                  margin: '0 auto',
+                }}
+                onSubmit={handleSubmit}
               >
-                <MenuItem value={1}>Concert</MenuItem>
-                <MenuItem value={2}>Play</MenuItem>
-                <MenuItem value={3}>Movie Screening</MenuItem>
-                <MenuItem value={4}>Sports Game</MenuItem>
-                <MenuItem value={5}>Party</MenuItem>
-              </Select>
-            </FormControl>
-            <Button variant="contained" color="primary" type="submit">
-              Post Event
-            </Button>
-          </form>
+
+                <TextField
+                  style={{ marginBottom: '2rem' }}
+                  label="Event Title"
+                  name="title"
+                  value={eventData.title}
+                  onChange={handleInputChange}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '2rem' }}
+                  label="Event Description"
+                  name="description"
+                  value={eventData.description}
+                  onChange={handleInputChange}
+                  required
+                  multiline
+                  rows={4}
+                />
+                <TextField
+                  style={{ marginBottom: '2rem' }}
+                  label="Event Date"
+                  type="date"
+                  name="date"
+                  value={eventData.date}
+                  onChange={handleInputChange}
+                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  style={{ marginBottom: '2rem' }}
+                  label="Event ZIP"
+                  name="zip"
+                  value={eventData.zip}
+                  onChange={handleInputChange}
+                  required
+                  inputProps={{
+                    pattern: '\\d{5}',
+                  }}
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel>Event Type</InputLabel>
+                  <Select
+                    name="type"
+                    value={eventData.type}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <MenuItem value={1}>Concert</MenuItem>
+                    <MenuItem value={2}>Play</MenuItem>
+                    <MenuItem value={3}>Movie Screening</MenuItem>
+                    <MenuItem value={4}>Sports Game</MenuItem>
+                    <MenuItem value={5}>Party</MenuItem>
+                  </Select>
+                </FormControl>
+                <Button variant="contained" color="primary" type="submit">
+                  Post Event
+                </Button>
+              </form>
+            )}
+          </Paper>
         </Grid>
       </Grid>
     </Background>
