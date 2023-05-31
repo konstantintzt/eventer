@@ -41,7 +41,7 @@ function EventGrid() {
                                     id={event.id}
                                     title={event.title}
                                     desc={event.desc}
-                                    description={event.description}
+                                    likes={event.likes}
                                     onClick={() => handleEventClick(event.id)}
                                 />
                             </Grid>
