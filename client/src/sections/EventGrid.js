@@ -11,13 +11,17 @@ function EventGrid() {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
 
+    useEffect(() =>{
+        console.log("EventTesting: ", events);
+    }, [events]);
+
     useEffect(() => {
         const getAllEvents = async () => {
             try {
                 const response = await fetch('http://tzantchev.com:2512/events');
                 const data = await response.json();
                 setEvents(data);
-                console.log("Events: ", data);
+                console.log("Events: ", events);
             } catch (error) {
                 console.error("Error fetching events: ", error);
             }
@@ -34,9 +38,9 @@ function EventGrid() {
         <Background>
             <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
                 {events.map((event) => (
-                    <Grid item key={event.id}>
+                    <Grid item key={event.uuid}>
                         <EventCard
-                            id={event.id}
+                            id={event.uuid}
                             title={event.title}
                             desc={event.desc}
                             likes={event.likes}

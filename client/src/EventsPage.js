@@ -90,11 +90,14 @@ export const getAllEvents = async () => {
 
 function EventPage() {
     const [event, setEvent] = useState(null);
-    const { id } = useParams();
+    // const { id } = useParams();
+    const params  = useParams();
+    const id = params.id;
 
     useEffect(() => {
         const getEvent = async () => {
             try {
+                console.log(id);
                 const response = await fetch(`http://tzantchev.com:2512/event/${id}`);
                 const data = await response.json();
                 console.log(data);
