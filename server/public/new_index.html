@@ -25,22 +25,36 @@
 
 <html>
 <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div id="g_id_onload"
+         data-client_id="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com"
+         data-callback="onSignIn">
+    </div>
+
+
     <script>
         function onSignIn(googleUser) {
-            console.log(googleUser.getAuthResponse().id_token)
-        }
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
+            console.log(googleUser)
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST',
+                'https://7c54-2607-f010-2a7-c-7999-8b6e-8e4-1e70.ngrok-free.app/auth/verify_token');
+            xhr.onreadystatechange = function (e) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.response);
+                } else if (xhr.readyState === 4 && xhr.status === 401) {
+                // Token invalid, so prompt for user permission.
+                oauth2SignIn();
+                }
+            };
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify(googleUser));
+            // xhr.send(null);
         }
     </script>
 </head>
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
+    <div class="g_id_signin" data-type="standard"></div>
 </body>
 </html>
+
+

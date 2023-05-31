@@ -3,11 +3,13 @@ const dotenv = require("dotenv")
 const bodyParser = require("body-parser")
 const passport = require("passport")
 const session = require("express-session")
+const cors = require("cors")
+
 
 dotenv.config()
 const app = express()
 app.use(bodyParser.json())
-
+app.use(cors())
 app.use(session({
     secret: 'keyboard cat',
     resave: false,

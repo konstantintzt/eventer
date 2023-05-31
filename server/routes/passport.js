@@ -7,7 +7,7 @@ const ExtractJWT = require('passport-jwt').ExtractJwt
 const { ref } = require("joi")
 const {OAuth2Client} = require('google-auth-library')
 const { v4: uuidv4 } = require('uuid')
-const client = new OAuth2Client("588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com")
+const client = new OAuth2Client("588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com")
 
 const router = express.Router()
 
@@ -37,8 +37,8 @@ router.post( '/verify_token',
     async (req, res) => {
         console.log(req.body)
         const ticket = await client.verifyIdToken({
-            idToken:  req.body["id_token"],
-            audience: "588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+            idToken:  req.body["credential"],
+            audience: "588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         })
