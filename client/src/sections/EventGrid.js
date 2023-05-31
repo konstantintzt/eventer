@@ -7,29 +7,6 @@ import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
 import Paper from '@material-ui/core/Paper';
 import Background from '../components/Background';
 
-
-const styles = {
-    paperContainer: {
-        backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '300px',
-        width: '100%',
-        height: '100vh',
-    },
-    gridContainer: {
-        backgroundColor: alpha('#FFFFFF', 0.7),
-        width: '80%',
-        height: '100vh',
-        margin: 'auto',
-        borderRadius: '0px',
-    },
-    darkenBackground: {
-        width: '100%',
-        height: '100vh',
-        backgroundColor: alpha('#000000', 0),
-    },
-};
-
 function EventGrid() {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
@@ -54,25 +31,21 @@ function EventGrid() {
     };
 
     return (
-        <Paper container style={styles.paperContainer}>
-            <Paper container style={styles.darkenBackground}>
-                <Paper container style={styles.gridContainer} position="fixed" elevation={0}>
-                    <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
-                        {events.map((event) => (
-                            <Grid item key={event.id}>
-                                <EventCard
-                                    id={event.id}
-                                    title={event.title}
-                                    desc={event.desc}
-                                    likes={event.likes}
-                                    onClick={() => handleEventClick(event.id)}
-                                />
-                            </Grid>
-                        ))}
+        <Background>
+            <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+                {events.map((event) => (
+                    <Grid item key={event.id}>
+                        <EventCard
+                            id={event.id}
+                            title={event.title}
+                            desc={event.desc}
+                            likes={event.likes}
+                            onClick={() => handleEventClick(event.id)}
+                        />
                     </Grid>
-                </Paper>
-            </Paper>
-        </Paper>
+                ))}
+            </Grid>
+        </Background>
     );
 }
 

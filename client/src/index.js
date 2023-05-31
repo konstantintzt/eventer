@@ -10,18 +10,19 @@ import EventPage from './EventsPage'
 import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 
+import { getAllEvents } from './EventsPage';
+
 const App = () => {
   return (
     <Router>
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/event-post" element={<EventPostPage />} />
-          <Route path="/event/:id" element={<EventPage />} />
-          {/* Insert other routes here */}
-        </Routes>
-      </ThemeProvider>
+      {/* <ThemeProvider theme={theme}> */}
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/event-post" element={<EventPostPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
+      </Routes>
+      {/* </ThemeProvider>  */}
     </Router>
   );
 };
@@ -34,7 +35,6 @@ const Home = () => {
         const data = await getAllEvents();
         setEvents(data);
       } catch (error) {
-        // Handle the error here
         console.error("Error fetching events: ", error);
       }
     };
@@ -53,7 +53,9 @@ const Home = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

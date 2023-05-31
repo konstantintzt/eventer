@@ -6,29 +6,29 @@ import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 import { Card, CardContent, Typography } from '@material-ui/core';
 
+import Background from './components/Background';
 
-const styles = {
-    paperContainer: {
-        backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '300px',
-        width: '100%',
-        height: '100vh',
-    },
-    gridContainer: {
-        backgroundColor: alpha('#FFFFFF', 0.7),
-        width: '80%',
-        height: '100vh',
-        margin: 'auto',
-        borderRadius: '0px',
-    },
-    darkenBackground: {
-        width: '100%',
-        height: '100vh',
-        backgroundColor: alpha('#000000', 0),
-    },
-};
-
+// const styles = {
+//     paperContainer: {
+//         backgroundImage: `url(${katerina_stepanenko})`,
+//         backgroundRepeat: 'repeat',
+//         backgroundSize: '300px',
+//         width: '100%',
+//         height: '100vh',
+//     },
+//     gridContainer: {
+//         backgroundColor: alpha('#FFFFFF', 0.7),
+//         width: '80%',
+//         height: '100vh',
+//         margin: 'auto',
+//         borderRadius: '0px',
+//     },
+//     darkenBackground: {
+//         width: '100%',
+//         height: '100vh',
+//         backgroundColor: alpha('#000000', 0),
+//     },
+// };
 
 const events = [
     {
@@ -82,7 +82,7 @@ export const getAllEvents = async () => {
         return data;
     } catch (error) {
         console.error("Error fetching events: ", error);
-        throw error; // Rethrow the error to handle it in the component
+        throw error;
     }
 };
 
@@ -122,31 +122,25 @@ function EventPage() {
         //     )}
         // </Background>
 
-        <div>
-            <Paper style={styles.paperContainer}>
-                <Paper style={styles.darkenBackground}>
-                    <Paper style={styles.gridContainer} position="fixed" elevation={0}>
-                        <Grid container justifyContent="center" alignItems="center" height="100%">
-                            {event && (
-                                <Grid item xs={12} md={6}>
-                                    <Card style={styles.card}>
-                                        <CardContent>
-                                            <div style={{ ...styles.banner, backgroundImage: `url(${event.url})` }}></div>
-                                            <Typography variant="h4" component="div">{event.title}</Typography>
-                                            <Typography variant="body1">Date: {new Date(event.date * 1000).toLocaleDateString()}</Typography>
-                                            <Typography variant="body1">Organizer: {event.organizer}</Typography>
-                                            <Typography variant="body1">ZIP: {event.zip}</Typography>
-                                            <Typography variant="body1">Type: {getEventType(event.type)}</Typography>
-                                            <Typography variant="body1">Description: {event.description}</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            )}
-                        </Grid>
-                    </Paper>
-                </Paper>
-            </Paper>
-        </div>
+        <Background opaque>
+            <Grid container justifyContent="center" alignItems="center" height="100%">
+                {event && (
+                    <Grid item xs={12} md={6}>
+                        <Card>
+                            <CardContent>
+                                <div style={{ backgroundImage: `url(${event.url})` }}></div>
+                                <Typography variant="h4" component="div">{event.title}</Typography>
+                                <Typography variant="body1">Date: {new Date(event.date * 1000).toLocaleDateString()}</Typography>
+                                <Typography variant="body1">Organizer: {event.organizer}</Typography>
+                                <Typography variant="body1">ZIP: {event.zip}</Typography>
+                                <Typography variant="body1">Type: {getEventType(event.type)}</Typography>
+                                <Typography variant="body1">Description: {event.description}</Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                )}
+            </Grid>
+        </Background>
     );
 }
 
