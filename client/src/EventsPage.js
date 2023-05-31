@@ -147,5 +147,5 @@ function EventPage() {
     );
 }
 
-
+export const eventz = events;
 export default EventPage;

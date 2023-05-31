@@ -1,0 +1,79 @@
+<html><head></head><body>
+<script>
+  var YOUR_CLIENT_ID = '588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com';
+  var YOUR_REDIRECT_URI = 'https://b8db-2607-f010-2a7-c-253-5e26-ffe9-4603.ngrok-free.app/test/temp.html';
+  var fragmentString = location.hash.substring(1);
+
+  // Parse query string to see if page request is coming from OAuth 2.0 server.
+  var params = {};
+  var regex = /([^&=]+)=([^&]*)/g, m;
+  while (m = regex.exec(fragmentString)) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+  }
+  if (Object.keys(params).length > 0) {
+    localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+    console.log("foobar");
+    trySampleRequest();
+  }
+
+  // If there's an access token, try an API request.
+  // Otherwise, start OAuth 2.0 flow.
+  function trySampleRequest() {
+    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
+    if (params && params['access_token']) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST',
+          'https://c800-2607-f010-2a7-c-7999-8b6e-8e4-1e70.ngrok-free.app/auth/verify_token');
+      xhr.onreadystatechange = function (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.response);
+        } else if (xhr.readyState === 4 && xhr.status === 401) {
+          // Token invalid, so prompt for user permission.
+          oauth2SignIn();
+        }
+      };
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify(params));
+      // xhr.send(null);
+    } else {
+      oauth2SignIn();
+    }
+  }
+</script>
+
+<button onclick="trySampleRequest();">Try sample request</button>
+</body></html>
+<!-- 
+/*
+ * Create form to request access token from Google's OAuth 2.0 server.
+ */
+function oauthSignIn() {
+    // Google's OAuth 2.0 endpoint for requesting an access token
+    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+  
+    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+    var form = document.createElement('form');
+    form.setAttribute('method', 'GET'); // Send as a GET request.
+    form.setAttribute('action', oauth2Endpoint);
+  
+    // Parameters to pass to OAuth 2.0 endpoint.
+    var params = {'client_id': '588092924792-pn199a7ipp505p3ilu1k3d1enttnlvvs.apps.googleusercontent.com',
+                  'redirect_uri': 'https://b8db-2607-f010-2a7-c-253-5e26-ffe9-4603.ngrok-free.app/auth/test',
+                  'response_type': 'token',
+                  'scope': "https://www.googleapis.com/auth/userinfo.profile",
+                  'include_granted_scopes': 'true',
+                  'state': 'pass-through value'};
+  
+    // Add form parameters as hidden input values.
+    for (var p in params) {
+      var input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', p);
+      input.setAttribute('value', params[p]);
+      form.appendChild(input);
+    }
+  
+    // Add form to page and submit it to open the OAuth 2.0 endpoint.
+    document.body.appendChild(form);
+    form.submit();
+  } -->

@@ -2,11 +2,11 @@ const express = require("express")
 const database = require("../database")
 const { v4: uuidv4 } = require('uuid')
 const { fetchSingleEventParamsSchema, addNewEventBodySchema } = require("../requestSchemas")
-
+const passport = require("passport")
 const router = express.Router()
 
 
-router.get("/:uuid", async (req, res) => {
+router.get("/:uuid",   async (req, res) => {
     const { error, value } = fetchSingleEventParamsSchema.validate(req.params)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
@@ -19,9 +19,8 @@ router.get("/:uuid", async (req, res) => {
         return res.status(200).json({ event: results, attendees: attendees })
     }
 })
-router.use(express.json())
-router.post("/new", async (req, res) => {
-    console.log(req.body)
+
+router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
     const { error, value } = addNewEventBodySchema.validate(req.body)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {

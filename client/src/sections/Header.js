@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+import { eventz } from '../EventsPage';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,7 +67,25 @@ export default function SearchAppBar() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    //figure out search functionality later
+    
+    var myArray = [];
+    for(var events in events) //We iterate over the Object to get the names of the nested objects
+      myArray.push(events[events.title]); //We get the objects of the json and push them inside our array.
+    
+    console.log(myArray);
+
+    var userQuery = searchValue; //user input
+    var myRegex = new RegExp('.*' + userQuery + '.*','gi'); //We create a new regular expression, this one tests if the text is contained within a string.
+    
+    var filteredArray = myArray.filter(function(item){
+        //We test each element of the object to see if one string matches the regexp.
+        return (myRegex.test(item.track) || myRegex.test(item.artist) || myRegex.test(item.album))
+    
+    }); 
+
+    console.log(filteredArray);
+
+      //figure out search functionality later
     console.log('Searching for:', searchValue);
   };
 
