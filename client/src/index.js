@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import './index.css';
+import { BrowserRouter as Router, Route, Routes, Link, Outlet } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
 import EventPostPage from './EventPostPage.js';
-import EventPage from './EventsPage'
+import EventPage from './EventsPage';
 import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
@@ -19,15 +19,16 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/event-post" element={<EventPostPage />} />
           <Route path="/event/:id" element={<EventPage />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>
   );
 };
+
 const Home = () => {
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -43,7 +44,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-
   return (
     <div>
       <EventGrid events={events} />
@@ -51,13 +51,16 @@ const Home = () => {
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
-);
+const Root = () => {
+  return (
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<Root />, document.getElementById('root'));
 
 reportWebVitals();

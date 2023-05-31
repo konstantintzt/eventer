@@ -11,7 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -27,7 +27,6 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
-
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -58,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -73,8 +73,17 @@ export default function SearchAppBar() {
     setMenuAnchor(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (path) => {
+
     setMenuAnchor(null);
+    console.log("path", path);
+    console.log("tocken", localStorage.getItem('token'))
+    if (path === '/event-post' && !localStorage.getItem('token')) {
+      navigate('/'); //broken
+    } else {
+      navigate(path);
+      console.log("path")
+    }
   };
 
   return (
@@ -96,9 +105,15 @@ export default function SearchAppBar() {
             open={Boolean(menuAnchor)}
             onClose={() => handleMenuClose('')}
           >
-            <MenuItem component={Link} to="/event-post" onClick={handleMenuClose}>Post An Event</MenuItem>
-            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={handleMenuClose}>Editor Pick</MenuItem>
-            <MenuItem component={Link} to="/login" onClick={handleMenuClose}> Login </MenuItem>
+            <MenuItem component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
+              Post An Event
+            </MenuItem>
+            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
+              Editor Pick
+            </MenuItem>
+            <MenuItem component={Link} to="/" onClick={() => handleMenuClose('/')}>
+              Login
+            </MenuItem>
           </Menu>
 
           <Typography
@@ -107,16 +122,11 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" component={Link} to="/" sx={{
-              fontSize: '20px', marginTop: '2px'
-            }}>
+            <Button color="inherit" component={Link} to="/home" sx={{ fontSize: '20px', marginTop: '2px' }}>
               Eventer
             </Button>
           </Typography>
-          <Button
-            color="inherit"
-            component={Link}
-            to="/event-post">
+          <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>
           <Search>
@@ -135,6 +145,6 @@ export default function SearchAppBar() {
           </Button>
         </Toolbar>
       </AppBar>
-    </Box >
+    </Box>
   );
 }
