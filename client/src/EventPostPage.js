@@ -59,7 +59,7 @@ const EventPostPage = () => {
     console.log(JSON.stringify({ event: eventData }));
     const response = await fetch('http://tzantchev.com:2512/event/new', {
       method: 'POST',
-      body: JSON.stringify({ event: eventData }),
+      body: JSON.stringify(eventData),
       headers: {
         'Content-Type': 'application/json',
       },
