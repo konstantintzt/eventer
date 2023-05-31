@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes, Link, Outlet } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
 import EventPostPage from './EventPostPage.js';
@@ -15,8 +15,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => {
   return (
-    <GoogleOAuthProvider clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g">
-      <Router>
+    <div>
         <Header />
         <Routes>
           <Route path="/" element={<Login />} />
@@ -24,8 +23,7 @@ const App = () => {
           <Route path="/event-post" element={<EventPostPage />} />
           <Route path="/event/:id" element={<EventPage />} />
         </Routes>
-      </Router>
-    </GoogleOAuthProvider>
+        </div>
   );
 };
 
@@ -54,9 +52,15 @@ const Home = () => {
 const Root = () => {
   return (
     <React.StrictMode>
+          <GoogleOAuthProvider clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g">
+      <Router>
+
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
+      </Router>
+    </GoogleOAuthProvider>
+
     </React.StrictMode>
   );
 };

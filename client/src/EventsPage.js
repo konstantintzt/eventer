@@ -4,31 +4,9 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@mui/material';
 
 import Background from './components/Background';
-
-// const styles = {
-//     paperContainer: {
-//         backgroundImage: `url(${katerina_stepanenko})`,
-//         backgroundRepeat: 'repeat',
-//         backgroundSize: '300px',
-//         width: '100%',
-//         height: '100vh',
-//     },
-//     gridContainer: {
-//         backgroundColor: alpha('#FFFFFF', 0.7),
-//         width: '80%',
-//         height: '100vh',
-//         margin: 'auto',
-//         borderRadius: '0px',
-//     },
-//     darkenBackground: {
-//         width: '100%',
-//         height: '100vh',
-//         backgroundColor: alpha('#000000', 0),
-//     },
-// };
 
 const events = [
     {
@@ -111,20 +89,6 @@ function EventPage() {
     }, [id]);
 
     return (
-
-        // Note to charles -- pass prop "opaque" to background if you want it to be opaque
-        // don't if you want it to be semitransparent
-        // <Background opaque> 
-        //     {event && (
-        //         <EventCard
-        //             id={event.id}
-        //             url={event.url}
-        //             title={event.title}
-        //             desc={event.desc}
-        //         />
-        //     )}
-        // </Background>
-
         <Background opaque>
             <Grid container justifyContent="center" alignItems="center" height="100%">
                 {event && (
