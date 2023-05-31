@@ -4,8 +4,31 @@ import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
-
+import Paper from '@material-ui/core/Paper';
 import Background from '../components/Background';
+
+
+const styles = {
+    paperContainer: {
+        backgroundImage: `url(${katerina_stepanenko})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '300px',
+        width: '100%',
+        height: '100vh',
+    },
+    gridContainer: {
+        backgroundColor: alpha('#FFFFFF', 0.7),
+        width: '80%',
+        height: '100vh',
+        margin: 'auto',
+        borderRadius: '0px',
+    },
+    darkenBackground: {
+        width: '100%',
+        height: '100vh',
+        backgroundColor: alpha('#000000', 0),
+    },
+};
 
 function EventGrid() {
     const [events, setEvents] = useState([]);
