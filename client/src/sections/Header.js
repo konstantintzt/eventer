@@ -98,6 +98,7 @@ export default function SearchAppBar() {
           >
             <MenuItem component={Link} to="/event-post" onClick={handleMenuClose}>Post An Event</MenuItem>
             <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={handleMenuClose}>Editor Pick</MenuItem>
+            <MenuItem component={Link} to="/login" onClick={handleMenuClose}> Login </MenuItem>
           </Menu>
 
           <Typography
