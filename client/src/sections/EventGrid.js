@@ -2,31 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
 
-const styles = {
-    paperContainer: {
-        backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '300px',
-        width: '100%',
-        height: '100vh',
-    },
-    gridContainer: {
-        backgroundColor: alpha('#FFFFFF', 0.7),
-        width: '80%',
-        height: '100vh',
-        margin: 'auto',
-        borderRadius: '0px',
-    },
-    darkenBackground: {
-        width: '100%',
-        height: '100vh',
-        backgroundColor: alpha('#000000', 0),
-    },
-};
+import Background from '../components/Background';
 
 function EventGrid() {
     const [events, setEvents] = useState([]);

@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './Themes';
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
 import EventPostPage from './EventPostPage.js';
-import { getAllEvents } from './EventsPage';
-import reportWebVitals from './reportWebVitals';
 import EventPage from './EventsPage'
-
+import reportWebVitals from './reportWebVitals';
+import { theme } from './Themes';
 
 const App = () => {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/event-post" element={<EventPostPage />} />
-        <Route path="/event/:id" element={<EventPage />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/event-post" element={<EventPostPage />} />
+          <Route path="/event/:id" element={<EventPage />} />
+          {/* Insert other routes here */}
+        </Routes>
+      </ThemeProvider>
     </Router>
   );
 };
@@ -48,12 +50,11 @@ const Home = () => {
   );
 };
 
-
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
     <App />
-  </ThemeProvider>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 reportWebVitals();

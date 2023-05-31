@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
-import { Card, CardContent, Typography } from '@mui/material';
 
 const styles = {
     paperContainer: {
@@ -15,7 +14,7 @@ const styles = {
         height: '100vh',
     },
     gridContainer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        backgroundColor: alpha('#FFFFFF', 0.7),
         width: '80%',
         height: '100vh',
         margin: 'auto',
@@ -24,22 +23,8 @@ const styles = {
     darkenBackground: {
         width: '100%',
         height: '100vh',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
+        backgroundColor: alpha('#000000', 0),
     },
-    banner: {
-        backgroundImage: `url(${katerina_stepanenko})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '200px',
-        marginBottom: '2rem',
-    },
-    card: {
-        margin: '2rem',
-        padding: '2rem',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)'
-    }
 };
 
 
@@ -121,6 +106,20 @@ function EventPage() {
     }, [id]);
 
     return (
+
+        // Note to charles -- pass prop "opaque" to background if you want it to be opaque
+        // don't if you want it to be semitransparent
+        // <Background opaque> 
+        //     {event && (
+        //         <EventCard
+        //             id={event.id}
+        //             url={event.url}
+        //             title={event.title}
+        //             desc={event.desc}
+        //         />
+        //     )}
+        // </Background>
+
         <div>
             <Paper style={styles.paperContainer}>
                 <Paper style={styles.darkenBackground}>

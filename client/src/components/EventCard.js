@@ -6,13 +6,15 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { styled } from '@mui/system';
 
+import LikeButton from './LikeButton';
+
 const StyledCard = styled(Card)((theme) => ({
   transition: 'transform 0.15s ease-in-out',
   '&:hover': { transform: 'scale3d(1.02, 1.02, 1)' },
 }));
 
 function EventCard(props) {
-  const { id, title, desc, description } = props;
+  const { id, url, title, desc, likes } = props;
 
   return (
     <Link to={`/event/${id}`} style={{ textDecoration: 'none' }}>
@@ -25,9 +27,7 @@ function EventCard(props) {
             <Typography variant="body2" color="text.secondary">
               {desc}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {description}
-            </Typography>
+            <LikeButton likes={likes} />
           </CardContent>
         </CardActionArea>
       </StyledCard>
