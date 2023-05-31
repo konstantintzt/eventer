@@ -88,7 +88,7 @@ export default function SearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
+      <AppBar position="sticky" color="primary">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             size="large"

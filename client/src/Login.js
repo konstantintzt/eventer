@@ -1,13 +1,40 @@
 import { GoogleLogin } from '@react-oauth/google';
 import { Typography, Box, Button, Container } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
+import Paper from '@mui/material/Paper';
+import { alpha } from '@material-ui/core/styles/colorManipulator';
+import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 
-// const theme = createTheme({
-//     typography: {
-//         fontSize: 18,
-//     },
-//     spacing: (factor) => `${0.5 * factor}rem`,
-// });
+import Background from './components/Background';
+
+const styles = {
+    patternedBackground: {
+        backgroundImage: `url(${katerina_stepanenko})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '300px',
+        width: '100%',
+        height: '100vh',
+    },
+    opaqueBacking: {
+        backgroundColor: alpha('#FFFFFF', 1),
+        width: '80%',
+        height: '100%',
+        margin: 'auto',
+        borderRadius: '0px',
+    },
+    semiTransparentBacking: {
+        backgroundColor: alpha('#FFFFFF', 0.7),
+        width: '80%',
+        height: '100%',
+        margin: 'auto',
+        borderRadius: '0px',
+    },
+    darkenBackground: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: alpha('#FFFFFF', 0),
+    },
+};
 
 const Login = () => {
     const handleLoginSuccess = async (credentialResponse) => {
@@ -28,16 +55,16 @@ const Login = () => {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Box
+        <Paper container style={styles.patternedBackground}>
+            {/* <Box
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
                 minHeight="50vh"
                 paddingY={4}
-            >
-                <Typography variant="h4" component="h2" align="center" gutterBottom>
+            > */}
+                <Typography variant="h4" align="center" gutterBottom>
                     Welcome to Eventer
                 </Typography>
                 <Typography variant="body1" align="center" paragraph>
@@ -51,12 +78,12 @@ const Login = () => {
                     cookiePolicy={'single_host_origin'}
                 />
                 <Box marginTop={2}>
-                    <Button variant="text" color="primary" href="/home">
+                    <Button variant="text" href="/home">
                         Skip Login
                     </Button>
                 </Box>
-            </Box>
-        </Container>
+            {/* </Box> */}
+        </Paper>
     );
 };
 
