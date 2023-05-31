@@ -62,6 +62,7 @@ const EventPostPage = () => {
       body: JSON.stringify(eventData),
       headers: {
         'Content-Type': 'application/json',
+        "Authorization": "Bearer " + localStorage.getItem("token")
       },
     });
 
