@@ -28,6 +28,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -64,7 +65,7 @@ export default function SearchAppBar() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    // Perform search functionality here with the 'searchValue' state
+    //figure out search functionality later
     console.log('Searching for:', searchValue);
   };
 
@@ -93,19 +94,23 @@ export default function SearchAppBar() {
           <Menu
             anchorEl={menuAnchor}
             open={Boolean(menuAnchor)}
-            onClose={handleMenuClose}
+            onClose={() => handleMenuClose('')}
           >
-            <MenuItem onClick={handleMenuClose}>Ur Mom</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Ur Mom 2</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Ur Mom 3</MenuItem>
+            <MenuItem component={Link} to="/event-post" onClick={handleMenuClose}>Post An Event</MenuItem>
+            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={handleMenuClose}>Editor Pick</MenuItem>
           </Menu>
+
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Eventer
+            <Button color="inherit" component={Link} to="/" sx={{
+              fontSize: '20px', marginTop: '2px'
+            }}>
+              Eventer
+            </Button>
           </Typography>
           <Button
             color="inherit"
@@ -129,6 +134,6 @@ export default function SearchAppBar() {
           </Button>
         </Toolbar>
       </AppBar>
-    </Box>
+    </Box >
   );
 }

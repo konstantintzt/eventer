@@ -16,7 +16,7 @@ router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }),  async (
         const results = await database.getDB().collection("events").findOne(value)
         // console.log(results)
         // console.log(attendees)
-        return res.status(200).json({event: results, attendees: attendees})
+        return res.status(200).json({ event: results, attendees: attendees })
     }
 })
 
@@ -25,7 +25,7 @@ router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
         // console.log(req.body)
-        await database.getDB().collection("events").insertOne({...value, uuid: uuidv4()})
+        await database.getDB().collection("events").insertOne({ ...value, uuid: uuidv4() })
         return res.status(200).json({ success: true })
     }
 })
