@@ -24,9 +24,9 @@ router.get("/", passport.authenticate( 'jwt',{ session: false }), async (req, re
         
         const liked_events = await database.getDB().collection("likes").find({user : req.user.id}).toArray()
 
-        // liked_events.map((event) => (
-
-        // ))
+        liked_events.map((event) => {
+            results[event.uuid].liked = 1
+        })
 
         return res.status(200).json(results)
     }
