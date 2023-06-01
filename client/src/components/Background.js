@@ -9,7 +9,7 @@ const styles = {
     patternedBackground: {
         backgroundImage: `url(${watercolor})`,
         backgroundRepeat: 'repeat',
-        backgroundSize: '300px',
+        backgroundSize: '600px',
         width: '100%',
         maxHeight: false,
         minHeight: '100vh'
