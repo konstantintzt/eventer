@@ -1,28 +1,36 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Background from '../components/Background';
 
-function EventGrid() {
+function EventGrid({ events }) {
+
+    const navigate = useNavigate();
+
+    const handleEventClick = (id) => {
+        navigate(`/event/${id}`);
+    };
+
     return (
-        <Box sx={{ width: '100%'}}>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={2}>
-                    <EventCard
-                    url='https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg'
-                    title='This is a cat.'
-                    desc='This is a description of a cat.'
+        <Background>
+            <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+                {events.map((event) => (
+                    <Grid item key={event.uuid}>
+                        <EventCard
+                            id={event.uuid}
+                            title={event.title}
+                            desc={event.desc}
+                            likes={event.likes}
+                            onClick={() => handleEventClick(event.id)}
                         />
-                </Grid>
-                <Grid item xs={2}>
-                    <EventCard
-                    title='This card has no image.'
-                    desc='How sad...'
-                        />
-                </Grid>
+                    </Grid>
+                ))}
             </Grid>
-        </Box>
+        </Background>
     );
-  }
-  
-  export default EventGrid;  
+}
+
+
+
+export default EventGrid;

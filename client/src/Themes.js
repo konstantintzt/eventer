@@ -1,14 +1,20 @@
-import { createTheme } from '@material-ui/core/styles'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
     palette: {
       mode: 'light',
       primary: {
         main: '#3f51b5',
+        accent: '#f50057'
       },
       secondary: {
         main: '#f50057',
       },
+      text: {
+        black: '#000000',
+        white: '#ffffff',
+      },
+      red: '#f50057',
     },
     typography: {
       h1: {

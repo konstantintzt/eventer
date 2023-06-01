@@ -1,10 +1,10 @@
 const express = require("express")
 const database = require("../database")
 const { addEventAttendeeBodySchema } = require("../requestSchemas")
-
+const passport = require("passport")
 const router = express.Router()
 
-router.post("/", async (req, res) => {
+router.post("/", passport.authenticate( 'jwt',{ session: false }),  async (req, res) => {
     const { error, value } = addEventAttendeeBodySchema.validate(req.body)
     console.log(req.body)
     if (error) return res.status(400).json({ error: error.details[0].message })
@@ -12,7 +12,11 @@ router.post("/", async (req, res) => {
         const event = await database.getDB().collection("events").findOne({ uuid: value.uuid })
         if (event == null) return res.status(400).json({ error: "Event does not exist" })
         else {
-            await database.getDB().collection("attendances").insertOne({...value, confirmed: Math.floor(Date.now()/1000)})
+            const exists = await database.getDB().collection("attendances").countDocuments({...value, user: req.user.uuid})
+            const attendee = await database.getDB().collection("users").findOne({uuid : req.user.uuid})
+            if (exists == 0){
+                await database.getDB().collection("attendances").insertOne({...value, name: attendee.name, user: req.user.uuid, confirmed: Math.floor(Date.now()/1000)})
+            }
             return res.status(200).json({ success: true })
         }
     }

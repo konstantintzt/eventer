@@ -1,0 +1,10 @@
+tensorflow
+keras
+numpy
+pandas
+torch
+flask
+transformers
+sentence-transformers
+pgeocode
+python-dotenv
