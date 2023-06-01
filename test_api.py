@@ -55,7 +55,7 @@ end_points =  {
     #     [
     #         {
     #             "type":"get",
-    #             "url":"/44df4b3d-2ea8-4334-b836-0bd8e64c2aeb",
+    #             "url":"/5bb369ab-b253-42f2-bc3d-7dc5ac4b56ad",
     #             "response":200
     #         },
     #         {
@@ -89,36 +89,36 @@ end_points =  {
     #             "response":400
     #         }
     #     ],       
-    # "/events":
-    #         [
-    #             {
-    #                 "type":"get",
-    #                 "url":"/",
-    #                 "data":
-    #                     {
-    #                         "organizer":"ACM",
-    #                         "zip":94588,
-    #                         "type":3,
-    #                         "after":12310,
-    #                         "before":12314,
-    #                         "search":"test search"
-    #                     },
-    #                 "response":200
-    #             },
-    #             {
-    #                 "type":"get",
-    #                 "url":"/",
-    #                 "data":
-    #                     {
-    #                         "organizer":"ACM",
-    #                         "zip":94588,
-    #                         "type":3,
-    #                         "after":12310,
-    #                         "before":12314
-    #                     },
-    #                 "response":200
-    #             }
-    #         ]
+    "/events":
+            [
+                {
+                    "type":"get",
+                    "url":"",
+                    # "data":
+                    #     {
+                    #         "organizer":"ACM",
+                    #         "zip":94588,
+                    #         "type":3,
+                    #         "after":12310,
+                    #         "before":12314,
+                    #         "search":"test search"
+                    #     },
+                    "response":200
+                },
+                # {
+                #     "type":"get",
+                #     "url":"/",
+                #     "data":
+                #         {
+                #             "organizer":"ACM",
+                #             "zip":94588,
+                #             "type":3,
+                #             "after":12310,
+                #             "before":12314
+                #         },
+                #     "response":200
+                # }
+            ]
     }
 
 
@@ -160,7 +160,7 @@ def test_oauth_new():
     #     }
     
     data = {
-        "credential": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwODNkZDU5ODE2NzNmNjYxZmRlOWRhZTY0NmI2ZjAzODBhMDE0NWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODU1ODg5NzYsImF1ZCI6IjU4ODA5MjkyNDc5Mi1vM2gwOXF2NWRjNWpybTRsODB0Z2RqcDYya3I5ZTYwZy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwODA4MjA3Njc2Mjc4MDM3NjgyMSIsImVtYWlsIjoic2VhbnRhbmcwNTE2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiI1ODgwOTI5MjQ3OTItbzNoMDlxdjVkYzVqcm00bDgwdGdkanA2MmtyOWU2MGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiU2VhbiBUYW5nIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBY0hUdGRiQ2NlVHJKdThMWFE0Qk5VWUMydmVoWkN4RHRWby1vajZoaDBLPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlNlYW4iLCJmYW1pbHlfbmFtZSI6IlRhbmciLCJpYXQiOjE2ODU1ODkyNzYsImV4cCI6MTY4NTU5Mjg3NiwianRpIjoiZDBkNTJjYzI4OTA2NjU5YzRjOTljOTAzMzk0MTQ0MDgwMDZlM2IxYSJ9.meY0-ONLPEGD49BqFZV4zcAwRFHg3xWCfns8yX6slreIHHEAYdL53bAWhLhCQzR0Wlgp2oJ5ghzrVXP0dlcMBgQP35pbH37Vm-dHHzvhNKGUTRVU51ifLjaO4ac3_BIWR917P4piocI7fFgKeo5MtJCbn5zX8Q9CN6EI6-EZS7Z3UP_OaZeU7Raytv9Bz6umS6NPcu7qFXfN3FSKqTcmuVvDyezsc_gsn5rkAjJGIoRZZYmYFClpozMOx8iB9vl1bBjEERF-vDVLWo7JhPDdgNFsKyQO-qvPnlyMDi99aRiceyp3CwRL-D4OEDMAeN9ZwIBV4Owmt94HUhCmdnS_HQ"
+        "credential": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwODNkZDU5ODE2NzNmNjYxZmRlOWRhZTY0NmI2ZjAzODBhMDE0NWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODU1OTc3NjQsImF1ZCI6IjU4ODA5MjkyNDc5Mi1vM2gwOXF2NWRjNWpybTRsODB0Z2RqcDYya3I5ZTYwZy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExNDE3MDIwNzc4NjMwOTc1MTAzNyIsImVtYWlsIjoic2VhbnRhbmcwMDFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjU4ODA5MjkyNDc5Mi1vM2gwOXF2NWRjNWpybTRsODB0Z2RqcDYya3I5ZTYwZy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJTZWFuIFRhbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZndvUTNmMm9TZTQtb1pMODF6anhDQndyQUhQX1pwNko3blBPTWw9czk2LWMiLCJnaXZlbl9uYW1lIjoiU2VhbiIsImZhbWlseV9uYW1lIjoiVGFuZyIsImlhdCI6MTY4NTU5ODA2NCwiZXhwIjoxNjg1NjAxNjY0LCJqdGkiOiJlZjcxYzZmMDllMjZlMDgwYjk4NmQzOGZjNGRkNjc5NDMwZDU0M2ZhIn0.paExjTBndBPA6a1qMwRg9nRHRwZkp4xhEEKRiuGQVRy9S486h7Qy91Gt1ks4azlJK3KWrKXOjW0T45mb9RaUJ5hZkPkn4M4vIJqb7QAAesY42A3qHisUl8G16UsUZ5dRbjweRxlg1oiPMdp46L06kDq0pyFV6LwYT9SEW2RzjMJepDnh6sozfXQmsXeGEYxaISiQkFxAptRaxoIyXAmXjANmWcm0BoHT6svFnxY24rttvdPNekPOn5SB2OT4pjD8QMh_6MQD3ER8VYAa5_R_A1LNCVArH-SFNgoDqtOxjsOQSLnJC_63kA0AlXn7ofuJ3kZU5n6zB9Dp8pD2cz65qA"
         }
     
     # data = {
@@ -189,9 +189,16 @@ def test_oauth_new():
                 try:
                     response = requests.get(url+i+x["url"], data=x["data"], headers={"Authorization":"Bearer "+b["token"]})
                 except KeyError:
-                    continue
-            if (response.status_code == x["response"]):
+                    response = requests.get(url+i+x["url"], headers={"Authorization":"Bearer "+b["token"]})
+            if (response.status_code != x["response"]):
                 print("test failed for following test case at endpoint: " + i)
+                print(x)
+                try:
+                    print(response.json())
+                except:
+                    print(response)
+            if (response.status_code == x["response"]):
+                print("test passed for following test case at endpoint: " + i)
                 print(x)
                 try:
                     print(response.json())

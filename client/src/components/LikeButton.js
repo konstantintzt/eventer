@@ -44,6 +44,7 @@ export default function LikeButton({ id, likes, isLiked }) {
     window.location.reload();
   };
 
+
   return (
       <StyledButton onClick = { () => addLike(id)} >
         <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> 

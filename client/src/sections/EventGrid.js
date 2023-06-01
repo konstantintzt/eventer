@@ -56,7 +56,7 @@ function EventGrid({ events }) {
                             likes={event.likes}
                             onClick={() => handleEventClick(event.id)}
                         />
-                        <LikeButton likes={event.likes} id = {event.uuid}/>
+                        <LikeButton likes={event.likes} id = {event.uuid} isLiked={event.liked}/>
                     </StyledCard>
                     </Grid>
                 ))}
