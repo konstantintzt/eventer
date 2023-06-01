@@ -98,7 +98,7 @@ function EventPage() {
         const getEvent = async () => {
             try {
                 console.log(id);
-                const response = await fetch(`http://tzantchev.com:2512/event/${id}`);
+                const response = await fetch(`http://localhost:2902/event/${id}`);
                 const data = await response.json();
                 console.log(data);
                 setEvent(data.event); // Access the event object inside the data
