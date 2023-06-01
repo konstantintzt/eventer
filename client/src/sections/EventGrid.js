@@ -51,7 +51,7 @@ function EventGrid({ events }) {
               <Masonry columns={3} spacing={0} loading="lazy">
                 {(events.length > 0) && events.map((event) => (
                     <Grid item key={event.uuid} margin='auto'>
-                      <StyledCard sx={{ minWidth: '300px', m: '15px', borderRadius: '0px' }}>
+                      <StyledCard sx={{ m: '15px', borderRadius: '0px' }}>
                           <EventCard
                               id={event.uuid}
                               title={event.title}
