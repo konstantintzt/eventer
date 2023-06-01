@@ -1,10 +1,7 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
 const StyledButton = styled(Button) ( ({theme}) => ({

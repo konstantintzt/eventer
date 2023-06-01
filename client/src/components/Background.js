@@ -1,12 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import katerina_stepanenko from '../images/katerina_stepanenko.jpg';
+// import { alpha } from '@material-ui/core/styles/colorManipulator';
+import { alpha } from '@mui/material';
+import rawpixel_holographic from '../images/rawpixel_holographic-background.jpg';
 
 const styles = {
     patternedBackground: {
-        backgroundImage: `url(${katerina_stepanenko})`,
+        backgroundImage: `url(${rawpixel_holographic})`,
         backgroundRepeat: 'repeat',
         backgroundSize: '300px',
         width: '100%',

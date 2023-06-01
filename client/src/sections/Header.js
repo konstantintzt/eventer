@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { alpha } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -75,8 +76,10 @@ export default function SearchAppBar({ handleSearchSubmit }) {
 
   const handleMenuClose = (path) => {
     setMenuAnchor(null);
-    if (path === '/event-post' && !localStorage.getItem('token')) {
-      navigate('/');
+    console.log("path", path);
+    console.log("tocken", localStorage.getItem('token'))
+    if (path === '/event-post') {
+      navigate('/'); //broken
     } else {
       navigate(path);
     }

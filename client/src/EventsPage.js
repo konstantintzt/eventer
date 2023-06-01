@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import katerina_stepanenko from './images/katerina_stepanenko.jpg';
+
 import { Card, CardContent, Typography } from '@mui/material';
 import Login from "./Login"
 
 import Background from './components/Background';
+import { invalidToken } from './utils';
 
 const events = [
     {
@@ -96,7 +95,7 @@ function EventPage() {
     useEffect(() => {
         const getEvent = async () => {
 
-          if (!localStorage.getItem("token")) return
+          if (invalidToken()) return
 
             try {
                 console.log(id);
@@ -119,7 +118,7 @@ function EventPage() {
     }, [id]);
 
 
-    if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
+    if (invalidToken()) return <Login redirect="/event-post"/>
 
     return (
         <Background opaque>
