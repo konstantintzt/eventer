@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { ThemeProvider } from "@material-ui/core/styles"
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'

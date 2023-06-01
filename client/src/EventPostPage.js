@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import Background from './components/Background';
 import Login from './Login';
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   formControl: {
     marginBottom: '2rem',
     minWidth: 200,
@@ -22,11 +21,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
   },
-}));
+});
 
 const EventPostPage = () => {
-  const classes = useStyles();
-
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -81,15 +78,17 @@ const EventPostPage = () => {
     <Background>
       <Grid container justifyContent="center" spacing={2} style={{ height: '90vh', textAlign: 'center' }}>
         <Grid item xs={12}>
-          <Typography variant="h4" className={classes.title}>
+          <Typography variant="h4" className={styles.title}>
             Post a New Event
           </Typography>
-          <Typography variant="subtitle1" className={classes.subtitle}>
+          <Typography variant="subtitle1" className={styles.subtitle}>
+
             Share your events with your UCLA community and attract more attendees. Fill out the form below to get started.
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
+          <Paper className={styles.paper}>
+
             {submitted ? (
               <Typography variant="h6" style={{ color: 'green' }}>
                 Successfully posted event!
@@ -146,7 +145,7 @@ const EventPostPage = () => {
                     pattern: '\\d{5}',
                   }}
                 />
-                <FormControl className={classes.formControl}>
+                <FormControl className={styles.formControl}>
                   <InputLabel>Event Type</InputLabel>
                   <Select
                     name="type"

@@ -10,25 +10,28 @@ const styles = {
         backgroundRepeat: 'repeat',
         backgroundSize: '300px',
         width: '100%',
-        height: '100vh',
+        maxHeight: false,
+        minHeight: '100vh'
     },
     opaqueBacking: {
         backgroundColor: alpha('#FFFFFF', 1),
         width: '80%',
-        height: '100vh',
+        height: '100%',
         margin: 'auto',
         borderRadius: '0px',
+        minHeight: '100vh'
     },
     semiTransparentBacking: {
         backgroundColor: alpha('#FFFFFF', 0.7),
         width: '80%',
-        height: '100vh',
+        height: '100%',
         margin: 'auto',
         borderRadius: '0px',
+        minHeight: '100vh'
     },
     darkenBackground: {
         width: '100%',
-        height: '100vh',
+        height: '100%',
         backgroundColor: alpha('#000000', 0),
     },
 };

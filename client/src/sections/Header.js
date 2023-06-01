@@ -11,7 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -28,7 +28,6 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
-
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -59,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -68,13 +68,22 @@ export default function SearchAppBar({ handleSearchSubmit }) {
     setMenuAnchor(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (path) => {
+
     setMenuAnchor(null);
+    console.log("path", path);
+    console.log("tocken", localStorage.getItem('token'))
+    if (path === '/event-post' && !localStorage.getItem('token')) {
+      navigate('/'); //broken
+    } else {
+      navigate(path);
+      console.log("path")
+    }
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
+      <AppBar position="sticky" color="primary">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             size="large"
@@ -91,9 +100,15 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             open={Boolean(menuAnchor)}
             onClose={() => handleMenuClose('')}
           >
-            <MenuItem component={Link} to="/event-post" onClick={handleMenuClose}>Post An Event</MenuItem>
-            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={handleMenuClose}>Editor Pick</MenuItem>
-            <MenuItem component={Link} to="/login" onClick={handleMenuClose}> Login </MenuItem>
+            <MenuItem component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
+              Post An Event
+            </MenuItem>
+            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
+              Editor Pick
+            </MenuItem>
+            <MenuItem component={Link} to="/login" onClick={() => handleMenuClose('/login')}>
+              Login
+            </MenuItem>
           </Menu>
 
           <Typography
@@ -108,10 +123,7 @@ export default function SearchAppBar({ handleSearchSubmit }) {
               Eventer
             </Button>
           </Typography>
-          <Button
-            color="inherit"
-            component={Link}
-            to="/event-post">
+          <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>
           <Search>
@@ -130,6 +142,6 @@ export default function SearchAppBar({ handleSearchSubmit }) {
           </Button>
         </Toolbar>
       </AppBar>
-    </Box >
+    </Box>
   );
 }
