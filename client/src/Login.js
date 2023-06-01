@@ -31,7 +31,6 @@ const styles = {
         backgroundColor: alpha('#000000', 0.1),
     },
 };
-
 const Login = redirect => {
     const [loggedin, setloggedin] = useState(0);
 
@@ -55,43 +54,39 @@ const Login = redirect => {
         setloggedin(0);
     };
 
-    if (!loggedin){
+    if (!loggedin) {
         return (
             <Paper container style={styles.patternedBackground}>
-            <Paper container style={styles.darkenBackground}>
-                <Grid container style={styles.textContainer}>
-                    <Grid container flexDirection='column' m='20px'>
-                        <Typography variant="h3" fontSize='60px' color="white" >
-                            eventer
-                        </Typography>
-                        <Typography variant="h1" fontSize='140px' color="white" marginBottom='0px'>
-                            Explore LA.
-                        </Typography>
+                <Paper container style={styles.darkenBackground}>
+                    <Grid container style={styles.textContainer}>
+                        <Grid container flexDirection='column' m='20px'>
+                            <Typography variant="h3" fontSize='60px' color="white" >
+                                eventer
+                            </Typography>
+                            <Typography variant="h1" fontSize='140px' color="white" marginBottom='0px'>
+                                Explore LA.
+                            </Typography>
+                        </Grid>
+                        <Grid flexDirection='row' m='20px' width='100%' justifyItems="center" justifyContent="center" marginBottom='100px'>
+                            <GoogleLogin
+                                clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g"
+                                onSuccess={handleLoginSuccess}
+                                onError={handleLoginError}
+                                buttonText="Login with Google"
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid flexDirection='row' m='20px' width='100%' justifyItems="center" justifyContent="center" marginBottom='100px'>
-                        <GoogleLogin
-                            clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g"
-                            onSuccess={handleLoginSuccess}
-                            onError={handleLoginError}
-                            buttonText="Login with Google"
-                            cookiePolicy={'single_host_origin'}
-                        />
-                        <Button variant="text" href="/home">
-                            Skip Login
-                        </Button>
-                        <Button variant="text" href="/home">
-                            Skip Login
-                        </Button>
-                    </Grid>
-                </Grid>
+                </Paper>
             </Paper>
-        </Paper>            
         );
     }
-    else{
+    else {
         return <Navigate replace to={redirect} />;
     }
 
 };
+
+
 
 export default Login;
