@@ -124,7 +124,9 @@ function EventPage() {
                             component="img"
                             height="400px"
                             width="100%"
-                            src="https://images.unsplash.com/photo-1549388604-817d15aa0110" />
+                            src="https://images.unsplash.com/photo-1549388604-817d15aa0110"
+                            // src={event.url}
+                            />
                         <Grid container sx={{ px: '40px', py: '30px' }} margin='auto' xs={10}>
                             <Grid item xs={12} paddingBottom='30px'>
                                 <Typography variant="h3" align="center" component="div">{event.title}</Typography>

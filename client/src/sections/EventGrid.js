@@ -4,8 +4,10 @@ import EventCard from '../components/EventCard';
 import Grid from '@mui/material/Grid';
 import Background from '../components/Background';
 import LikeButton from '../components/LikeButton';
+import Masonry from '@mui/lab/Masonry';
 import Card from '@mui/material/Card';
 import { styled } from '@mui/system';
+// quotes from sitting in on a queer musicology 
 
 function EventGrid({ events }) {
 
@@ -45,10 +47,11 @@ function EventGrid({ events }) {
     console.log("generating " + events)
     return (
         <Background>
-            <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+            <Grid container rowSpacing={1} margin="auto">
+              <Masonry columns={3} spacing={0} loading="lazy">
                 {(events.length > 0) && events.map((event) => (
-                    <Grid item key={event.uuid}>
-                      <StyledCard sx={{ width: 345, m: '15px', borderRadius: '0px' }}>
+                    <Grid item key={event.uuid} margin='auto'>
+                      <StyledCard sx={{ minWidth: '300px', m: '15px', borderRadius: '0px' }}>
                           <EventCard
                               id={event.uuid}
                               title={event.title}
@@ -60,6 +63,7 @@ function EventGrid({ events }) {
                       </StyledCard>
                     </Grid>
                 ))}
+                </Masonry>
             </Grid>
         </Background>
     );
