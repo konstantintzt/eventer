@@ -9,15 +9,15 @@ import Background from './components/Background';
 import AttendingList from './components/AttendingList'
 import { invalidToken } from './utils';
 
-const StyledHeaderCell = styled(TableCell)(({theme}) => ({
+const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
     width: '20%',
     variant: 'h7',
-    '&:hover': { 
+    '&:hover': {
     },
-  }));
+}));
 
-function HeaderCell({text}) {
-    return(
+function HeaderCell({ text }) {
+    return (
         <StyledHeaderCell>
             <Typography variant='h7' sx={{ textTransform: 'lowercase' }} >
                 <strong>
@@ -27,7 +27,7 @@ function HeaderCell({text}) {
         </StyledHeaderCell>
     );
 };
-  
+
 function getEventType(type) {
     switch (type) {
         case 1:
@@ -63,45 +63,45 @@ function EventPage() {
     const [event, setEvent] = useState(null);
     const [attendees, setAttendees] = useState(null);
     // const { id } = useParams();
-    const params  = useParams();
+    const params = useParams();
     const id = params.id;
 
-    const addAttendance = async() => {
+    const addAttendance = async () => {
         const response = await fetch('http://localhost:2902/attend', {
-          method: 'POST',
-          body: JSON.stringify({ uuid: id}),
-          headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + localStorage.getItem("token")
-          },
+            method: 'POST',
+            body: JSON.stringify({ uuid: id }),
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
         });
-      
+
         const data = await response.json();
         if (response.ok) {
-          // setSubmitted(true);
+            // setSubmitted(true);
         } else {
-          console.error('Failed to post event', data);
+            console.error('Failed to post event', data);
         }
         window.location.reload();
-      };
+    };
 
     useEffect(() => {
         const getEvent = async () => {
 
-          if (invalidToken()) return
+            if (invalidToken()) return
 
             try {
                 console.log(id);
                 const response = await fetch(`http://localhost:2902/event/${id}`,
-                {
-                    headers:{"Authorization": "Bearer " + localStorage.getItem("token")}
-                }
+                    {
+                        headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+                    }
 
                 );
                 const data = await response.json();
                 console.log(data);
                 setAttendees(data.attendees);
-                setEvent(data.event); // Access the event object inside the data
+                setEvent(data.event);
                 console.log(data.event.title)
             } catch (error) {
                 console.error("Error fetching event: ", error);
@@ -112,14 +112,14 @@ function EventPage() {
     }, [id]);
 
 
-    if (invalidToken()) return <Login redirect="/event-post"/>
+    if (invalidToken()) return <Login redirect="/event-post" />
 
     return (
         <Background opaque nospacing>
             <Grid container justifyContent="left" alignItems="center" height="100%">
                 {event && (
                     <Grid container>
-                        <CardMedia 
+                        <CardMedia
                             margin='0px'
                             component="img"
                             height="400px"
@@ -133,38 +133,38 @@ function EventPage() {
                                 <Table margin='auto'>
                                     <TableBody>
                                         <TableRow>
-                                            <HeaderCell text='Date'/>
+                                            <HeaderCell text='Date' />
                                             <TableCell>{new Date(event.date * 1000).toLocaleDateString()}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <HeaderCell text='Organizer'/>
+                                            <HeaderCell text='Organizer' />
                                             <TableCell>{event.organizer}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <HeaderCell text='Zip Code'/>
+                                            <HeaderCell text='Zip Code' />
                                             <TableCell>{event.zip}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <HeaderCell text='Organizer'/>
+                                            <HeaderCell text='Organizer' />
                                             <TableCell>{getEventType(event.type)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <HeaderCell text='Description'/>
+                                            <HeaderCell text='Description' />
                                             <TableCell>{event.description}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
                             </Grid>
                             <Grid item xs={1}></Grid>
-                            { attendees && (
+                            {attendees && (
                                 <Grid item xs={4}>
-                                    <AttendingList attendees={attendees} clickfunc={addAttendance}/>
+                                    <AttendingList attendees={attendees} clickfunc={addAttendance} />
                                     {/* <button type="button" onClick=>Attend</button> */}
                                 </Grid>
                             )}
                         </Grid>
                     </Grid>
-                    )}
+                )}
             </Grid>
         </Background>
     );
