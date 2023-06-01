@@ -105,6 +105,7 @@ function EventPage() {
                 console.log(data);
                 setAttendees(data.attendees);
                 setEvent(data.event); // Access the event object inside the data
+                console.log(data.event.title)
             } catch (error) {
                 console.error("Error fetching event: ", error);
             }
