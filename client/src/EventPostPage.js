@@ -1,28 +1,9 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper } from '@mui/material';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper, Card, CardContent, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Background from './components/Background';
 import Login from './Login';
 import { invalidToken } from './utils';
-
-const styles = theme => ({
-  formControl: {
-    marginBottom: '2rem',
-    minWidth: 200,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  title: {
-    marginBottom: theme.spacing(1),
-  },
-  subtitle: {
-    marginBottom: theme.spacing(1),
-  },
-  paper: {
-    padding: theme.spacing(2),
-  },
-});
 
 const EventPostPage = () => {
   const [eventData, setEventData] = useState({
@@ -73,48 +54,38 @@ const EventPostPage = () => {
     }
   };
 
-  if (invalidToken()) return <Login redirect="/event-post"/>
+  if (invalidToken()) return <Login redirect="/event-post" />
 
   else return (
     <Background>
-      <Grid container justifyContent="center" spacing={2} style={{ height: '90vh', textAlign: 'center' }}>
-        <Grid item xs={12}>
-          <Typography variant="h4" className={styles.title}>
-            Post a New Event
-          </Typography>
-          <Typography variant="subtitle1" className={styles.subtitle}>
+      <Box sx={{ height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingLeft: '125px' }}>
+        <Typography variant="h3" gutterBottom>
+          Post a New Event
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Share your events with your UCLA community and attract more attendees. Fill out the form below to get started.
+        </Typography>
 
-            Share your events with your UCLA community and attract more attendees. Fill out the form below to get started.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={styles.paper}>
-
+        <Card sx={{ minWidth: 275, maxWidth: 500, mt: 3 }}>
+          <CardContent>
             {submitted ? (
               <Typography variant="h6" style={{ color: 'green' }}>
                 Successfully posted event!
               </Typography>
             ) : (
-              <form
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  maxWidth: '400px',
-                  margin: '0 auto',
-                }}
-                onSubmit={handleSubmit}
-              >
+              <form onSubmit={handleSubmit}>
 
                 <TextField
-                  style={{ marginBottom: '2rem' }}
+                  fullWidth
                   label="Event Title"
                   name="title"
                   value={eventData.title}
                   onChange={handleInputChange}
                   required
+                  sx={{ mb: 2 }}
                 />
                 <TextField
-                  style={{ marginBottom: '2rem' }}
+                  fullWidth
                   label="Event Description"
                   name="description"
                   value={eventData.description}
@@ -122,9 +93,10 @@ const EventPostPage = () => {
                   required
                   multiline
                   rows={4}
+                  sx={{ mb: 2 }}
                 />
                 <TextField
-                  style={{ marginBottom: '2rem' }}
+                  fullWidth
                   label="Event Date"
                   type="date"
                   name="date"
@@ -134,9 +106,10 @@ const EventPostPage = () => {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  sx={{ mb: 2 }}
                 />
                 <TextField
-                  style={{ marginBottom: '2rem' }}
+                  fullWidth
                   label="Event ZIP"
                   name="zip"
                   value={eventData.zip}
@@ -145,14 +118,14 @@ const EventPostPage = () => {
                   inputProps={{
                     pattern: '\\d{5}',
                   }}
+                  sx={{ mb: 2 }}
                 />
-                <FormControl className={styles.formControl}>
-                  <InputLabel>Event Type</InputLabel>
+                <FormControl fullWidth sx={{ mb: 2 }}>
+                  <InputLabel></InputLabel>
                   <Select
                     name="type"
                     value={eventData.type}
                     onChange={handleInputChange}
-                    required
                   >
                     <MenuItem value={1}>Concert</MenuItem>
                     <MenuItem value={2}>Play</MenuItem>
@@ -166,9 +139,9 @@ const EventPostPage = () => {
                 </Button>
               </form>
             )}
-          </Paper>
-        </Grid>
-      </Grid>
+          </CardContent>
+        </Card>
+      </Box>
     </Background>
   );
 };
