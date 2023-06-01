@@ -5,8 +5,49 @@ import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
-// import { alpha } from '@material-ui/core/styles/colorManipulator';
-import { alpha } from '@mui/material';
+import { alpha } from '@material-ui/core/styles/colorManipulator';
+import katerina_stepanenko from './images/katerina_stepanenko.jpg';
+import { styled } from '@mui/material/styles';
+
+const LoginButton = styled(Button) ( ({theme}) => ({
+    textAlign: 'left',
+    variant: 'outlined',
+    color: '#FFFFFF',
+    borderColor: '#FFFFFF',
+    transition: "transform 0.15s fade",
+    borderRadius: '0px',
+    border: '3px solid',
+    size: 'large',
+    fontSize: '24px',
+    paddingTop: '20px',
+    paddingBottom: '20px',
+    paddingLeft: '40px',
+    paddingRight: '40px',
+    margin: '15px',
+    "&:hover": { 
+        backgroundColor: alpha('#000000', 0.2),
+    },
+}));
+
+const GoogleCopycatButton = styled(Button) ( ({theme}) => ({
+    textAlign: 'left',
+    variant: 'outlined',
+    color: '#FFFFFF',
+    borderColor: '#FFFFFF',
+    transition: "transform 0.15s fade",
+    borderRadius: '24px',
+    height: '38px',
+    border: '2px solid',
+    size: 'large',
+    fontSize: '18px',
+    width: '200px',
+    padding: '19px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    "&:hover": { 
+        backgroundColor: alpha('#FFFFFF', 0.2),
+    },
+}));
 
 const styles = {
     patternedBackground: {
@@ -53,34 +94,40 @@ const Login = redirect => {
         console.log('Login Failed');
         setloggedin(0);
     };
-
-    if (!loggedin) {
+    
+    if (!loggedin){
         return (
             <Paper container style={styles.patternedBackground}>
-                <Paper container style={styles.darkenBackground}>
-                    <Grid container style={styles.textContainer}>
-                        <Grid container flexDirection='column' m='20px'>
-                            <Typography variant="h3" fontSize='60px' color="white" >
-                                eventer
-                            </Typography>
-                            <Typography variant="h1" fontSize='140px' color="white" marginBottom='0px'>
-                                Explore LA.
-                            </Typography>
-                        </Grid>
-                        <Grid flexDirection='row' m='20px' width='100%' justifyItems="center" justifyContent="center" marginBottom='100px'>
-                            <GoogleLogin
-                                clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g"
-                                onSuccess={handleLoginSuccess}
-                                onError={handleLoginError}
-                                buttonText="Login with Google"
-                                cookiePolicy={'single_host_origin'}
-                            />
-                        </Grid>
+            <Paper container style={styles.darkenBackground}>
+                <Grid container style={styles.textContainer}>
+                    <Grid container flexDirection='column' m='20px'>
+                        <Typography variant="h3" fontSize='60px' color="white" >
+                            eventer
+                        </Typography>
+                        <Typography variant="h1" fontSize='140px' color="white" marginBottom='0px'>
+                            Explore LA.
+                        </Typography>
                     </Grid>
-                </Paper>
+                    <Grid flexDirection='row' m='20px' width='100%' justifyItems="center" justifyContent="center" marginBottom='100px'>
+                        <GoogleLogin
+                            clientId="588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g"
+                            onSuccess={handleLoginSuccess}
+                            onError={handleLoginError}
+                            buttonText="Login with Google"
+                            cookiePolicy={'single_host_origin'}
+                            size='large'
+                            theme='filled_blue'
+                            shape='pill'
+                            width='200px'
+                        />
+                        <GoogleCopycatButton href="/">
+                            Skip Login
+                        </GoogleCopycatButton>
+                    </Grid>
+                </Grid>
             </Paper>
-        );
-    }
+        </Paper>
+    );}
     else {
         return <Navigate replace to={redirect} />;
     }
