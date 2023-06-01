@@ -43,7 +43,6 @@ function EventGrid({ events }) {
         window.location.reload();
       };
     
-
     console.log("generating " + events)
     return (
         <Background>
