@@ -7,7 +7,6 @@ import LikeButton from '../components/LikeButton';
 import Masonry from '@mui/lab/Masonry';
 import Card from '@mui/material/Card';
 import { styled } from '@mui/system';
-// quotes from sitting in on a queer musicology 
 
 function EventGrid({ events }) {
 
