@@ -2,6 +2,7 @@ import * as React from 'react';
 import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button} from '@mui/material';
 import { styled } from '@mui/system';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 
 const StyledButton = styled(Button)(({theme}) => ({
   height: '100%',
@@ -18,7 +19,7 @@ const StyledCardHeader = styled(CardHeader)(({theme}) => ({
   backgroundColor: theme.palette.primary.main,
 }));
 
-export default function BasicList({attendees, clickfunc}) {
+export default function BasicList({attendees, clickfunc, isAttending}) {
   return (
     <Card>
         <StyledCardHeader title="Attending"/>
@@ -33,10 +34,16 @@ export default function BasicList({attendees, clickfunc}) {
             ))}
         </List>
         <Divider />
+        { isAttending ? 
         <StyledButton onClick = {clickfunc}>
-          <GroupAddIcon sx={{ marginRight: '10px' }}/>
+          <GroupAddIcon sx={{ marginRight: '5px' }}/>
           I'm attending!
+        </StyledButton> :
+        <StyledButton onClick = {clickfunc}>
+          <GroupAddOutlinedIcon sx={{ marginRight: '5px' }}/>
+          Not attending
         </StyledButton>
+        }
     </Card>
   );
 }

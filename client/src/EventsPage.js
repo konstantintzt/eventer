@@ -160,7 +160,7 @@ function EventPage() {
                             <Grid item xs={1}></Grid>
                             {attendees && (
                                 <Grid item xs={4}>
-                                    <AttendingList attendees={attendees} clickfunc={addAttendance} />
+                                    <AttendingList attendees={attendees} clickfunc={addAttendance} isAttending={false}/>
                                     {/* <button type="button" onClick=>Attend</button> */}
                                 </Grid>
                             )}
