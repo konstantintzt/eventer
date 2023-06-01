@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.get("/", passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
     const { error, value } = fetchEventsQuerySchema.validate(req.query)
+    console.log(req.user.uuid)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
         if (value.before != undefined) value.date = { $lte: value.before }
@@ -20,13 +21,23 @@ router.get("/", passport.authenticate( 'jwt',{ session: false }), async (req, re
         value.search = undefined
         value.before = undefined
         value.after = undefined
-        const results = await database.getDB().collection("events").find(value).toArray()
+        var results = await database.getDB().collection("events").find(value).toArray()
         
-        const liked_events = await database.getDB().collection("likes").find({user : req.user.id}).toArray()
+        const liked_events = await database.getDB().collection("likes").find({user : req.user.uuid}).toArray()
 
-        liked_events.map((event) => {
-            results[event.uuid].liked = 1
+        console.log(liked_events)
+
+        results = results.map((result) => {
+            if (liked_events.some(obj => obj["uuid"] == result.uuid)){
+                result = {...result, liked : 1}
+                console.log(result)
+            }else{
+                result = {...result, liked : 0}
+            }
+            return result
         })
+
+        console.log(results)
 
         return res.status(200).json(results)
     }

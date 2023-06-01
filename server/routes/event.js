@@ -13,7 +13,21 @@ router.get("/:uuid", async (req, res) => {
         // console.log("uuid")
         // console.log(value)
         const attendees = await database.getDB().collection("attendances").find(value).toArray()
-        const results = await database.getDB().collection("events").findOne(value)
+        var results = await database.getDB().collection("events").find(value).toArray()
+        
+        const liked_events = await database.getDB().collection("likes").find({user : req.user.uuid}).toArray()
+
+        console.log(liked_events)
+
+        results = results.map((result) => {
+            if (liked_events.some(obj => obj["uuid"] == result.uuid)){
+                result = {...result, liked : 1}
+                console.log(result)
+            }else{
+                result = {...result, liked : 0}
+            }
+            return result
+        })
         // console.log(results)
         // console.log(attendees)
         return res.status(200).json({ event: results, attendees: attendees })
