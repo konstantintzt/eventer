@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const StyledButton = styled(Button) ( ({theme}) => ({
     textAlign: 'left',
@@ -20,6 +21,7 @@ const StyledButton = styled(Button) ( ({theme}) => ({
         color: theme.palette.text.white,
         backgroundColor: theme.palette.red
     },
+
 }))
 
 export default function LikeButton({ id, likes, isLiked }) {
@@ -47,7 +49,7 @@ export default function LikeButton({ id, likes, isLiked }) {
 
   return (
       <StyledButton onClick = { () => addLike(id)} >
-        <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> 
+        { isLiked ? <FavoriteIcon sx={{ marginRight: '5px' }}/> : <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> }
         {likes} likes
       </StyledButton>
   );
