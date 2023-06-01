@@ -124,10 +124,10 @@ const Login = redirect => {
                             Skip Login
                         </GoogleCopycatButton>
                     </Grid>
-                </Paper>
+                </Grid>
             </Paper>
-        );
-    }
+        </Paper>
+    );}
     else {
         return <Navigate replace to={redirect} />;
     }
