@@ -11,7 +11,7 @@ const styles = {
         backgroundSize: '300px',
         width: '100%',
         maxHeight: false,
-        minHeight: '95vh'
+        minHeight: '100vh'
     },
     opaqueBacking: {
         backgroundColor: alpha('#FFFFFF', 1),
@@ -19,6 +19,7 @@ const styles = {
         height: '100%',
         margin: 'auto',
         borderRadius: '0px',
+        minHeight: '100vh'
     },
     semiTransparentBacking: {
         backgroundColor: alpha('#FFFFFF', 0.7),
@@ -26,6 +27,7 @@ const styles = {
         height: '100%',
         margin: 'auto',
         borderRadius: '0px',
+        minHeight: '100vh'
     },
     darkenBackground: {
         width: '100%',

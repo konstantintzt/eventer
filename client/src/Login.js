@@ -1,5 +1,7 @@
 import { GoogleLogin } from '@react-oauth/google';
 import { Typography, Box, Button, Container } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
@@ -31,9 +33,11 @@ const styles = {
 };
 
 const Login = () => {
+    const [loggedin, setloggedin] = useState(0);
+
     const handleLoginSuccess = async (credentialResponse) => {
         console.log(credentialResponse);
-        const response = await fetch('https://3e1e-2607-f010-2a7-c-7999-8b6e-8e4-1e70.ngrok-free.app/auth/verify_tokenn', {
+        const response = await fetch('http://localhost:2902/auth/verify_token', {
             method: 'POST',
             body: JSON.stringify(credentialResponse),
             headers: {
@@ -41,15 +45,18 @@ const Login = () => {
             },
         });
         const data = await response.json();
-        localStorage.setItem('token', data.token); //out the token in local stor
+        localStorage.setItem('token', data.token); // Store the token in local storage
+        setloggedin(1);
     };
 
     const handleLoginError = () => {
         console.log('Login Failed');
+        setloggedin(0);
     };
 
-    return (
-        <Paper container style={styles.patternedBackground}>
+    if (!loggedin){
+        return (
+            <Paper container style={styles.patternedBackground}>
             <Paper container style={styles.darkenBackground}>
                 <Grid container style={styles.textContainer}>
                     <Grid container flexDirection='column' m='20px'>
@@ -77,8 +84,13 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </Paper>
-        </Paper>
-    );
+        </Paper>            
+        );
+    }
+    else{
+        return <Navigate replace to="/" />;
+    }
+
 };
 
 export default Login;

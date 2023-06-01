@@ -13,6 +13,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -54,19 +55,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
-  };
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    //figure out search functionality later
-    console.log('Searching for:', searchValue);
   };
 
   const handleMenuOpen = (event) => {
@@ -111,7 +106,7 @@ export default function SearchAppBar() {
             <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
               Editor Pick
             </MenuItem>
-            <MenuItem component={Link} to="/" onClick={() => handleMenuClose('/')}>
+            <MenuItem component={Link} to="/login" onClick={() => handleMenuClose('/login')}>
               Login
             </MenuItem>
           </Menu>
@@ -122,7 +117,9 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" component={Link} to="/home" sx={{ fontSize: '20px', marginTop: '2px' }}>
+            <Button color="inherit" onClick={() => { window.location.reload() }} sx={{
+              fontSize: '20px', marginTop: '2px'
+            }}>
               Eventer
             </Button>
           </Typography>
@@ -140,7 +137,7 @@ export default function SearchAppBar() {
               onChange={handleSearchChange}
             />
           </Search>
-          <Button color="inherit" onClick={handleSearchSubmit}>
+          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue)}>
             Search
           </Button>
         </Toolbar>

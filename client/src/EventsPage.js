@@ -54,7 +54,7 @@ function getEventType(type) {
 
 export const getAllEvents = async () => {
     try {
-        const response = await fetch('http://tzantchev.com:2512/events');
+        const response = await fetch('http://localhost:2902/events');
         const data = await response.json();
         console.log(data);
         return data;
@@ -76,7 +76,7 @@ function EventPage() {
         const getEvent = async () => {
             try {
                 console.log(id);
-                const response = await fetch(`http://tzantchev.com:2512/event/${id}`);
+                const response = await fetch(`http://localhost:2902/event/${id}`);
                 const data = await response.json();
                 console.log(data);
                 setEvent(data.event); // Access the event object inside the data
@@ -111,5 +111,5 @@ function EventPage() {
     );
 }
 
-
+export const eventz = events;
 export default EventPage;
