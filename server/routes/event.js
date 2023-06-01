@@ -6,7 +6,7 @@ const passport = require("passport")
 const router = express.Router()
 
 
-router.get("/:uuid", async (req, res) => {
+router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
     const { error, value } = fetchSingleEventParamsSchema.validate(req.params)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
