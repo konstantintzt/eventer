@@ -10,6 +10,7 @@ import { styled } from '@mui/system';
 
 import Background from './components/Background';
 import AttendingList from './components/AttendingList'
+import { invalidToken } from './utils';
 
 const StyledHeaderCell = styled(TableCell)(({theme}) => ({
     width: '20%',
@@ -90,7 +91,7 @@ function EventPage() {
     useEffect(() => {
         const getEvent = async () => {
 
-          if (!localStorage.getItem("token")) return
+          if (invalidToken()) return
 
             try {
                 console.log(id);
@@ -113,7 +114,7 @@ function EventPage() {
     }, [id]);
 
 
-    if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
+    if (invalidToken()) return <Login redirect="/event-post"/>
 
     return (
         <Background opaque nospacing>

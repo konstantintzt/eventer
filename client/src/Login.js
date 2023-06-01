@@ -1,6 +1,6 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { Typography, Box, Button, Container, Hidden } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import { Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
 import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
@@ -72,7 +72,6 @@ const styles = {
         backgroundColor: alpha('#000000', 0.1),
     },
 };
-
 const Login = redirect => {
     const [loggedin, setloggedin] = useState(0);
 
@@ -125,15 +124,16 @@ const Login = redirect => {
                             Skip Login
                         </GoogleCopycatButton>
                     </Grid>
-                </Grid>
+                </Paper>
             </Paper>
-        </Paper>            
         );
     }
-    else{
+    else {
         return <Navigate replace to={redirect} />;
     }
 
 };
+
+
 
 export default Login;

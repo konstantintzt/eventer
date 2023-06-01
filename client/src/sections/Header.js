@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { alpha } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -54,7 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
 export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
@@ -68,16 +68,20 @@ export default function SearchAppBar({ handleSearchSubmit }) {
     setMenuAnchor(event.currentTarget);
   };
 
-  const handleMenuClose = (path) => {
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    handleMenuClose('/');
+    window.location.reload()
+  };
 
+  const handleMenuClose = (path) => {
     setMenuAnchor(null);
     console.log("path", path);
     console.log("tocken", localStorage.getItem('token'))
-    if (path === '/event-post' && !localStorage.getItem('token')) {
+    if (path === '/event-post') {
       navigate('/'); //broken
     } else {
       navigate(path);
-      console.log("path")
     }
   };
 
@@ -106,8 +110,8 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
               Editor Pick
             </MenuItem>
-            <MenuItem component={Link} to="/login" onClick={() => handleMenuClose('/login')}>
-              Login
+            <MenuItem component={Link} onClick={handleLogout}>
+              Logout
             </MenuItem>
           </Menu>
 

@@ -3,6 +3,7 @@ import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typograph
 import Grid from '@mui/material/Grid';
 import Background from './components/Background';
 import Login from './Login';
+import { invalidToken } from './utils';
 
 const styles = theme => ({
   formControl: {
@@ -72,7 +73,7 @@ const EventPostPage = () => {
     }
   };
 
-  if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
+  if (invalidToken()) return <Login redirect="/event-post"/>
 
   else return (
     <Background>
