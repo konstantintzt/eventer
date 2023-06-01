@@ -6,14 +6,28 @@ const passport = require("passport")
 const router = express.Router()
 
 
-router.get("/:uuid", async (req, res) => {
+router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
     const { error, value } = fetchSingleEventParamsSchema.validate(req.params)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
         // console.log("uuid")
         // console.log(value)
         const attendees = await database.getDB().collection("attendances").find(value).toArray()
-        const results = await database.getDB().collection("events").findOne(value)
+        var results = await database.getDB().collection("events").find(value).toArray()
+        
+        const liked_events = await database.getDB().collection("likes").find({user : req.user.uuid}).toArray()
+
+        console.log(liked_events)
+
+        results = results.map((result) => {
+            if (liked_events.some(obj => obj["uuid"] == result.uuid)){
+                result = {...result, liked : 1}
+                console.log(result)
+            }else{
+                result = {...result, liked : 0}
+            }
+            return result
+        })
         // console.log(results)
         // console.log(attendees)
         return res.status(200).json({ event: results, attendees: attendees })
@@ -28,7 +42,7 @@ router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req
         // console.log(req.body)
         const organizer = await database.getDB().collection("users").findOne({uuid : req.user.uuid})
         console.log(organizer["name"])
-        await database.getDB().collection("events").insertOne({ ...value, organizer: organizer["name"], uuid: uuidv4() })
+        await database.getDB().collection("events").insertOne({ ...value, organizer: organizer["name"], uuid: uuidv4(), likes : 0, liked : 0 })
         return res.status(200).json({ success: true })
     }
 })

@@ -18,6 +18,12 @@ const addEventAttendeeBodySchema = Joi.object({
     uuid: Joi.string().guid().required()
 }).unknown(false)
 
+const addLikeBodySchema = Joi.object({
+    like: Joi.number().integer().min(0).max(1),
+    uuid: Joi.string().guid().required()
+}).unknown(false)
+
+
 const addNewEventBodySchema = Joi.object({
     zip: Joi.number().integer().min(1).max(99950).required(),
     type:  Joi.number().integer().min(0).max(5).required(),
@@ -30,5 +36,6 @@ module.exports = {
     fetchEventsQuerySchema, 
     fetchSingleEventParamsSchema, 
     addEventAttendeeBodySchema,
-    addNewEventBodySchema
+    addNewEventBodySchema,
+    addLikeBodySchema
 }

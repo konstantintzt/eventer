@@ -29,6 +29,7 @@ async function main() {
     app.use("/auth", require("./routes/passport.js"))
     app.use("/", require("./routes/404"))
     app.use('/test', express.static('public'))
+    app.use("/like", require("./routes/like.js"))
     // app.use(unless(passport.authenticate( 'jwt',{ session: false }), "/auth/verify_token", "/test/index.html","/test/temp.html"))
     app.listen(process.env.PORT, () => {
         console.log("API is running on port " + process.env.PORT)

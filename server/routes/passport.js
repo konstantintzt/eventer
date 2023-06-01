@@ -57,7 +57,7 @@ router.post( '/verify_token',
             console.log("found")
             const user = await database.getDB().collection("users").findOne({"email":payload["email"]});
             token = jwt.sign({ uuid: user.uuid }, "foobar", {
-                expiresIn: 60*60
+                expiresIn: 60*60*24
               })
             //   return res.status(200).json({token})
             }
@@ -67,7 +67,7 @@ router.post( '/verify_token',
             const foo = await database.getDB().collection("users").insertOne({"name": payload["name"],"email":payload["email"], uuid: newuuid})
             console.log(foo)
             token = jwt.sign({ uuid: newuuid }, "foobar", {
-                expiresIn: 60*60,
+                expiresIn: 60*60*24,
               })
         }
         console.log(token)

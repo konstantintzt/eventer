@@ -22,9 +22,31 @@ const StyledButton = styled(Button) ( ({theme}) => ({
     },
 }))
 
-export default function LikeButton({ likes, isLiked }) {
+export default function LikeButton({ id, likes, isLiked }) {
+
+  const addLike = async(id) => {
+    console.log("clicked" + id)
+    const response = await fetch('http://localhost:2902/like', {
+      method: 'POST',
+      body: JSON.stringify({ uuid: id, like : 1}),
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+    });
+  
+    const data = await response.json();
+    if (response.ok) {
+      // setSubmitted(true);
+    } else {
+      console.error('Failed to post event', data);
+    }
+    window.location.reload();
+  };
+
+
   return (
-      <StyledButton>
+      <StyledButton onClick = { () => addLike(id)} >
         <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> 
         {likes} likes
       </StyledButton>

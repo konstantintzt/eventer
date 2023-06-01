@@ -32,6 +32,8 @@ const Home = () => {
   const [events, setEvents] = useState([])
 
   const handleSearchClick = async query => {
+    if (query.length != 0){
+
     const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
     {
       headers: {
@@ -41,6 +43,8 @@ const Home = () => {
     const data = await rawData.json()
     setEvents([])
     setEvents(data)
+    }
+
   }
 
   useEffect(() => {
