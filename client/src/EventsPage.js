@@ -122,7 +122,12 @@ function EventPage() {
 
             try {
                 console.log(id);
-                const response = await fetch(`http://localhost:2902/event/${id}`);
+                const response = await fetch(`http://localhost:2902/event/${id}`,
+                {
+                    headers:{"Authorization": "Bearer " + localStorage.getItem("token")}
+                }
+
+                );
                 const data = await response.json();
                 console.log(data);
                 setAttendees(data.attendees);
