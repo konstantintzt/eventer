@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-// import { alpha } from '@material-ui/core/styles/colorManipulator';
 import { alpha } from '@mui/material';
 import rawpixel_holographic from '../images/rawpixel_holographic-background.jpg';
 

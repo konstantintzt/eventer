@@ -32,7 +32,7 @@ const Home = () => {
   const [events, setEvents] = useState([])
 
   const handleSearchClick = async query => {
-    if (query.length != 0){
+    if (query.length !== 0){
 
     const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
     {
@@ -68,6 +68,23 @@ const Home = () => {
       }
     }
     fetchData()
+
+    window.addEventListener('error', e => {
+      if (e.message === 'ResizeObserver loop limit exceeded') {
+          const resizeObserverErrDiv = document.getElementById(
+              'webpack-dev-server-client-overlay-div'
+          );
+          const resizeObserverErr = document.getElementById(
+              'webpack-dev-server-client-overlay'
+          );
+          if (resizeObserverErr) {
+              resizeObserverErr.setAttribute('style', 'display: none');
+          }
+          if (resizeObserverErrDiv) {
+              resizeObserverErrDiv.setAttribute('style', 'display: none');
+          }
+      }
+    });
   }, [])
 
   if (invalidToken()) return <Login redirect="/" />

@@ -27,6 +27,19 @@ router.post("/", passport.authenticate( 'jwt',{ session: false }),  async (req, 
                 await database.getDB().collection("events").updateOne(filter, updateDoc);
                 return res.status(200).json({ liked: 1, like_count: event.likes + 1})
             }
+            // else if ((liked == 1) && (value.like == 0)){
+            //     await database.getDB().collection("likes").insertOne({ uuid : value.uuid, user: req.user.uuid})
+            //     // create a filter for a movie to update
+            //     const filter = { uuid: value.uuid };
+            //     // create a document that sets the plot of the movie
+            //     const updateDoc = {
+            //     $set: {
+            //         likes: event.likes - 1
+            //         },
+            //     };
+            //     await database.getDB().collection("events").updateOne(filter, updateDoc);
+            //     return res.status(200).json({ liked: 0, like_count: event.likes - 1})
+            // }
             return res.status(200).json({ liked: liked, like_count: like_count })
 
         }    }

@@ -1,52 +1,11 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
 import { alpha } from '@mui/material';
-import { styled } from '@mui/material/styles';
-
-const LoginButton = styled(Button) ( ({theme}) => ({
-    textAlign: 'left',
-    variant: 'outlined',
-    color: '#FFFFFF',
-    borderColor: '#FFFFFF',
-    transition: "transform 0.15s fade",
-    borderRadius: '0px',
-    border: '3px solid',
-    size: 'large',
-    fontSize: '24px',
-    paddingTop: '20px',
-    paddingBottom: '20px',
-    paddingLeft: '40px',
-    paddingRight: '40px',
-    margin: '15px',
-    "&:hover": { 
-        backgroundColor: alpha('#000000', 0.2),
-    },
-}));
-
-const GoogleCopycatButton = styled(Button) ( ({theme}) => ({
-    textAlign: 'left',
-    variant: 'outlined',
-    color: '#FFFFFF',
-    borderColor: '#FFFFFF',
-    transition: "transform 0.15s fade",
-    borderRadius: '24px',
-    height: '38px',
-    border: '2px solid',
-    size: 'large',
-    fontSize: '18px',
-    width: '200px',
-    padding: '19px',
-    marginTop: '20px',
-    marginBottom: '20px',
-    "&:hover": { 
-        backgroundColor: alpha('#FFFFFF', 0.2),
-    },
-}));
 
 const styles = {
     patternedBackground: {
