@@ -94,6 +94,24 @@ function EventPage() {
     const params  = useParams();
     const id = params.id;
 
+    const addAttendance = async() => {
+        const response = await fetch('http://localhost:2902/attend', {
+          method: 'POST',
+          body: JSON.stringify({ uuid: id}),
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          },
+        });
+      
+        const data = await response.json();
+        if (response.ok) {
+          // setSubmitted(true);
+        } else {
+          console.error('Failed to post event', data);
+        }
+      };
+
     useEffect(() => {
         const getEvent = async () => {
             try {
@@ -138,6 +156,7 @@ function EventPage() {
                                 <Typography variant="body1">ZIP: {event.zip}</Typography>
                                 <Typography variant="body1">Type: {getEventType(event.type)}</Typography>
                                 <Typography variant="body1">Description: {event.description}</Typography>
+                                <button type="button" onClick={addAttendance}>Attend</button>
                             </CardContent>
                         </Card>
                     </Grid>
