@@ -45,7 +45,6 @@ end_points =  {
                 "url":"/new",
                 "data":
                     {
-                        "organizer": "ACM",
                         "zip": 94588,
                         "type":  3,
                         "date": 20201212,
@@ -59,7 +58,6 @@ end_points =  {
                 "url":"/new",
                 "data":
                     {
-                        "organizer": "ACM",
                         "zip": 94588,
                         "type":  3,
                         "date": 20201212,
@@ -133,7 +131,7 @@ def test_oauth_new():
     apiz = requests.session()
 
     data = {
-        "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwODNkZDU5ODE2NzNmNjYxZmRlOWRhZTY0NmI2ZjAzODBhMDE0NWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1ODgwOTI5MjQ3OTItcG4xOTlhN2lwcDUwNXAzaWx1MWszZDFlbnR0bmx2dnMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDMwMzM0MzEwNzE4MTM0MTcxMzUiLCJoZCI6ImcudWNsYS5lZHUiLCJlbWFpbCI6InNlYW50YW5nMDAxQGcudWNsYS5lZHUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InNLaUc4NUxGSVRidElJYldDeW1tc0EiLCJub25jZSI6ImZvb2JhIiwibmFtZSI6IlNFQU4gVEFORyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQWNIVHRjRmRZTU9mZk94ZktJb0VkX1pLT3Zqd3NwWmRKUVZMcXVkMWVzOT1zOTYtYyIsImdpdmVuX25hbWUiOiJTRUFOIiwiZmFtaWx5X25hbWUiOiJUQU5HIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2ODU1MTI5MTUsImV4cCI6MTY4NTUxNjUxNSwianRpIjoiZmNiNmE5NjIzOWVmMDcxMDU0NmU4NGI3ODJjNDZlN2NiZTM2MGRlNCJ9.XPpNo59slmNCwgoo1zj3I0a9LddjB0Jpe2m1qr9gW1iHAuPjNfrIbac8O2feT0mCwrZNlJXyoRk9CydCZoms-RkbqH7RHnUeuz8ysGGEaKMzamzV6jDnwQS2KugUkH2HcMGcb3E40KsNgH9scnc--dHMe8gdDQnEMQMv6lNxWkLgzAOvxbYUgX0nYeBODZvfLQzhsUxtZjbUXa_AV7vbBIZjAlzzYd8Eiw5gFbnPttez5EjRA6LoUbdSWAl_vHZgJIwK_qiBL6-dFWXabUZZP1u_2FYJb4Qmvk5qW9nXXoaJsBPJ77UIiGR5wYaZ339Wbc0sT-clkJUeJ9a8U5YJrQ"
+        "credential": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYwODNkZDU5ODE2NzNmNjYxZmRlOWRhZTY0NmI2ZjAzODBhMDE0NWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODU1NzUxNDAsImF1ZCI6IjU4ODA5MjkyNDc5Mi1vM2gwOXF2NWRjNWpybTRsODB0Z2RqcDYya3I5ZTYwZy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExNDE3MDIwNzc4NjMwOTc1MTAzNyIsImVtYWlsIjoic2VhbnRhbmcwMDFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjU4ODA5MjkyNDc5Mi1vM2gwOXF2NWRjNWpybTRsODB0Z2RqcDYya3I5ZTYwZy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJTZWFuIFRhbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZndvUTNmMm9TZTQtb1pMODF6anhDQndyQUhQX1pwNko3blBPTWw9czk2LWMiLCJnaXZlbl9uYW1lIjoiU2VhbiIsImZhbWlseV9uYW1lIjoiVGFuZyIsImlhdCI6MTY4NTU3NTQ0MCwiZXhwIjoxNjg1NTc5MDQwLCJqdGkiOiIxNjM1ODBkN2M5NDQ2ZmNkYWUyYzNkNDc2MmY3YTZlOGIwNDA3ZmIyIn0.PnlAVIZYBDChogpZyODngf7mcCrJQ8tholiTaYXj0bDyWx8pn3EAmokV1Qp7y31077odfy573UORXx5yrA0BvABVS2smiBugWCIhdwkJEhKRV4XStAqdd23G96yOyV65SDwPv4tsjk6_RivhKV5EGjVtZwIqMlAxrjU9cl7ROqXMyv7RaGEyh3WLU_ygOSm8OQmS9hd8aAATixtPn6oCfTUoP2LkUubo68d_XUuiWjEioW3exRAhV1oPo5t-iOBFvgQQ1GmCVDTkJOisLHMJjWGuo6AYQotxx5qa3Ho8eWYzH3VmquGufd6MRuXqCc7kJV_39XRP1Kdh9OUi2WKdeg"
         }
 
 

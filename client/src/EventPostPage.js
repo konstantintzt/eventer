@@ -31,8 +31,7 @@ const EventPostPage = () => {
     description: '',
     date: '',
     zip: '',
-    type: 1,
-    organizer: 'charles',
+    type: 1
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -57,6 +56,7 @@ const EventPostPage = () => {
   const addNewEvent = async (eventData) => {
     eventData.date = Math.floor(new Date(eventData.date).valueOf());
     console.log(JSON.stringify({ event: eventData }));
+    console.log(localStorage.getItem("token"));
     const response = await fetch('http://localhost:2902/event/new', {
       method: 'POST',
       body: JSON.stringify(eventData),

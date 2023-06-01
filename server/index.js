@@ -10,15 +10,6 @@ dotenv.config()
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true }
-  }));
-
-
-
 
 
 async function main() {
