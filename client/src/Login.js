@@ -5,8 +5,7 @@ import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import katerina_stepanenko from './images/katerina_stepanenko.jpg';
+import { alpha } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const LoginButton = styled(Button) ( ({theme}) => ({
@@ -120,9 +119,6 @@ const Login = redirect => {
                             shape='pill'
                             width='200px'
                         />
-                        <GoogleCopycatButton href="/">
-                            Skip Login
-                        </GoogleCopycatButton>
                     </Grid>
                 </Grid>
             </Paper>

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 import { Card, CardContent, CardMedia, Typography, Table, TableCell, TableRow, TableBody } from '@mui/material';
 import Login from "./Login"
 import { styled } from '@mui/system';
