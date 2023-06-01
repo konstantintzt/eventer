@@ -4,10 +4,11 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Login from "./Login"
 
 import Background from './components/Background';
+import AttendingList from './components/AttendingList'
 
 const events = [
     {
@@ -122,45 +123,40 @@ function EventPage() {
     if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
 
     return (
-        <Background opaque>
-            <Grid container justifyContent="center" alignItems="center" height="100%">
+        <Background opaque nospacing>
+            <Grid container justifyContent="left" alignItems="center" height="100%">
                 {event && (
-                    <Grid item xs={12} md={6}>
-                        <Card>
-                            <CardContent>
-                                <div style={{ backgroundImage: `url(${event.url})` }}></div>
-                                <Typography variant="h4" component="div">{event.title}</Typography>
+                    <Grid container>
+                        <CardMedia 
+                            margin='0px'
+                            component="img"
+                            height="500px"
+                            width="100%"
+                            src="https://images.unsplash.com/photo-1549388604-817d15aa0110" />
+                        <Grid container sx={{ px: '40px', py: '30px' }} xs={12}>
+                            <Grid item xs={12} paddingBottom='30px'>
+                                <Typography variant="h3" align="center" component="div">{event.title}</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
                                 <Typography variant="body1">Date: {new Date(event.date * 1000).toLocaleDateString()}</Typography>
                                 <Typography variant="body1">Organizer: {event.organizer}</Typography>
                                 <Typography variant="body1">ZIP: {event.zip}</Typography>
                                 <Typography variant="body1">Type: {getEventType(event.type)}</Typography>
                                 <Typography variant="body1">Description: {event.description}</Typography>
+                            </Grid>
+                            { attendees && (
+                                <Grid item xs={6}>
+                                    <Typography variant="h4">Attendees</Typography>
+                                    {attendees.map((attendee) => (
+                                        <Typography variant="body1">{attendee.name}</Typography>
+                                    ))}
+                                <AttendingList attendees={attendees}/>
                                 <button type="button" onClick={addAttendance}>Attend</button>
-                            </CardContent>
-                        </Card>
+                            </Grid>
+                            )}
+                        </Grid>
                     </Grid>
-                    )},
-                <br></br>
-                <br></br>
-                { attendees && (
-                    <Grid item xs={12} md={6}>
-                    <Card>
-                    <CardContent>
-                    <Typography variant="h4" component="div">Attendees</Typography>
-                    {attendees.map((attendee) => (
-                    <Typography variant="body1">{attendee.name}</Typography>
-                    ))}
-                    {/* <table>
-                        {attendees.map((attendee) => (
-                                <tr>
-                                <th>{attendee.name}</th>
-                                </tr>
-                        ))}
-                    </table> */}
-                    </CardContent>
-                </Card>
-                </Grid>
-                )}
+                    )}
             </Grid>
         </Background>
     );

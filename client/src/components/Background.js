@@ -36,13 +36,20 @@ const styles = {
     },
 };
 
-function Background({children, opaque}) {
+function Background({children, opaque, nospacing}) {
     return (
         <Paper container style={styles.patternedBackground}>
             <Paper container style={opaque ? styles.opaqueBacking : styles.semiTransparentBacking} position="fixed" elevation={0}>
-                <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
-                    { children }
-                </Grid>
+                {nospacing && (
+                    <Grid container margin="auto">
+                        { children }
+                    </Grid>
+                )}
+                {!nospacing && (
+                    <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+                        { children }
+                    </Grid>
+                )}
             </Paper>
         </Paper>
     );

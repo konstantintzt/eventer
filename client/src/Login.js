@@ -125,8 +125,6 @@ const Login = redirect => {
                             Skip Login
                         </GoogleCopycatButton>
                     </Grid>
-                    {/* <Hidden xsUp> */}
-                    {/* </Hidden> */}
                 </Grid>
             </Paper>
         </Paper>            
