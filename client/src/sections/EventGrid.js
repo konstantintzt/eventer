@@ -45,10 +45,10 @@ function EventGrid({ events }) {
     console.log("generating " + events)
     return (
         <Background>
-            <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
+            <Grid container rowSpacing={1} margin="auto">
                 {(events.length > 0) && events.map((event) => (
-                    <Grid item key={event.uuid}>
-                      <StyledCard sx={{ width: 345, m: '15px', borderRadius: '0px' }}>
+                    <Grid item key={event.uuid} xs={4} marginLeft="auto" marginRight="auto">
+                      <StyledCard sx={{ m: '15px', borderRadius: '0px' }}>
                           <EventCard
                               id={event.uuid}
                               title={event.title}
