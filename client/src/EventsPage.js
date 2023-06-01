@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 import { Card, CardContent, Typography } from '@material-ui/core';
+import Login from "./Login"
 
 import Background from './components/Background';
 
@@ -96,6 +97,9 @@ function EventPage() {
 
     useEffect(() => {
         const getEvent = async () => {
+
+          if (!localStorage.getItem("token")) return
+
             try {
                 console.log(id);
                 const response = await fetch(`http://localhost:2902/event/${id}`);
@@ -109,6 +113,9 @@ function EventPage() {
 
         getEvent();
     }, [id]);
+
+
+    if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
 
     return (
 

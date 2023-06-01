@@ -3,6 +3,7 @@ import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typograph
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Background from './components/Background';
+import Login from './Login';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -74,7 +75,9 @@ const EventPostPage = () => {
     }
   };
 
-  return (
+  if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
+
+  else return (
     <Background>
       <Grid container justifyContent="center" spacing={2} style={{ height: '90vh', textAlign: 'center' }}>
         <Grid item xs={12}>
