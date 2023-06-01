@@ -20,7 +20,6 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/event-post" element={<EventPostPage />} />
           <Route path="/event/:id" element={<EventPage />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>
@@ -32,19 +31,29 @@ const Home = () => {
   const [events, setEvents] = useState([])
 
   const handleSearchClick = async query => {
-    // console.log("Search clicked")
-    // console.log(query)
-    const rawData = await fetch(`http://localhost:2902/events?search=${query}`)
+    const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
+    {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    })
     const data = await rawData.json()
     setEvents([])
     setEvents(data)
-    // console.log(events)
   }
 
   useEffect(() => {
     async function fetchData() {
+
+      if (!localStorage.getItem("token")) return;
+
       try {
-        const rawData = await fetch("http://localhost:2902/events")
+        const rawData = await fetch(`http://localhost:2902/events`,
+        {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+        })
         const data = await rawData.json()
         setEvents(data)
         console.log(events)
@@ -55,6 +64,8 @@ const Home = () => {
     }
     fetchData()
   }, [])
+
+  if (!localStorage.getItem("token")) return <Login redirect="/" />
 
   return (
     <div>
