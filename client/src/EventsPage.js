@@ -62,6 +62,7 @@ export const getAllEvents = async () => {
 function EventPage() {
     const [event, setEvent] = useState(null);
     const [attendees, setAttendees] = useState(null);
+    const [isAttending, setIsAttending] = useState(0);
     // const { id } = useParams();
     const params = useParams();
     const id = params.id;
@@ -99,10 +100,12 @@ function EventPage() {
 
                 );
                 const data = await response.json();
+                // const userAttending = await database.getDB().collection("attendances").countDocuments({...value, user: req.user.uuid});
                 console.log(data);
                 setAttendees(data.attendees);
                 setEvent(data.event);
                 console.log(data.event.title)
+                setIsAttending(1);
             } catch (error) {
                 console.error("Error fetching event: ", error);
             }
@@ -110,7 +113,6 @@ function EventPage() {
 
         getEvent();
     }, [id]);
-
 
     if (invalidToken()) return <Login redirect="/event-post" />
 

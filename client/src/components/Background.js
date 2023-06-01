@@ -2,11 +2,12 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { alpha } from '@mui/material';
-import rawpixel_holographic from '../images/rawpixel_holographic-background.jpg';
+import watercolor from '../images/watercolor.jpeg';
+
 
 const styles = {
     patternedBackground: {
-        backgroundImage: `url(${rawpixel_holographic})`,
+        backgroundImage: `url(${watercolor})`,
         backgroundRepeat: 'repeat',
         backgroundSize: '300px',
         width: '100%',
