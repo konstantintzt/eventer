@@ -57,7 +57,7 @@ const EventPostPage = () => {
   const addNewEvent = async (eventData) => {
     eventData.date = Math.floor(new Date(eventData.date).valueOf());
     console.log(JSON.stringify({ event: eventData }));
-    const response = await fetch('http://tzantchev.com:2512/event/new', {
+    const response = await fetch('http://localhost:2902/event/new', {
       method: 'POST',
       body: JSON.stringify(eventData),
       headers: {
