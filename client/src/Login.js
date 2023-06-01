@@ -3,7 +3,7 @@ import { Typography, Box, Button, Container } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Navigate } from "react-router-dom";
 
-const Login = () => {
+const Login = redirect => {
     const [loggedin, setloggedin] = useState(0);
 
     const handleLoginSuccess = async (credentialResponse) => {
@@ -18,6 +18,7 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem('token', data.token); // Store the token in local storage
         setloggedin(1);
+        window.location.reload()
     };
 
     const handleLoginError = () => {
@@ -59,7 +60,7 @@ const Login = () => {
         );
     }
     else{
-        return <Navigate replace to="/" />;
+        return <Navigate replace to={redirect} />;
     }
 
 };
