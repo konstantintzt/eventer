@@ -21,26 +21,6 @@ function EventGrid({ events }) {
     const handleEventClick = (id) => {
         navigate(`/event/${id}`);
     };
-
-    const addLike = async(id) => {
-        console.log("clicked")
-        const response = await fetch('http://localhost:2902/like', {
-          method: 'POST',
-          body: JSON.stringify({ uuid: id, like : 1}),
-          headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + localStorage.getItem("token")
-          },
-        });
-      
-        const data = await response.json();
-        if (response.ok) {
-          // setSubmitted(true);
-        } else {
-          console.error('Failed to post event', data);
-        }
-        window.location.reload();
-      };
     
     console.log("generating " + events)
     return (

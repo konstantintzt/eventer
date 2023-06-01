@@ -32,7 +32,7 @@ const Home = () => {
   const [events, setEvents] = useState([])
 
   const handleSearchClick = async query => {
-    if (query.length != 0){
+    if (query.length !== 0){
 
     const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
     {

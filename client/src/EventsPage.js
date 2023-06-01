@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import { Card, CardContent, CardMedia, Typography, Table, TableCell, TableRow, TableBody } from '@mui/material';
+import { CardMedia, Typography, Table, TableCell, TableRow, TableBody } from '@mui/material';
 import Login from "./Login"
 import { styled } from '@mui/system';
 

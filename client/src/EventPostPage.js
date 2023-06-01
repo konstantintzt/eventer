@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper, Card, CardContent, Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Card, CardContent, Box } from '@mui/material';
 import Background from './components/Background';
 import Login from './Login';
 import { invalidToken } from './utils';
