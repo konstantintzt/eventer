@@ -107,7 +107,7 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             <MenuItem component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
               Post An Event
             </MenuItem>
-            <MenuItem component={Link} to="/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
+            <MenuItem component={Link} to="/event/725ee160-88c8-4de3-bff7-257f1e973012" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
               Editor Pick
             </MenuItem>
             <MenuItem component={Link} onClick={handleLogout}>

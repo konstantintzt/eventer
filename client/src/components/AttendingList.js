@@ -33,7 +33,7 @@ export default function BasicList({attendees, clickfunc}) {
             ))}
         </List>
         <Divider />
-        <StyledButton>
+        <StyledButton onClick = {clickfunc}>
           <GroupAddIcon sx={{ marginRight: '10px' }}/>
           I'm attending!
         </StyledButton>
