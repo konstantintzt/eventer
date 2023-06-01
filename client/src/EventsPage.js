@@ -136,7 +136,7 @@ function EventPage() {
                                     <TableBody>
                                         <TableRow>
                                             <HeaderCell text='Date' />
-                                            <TableCell>{new Date(event.date * 1000).toLocaleDateString()}</TableCell>
+                                            <TableCell>{new Date(event.date).toLocaleDateString()}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <HeaderCell text='Organizer' />
