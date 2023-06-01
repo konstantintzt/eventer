@@ -11,6 +11,7 @@ const styles = {
         backgroundSize: '300px',
         width: '100%',
         maxHeight: false,
+        minHeight: '95vh'
     },
     opaqueBacking: {
         backgroundColor: alpha('#FFFFFF', 1),
