@@ -1,12 +1,12 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { Typography, Box, Button, Container } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import { Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
 import { Navigate } from "react-router-dom";
 import rawpixel_holographic_background from './images/rawpixel_holographic-background.jpg';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import katerina_stepanenko from './images/katerina_stepanenko.jpg';
+// import { alpha } from '@material-ui/core/styles/colorManipulator';
+import { alpha } from '@mui/material';
 
 const styles = {
     patternedBackground: {
