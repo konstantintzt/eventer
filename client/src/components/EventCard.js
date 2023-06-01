@@ -8,7 +8,7 @@ import { styled } from '@mui/system';
 
 
 function EventCard(props) {
-  const { id, url, title, desc, likes } = props;
+  const { id, title, desc, likes } = props;
 
   return (
     <Link to={`/event/${id}`} style={{ textDecoration: 'none' }}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
-import { BrowserRouter as Router, Route, Routes, Link, json } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles'
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
@@ -11,6 +11,7 @@ import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { invalidToken } from './utils';
 
 const App = () => {
   return (
@@ -49,7 +50,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
 
-      if (!localStorage.getItem("token")) return;
+      if (invalidToken()) return;
 
       try {
         const rawData = await fetch(`http://localhost:2902/events`,
@@ -69,7 +70,7 @@ const Home = () => {
     fetchData()
   }, [])
 
-  if (!localStorage.getItem("token")) return <Login redirect="/" />
+  if (invalidToken()) return <Login redirect="/" />
 
   return (
     <div>
