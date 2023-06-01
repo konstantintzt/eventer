@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Background from './components/Background';
+import Login from './Login';
 
 const styles = theme => ({
   formControl: {
@@ -28,8 +29,7 @@ const EventPostPage = () => {
     description: '',
     date: '',
     zip: '',
-    type: 1,
-    organizer: 'charles',
+    type: 1
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -54,6 +54,7 @@ const EventPostPage = () => {
   const addNewEvent = async (eventData) => {
     eventData.date = Math.floor(new Date(eventData.date).valueOf());
     console.log(JSON.stringify({ event: eventData }));
+    console.log(localStorage.getItem("token"));
     const response = await fetch('http://localhost:2902/event/new', {
       method: 'POST',
       body: JSON.stringify(eventData),
@@ -71,7 +72,9 @@ const EventPostPage = () => {
     }
   };
 
-  return (
+  if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
+
+  else return (
     <Background>
       <Grid container justifyContent="center" spacing={2} style={{ height: '90vh', textAlign: 'center' }}>
         <Grid item xs={12}>

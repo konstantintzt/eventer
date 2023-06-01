@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import katerina_stepanenko from './images/katerina_stepanenko.jpg';
 import { Card, CardContent, Typography } from '@mui/material';
+import Login from "./Login"
 
 import Background from './components/Background';
 
@@ -68,17 +69,46 @@ export const getAllEvents = async () => {
 
 function EventPage() {
     const [event, setEvent] = useState(null);
+    const [attendees, setAttendees] = useState(null);
     // const { id } = useParams();
     const params  = useParams();
     const id = params.id;
 
+    const addAttendance = async() => {
+        const response = await fetch('http://localhost:2902/attend', {
+          method: 'POST',
+          body: JSON.stringify({ uuid: id}),
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          },
+        });
+      
+        const data = await response.json();
+        if (response.ok) {
+          // setSubmitted(true);
+        } else {
+          console.error('Failed to post event', data);
+        }
+        window.location.reload();
+      };
+
     useEffect(() => {
         const getEvent = async () => {
+
+          if (!localStorage.getItem("token")) return
+
             try {
                 console.log(id);
-                const response = await fetch(`http://localhost:2902/event/${id}`);
+                const response = await fetch(`http://localhost:2902/event/${id}`,
+                {
+                    headers:{"Authorization": "Bearer " + localStorage.getItem("token")}
+                }
+
+                );
                 const data = await response.json();
                 console.log(data);
+                setAttendees(data.attendees);
                 setEvent(data.event); // Access the event object inside the data
             } catch (error) {
                 console.error("Error fetching event: ", error);
@@ -87,6 +117,9 @@ function EventPage() {
 
         getEvent();
     }, [id]);
+
+
+    if (!localStorage.getItem("token")) return <Login redirect="/event-post"/>
 
     return (
         <Background opaque>
@@ -102,9 +135,31 @@ function EventPage() {
                                 <Typography variant="body1">ZIP: {event.zip}</Typography>
                                 <Typography variant="body1">Type: {getEventType(event.type)}</Typography>
                                 <Typography variant="body1">Description: {event.description}</Typography>
+                                <button type="button" onClick={addAttendance}>Attend</button>
                             </CardContent>
                         </Card>
                     </Grid>
+                    )},
+                <br></br>
+                <br></br>
+                { attendees && (
+                    <Grid item xs={12} md={6}>
+                    <Card>
+                    <CardContent>
+                    <Typography variant="h4" component="div">Attendees</Typography>
+                    {attendees.map((attendee) => (
+                    <Typography variant="body1">{attendee.name}</Typography>
+                    ))}
+                    {/* <table>
+                        {attendees.map((attendee) => (
+                                <tr>
+                                <th>{attendee.name}</th>
+                                </tr>
+                        ))}
+                    </table> */}
+                    </CardContent>
+                </Card>
+                </Grid>
                 )}
             </Grid>
         </Background>
