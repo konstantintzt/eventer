@@ -28,7 +28,7 @@ router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req
         // console.log(req.body)
         const organizer = await database.getDB().collection("users").findOne({uuid : req.user.uuid})
         console.log(organizer["name"])
-        await database.getDB().collection("events").insertOne({ ...value, organizer: organizer["name"], uuid: uuidv4() })
+        await database.getDB().collection("events").insertOne({ ...value, organizer: organizer["name"], uuid: uuidv4(), likes : 0, liked : 0 })
         return res.status(200).json({ success: true })
     }
 })
