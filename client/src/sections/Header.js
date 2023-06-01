@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { eventz } from '../EventsPage';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,36 +56,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
-  };
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    
-    var myArray = [];
-    for(var events in events) //We iterate over the Object to get the names of the nested objects
-      myArray.push(events[events.title]); //We get the objects of the json and push them inside our array.
-    
-    console.log(myArray);
-
-    var userQuery = searchValue; //user input
-    var myRegex = new RegExp('.*' + userQuery + '.*','gi'); //We create a new regular expression, this one tests if the text is contained within a string.
-    
-    var filteredArray = myArray.filter(function(item){
-        //We test each element of the object to see if one string matches the regexp.
-        return (myRegex.test(item.track) || myRegex.test(item.artist) || myRegex.test(item.album))
-    
-    }); 
-
-    console.log(filteredArray);
-
-      //figure out search functionality later
-    console.log('Searching for:', searchValue);
   };
 
   const handleMenuOpen = (event) => {
@@ -127,7 +102,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" component={Link} to="/" sx={{
+            <Button color="inherit" onClick={() => { window.location.reload() }} sx={{
               fontSize: '20px', marginTop: '2px'
             }}>
               Eventer
@@ -150,7 +125,7 @@ export default function SearchAppBar() {
               onChange={handleSearchChange}
             />
           </Search>
-          <Button color="inherit" onClick={handleSearchSubmit}>
+          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue)}>
             Search
           </Button>
         </Toolbar>
