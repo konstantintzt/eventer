@@ -16,6 +16,7 @@ const StyledButton = styled(Button) ( ({theme}) => ({
     size: 'large',
     padding: '5px',
     width: '120px',
+    margin: '5px',
     "&:hover": { 
         variant: 'contained',
         color: theme.palette.text.white,
@@ -46,9 +47,30 @@ export default function LikeButton({ id, likes, isLiked }) {
     window.location.reload();
   };
 
+  // const removeLike = async(id) => {
+  //   console.log("clicked" + id)
+  //   const response = await fetch('http://localhost:2902/like', {
+  //     method: 'POST',
+  //     body: JSON.stringify({ uuid: id, like : 0}),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "Authorization": "Bearer " + localStorage.getItem("token")
+  //     },
+  //   });
+  
+  //   const data = await response.json();
+  //   if (response.ok) {
+  //     // setSubmitted(true);
+  //   } else {
+  //     console.error('Failed to post event', data);
+  //   }
+  //   window.location.reload();
+  // };
+
 
   return (
       <StyledButton onClick = { () => addLike(id)} >
+      {/* <StyledButton onClick = { () => isLiked ? removeLike(id) : addLike(id)} > */}
         { isLiked ? <FavoriteIcon sx={{ marginRight: '5px' }}/> : <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> }
         {likes} likes
       </StyledButton>

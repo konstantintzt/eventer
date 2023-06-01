@@ -48,16 +48,16 @@ function EventGrid({ events }) {
             <Grid container rowSpacing={1} sx={{ px: '40px', py: '30px' }} margin="auto">
                 {(events.length > 0) && events.map((event) => (
                     <Grid item key={event.uuid}>
-                    <StyledCard sx={{ width: 345, m: '15px', borderRadius: '0px' }}>
-                        <EventCard
-                            id={event.uuid}
-                            title={event.title}
-                            desc={event.desc}
-                            likes={event.likes}
-                            onClick={() => handleEventClick(event.id)}
-                        />
-                        <LikeButton likes={event.likes} id = {event.uuid} isLiked={event.liked}/>
-                    </StyledCard>
+                      <StyledCard sx={{ width: 345, m: '15px', borderRadius: '0px' }}>
+                          <EventCard
+                              id={event.uuid}
+                              title={event.title}
+                              desc={event.desc}
+                              likes={event.likes}
+                              onClick={() => handleEventClick(event.id)}
+                          />
+                          <LikeButton likes={event.likes} id = {event.uuid} isLiked={event.liked}/>
+                      </StyledCard>
                     </Grid>
                 ))}
             </Grid>
