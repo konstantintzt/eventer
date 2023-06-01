@@ -5,7 +5,7 @@ const passport = require("passport")
 
 const router = express.Router()
 
-router.get("/",   async (req, res) => {
+router.get("/", async (req, res) => {
     const { error, value } = fetchEventsQuerySchema.validate(req.query)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {

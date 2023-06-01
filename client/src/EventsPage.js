@@ -90,6 +90,7 @@ export const getAllEvents = async () => {
 
 function EventPage() {
     const [event, setEvent] = useState(null);
+    const [attendees, setAttendees] = useState(null);
     // const { id } = useParams();
     const params  = useParams();
     const id = params.id;
@@ -110,6 +111,7 @@ function EventPage() {
         } else {
           console.error('Failed to post event', data);
         }
+        window.location.reload();
       };
 
     useEffect(() => {
@@ -119,6 +121,7 @@ function EventPage() {
                 const response = await fetch(`http://localhost:2902/event/${id}`);
                 const data = await response.json();
                 console.log(data);
+                setAttendees(data.attendees);
                 setEvent(data.event); // Access the event object inside the data
             } catch (error) {
                 console.error("Error fetching event: ", error);
@@ -160,6 +163,27 @@ function EventPage() {
                             </CardContent>
                         </Card>
                     </Grid>
+                    )},
+                <br></br>
+                <br></br>
+                { attendees && (
+                    <Grid item xs={12} md={6}>
+                    <Card>
+                    <CardContent>
+                    <Typography variant="h4" component="div">Attendees</Typography>
+                    {attendees.map((attendee) => (
+                    <Typography variant="body1">{attendee.name}</Typography>
+                    ))}
+                    {/* <table>
+                        {attendees.map((attendee) => (
+                                <tr>
+                                <th>{attendee.name}</th>
+                                </tr>
+                        ))}
+                    </table> */}
+                    </CardContent>
+                </Card>
+                </Grid>
                 )}
             </Grid>
         </Background>
