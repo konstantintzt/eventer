@@ -14,7 +14,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -55,6 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
@@ -71,15 +71,15 @@ export default function SearchAppBar({ handleSearchSubmit }) {
   const handleLogout = () => {
     localStorage.removeItem('token');
     handleMenuClose('/');
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleMenuClose = (path) => {
     setMenuAnchor(null);
-    console.log("path", path);
-    console.log("tocken", localStorage.getItem('token'))
+    console.log('path', path);
+    console.log('token', localStorage.getItem('token'));
     if (path === '/event-post') {
-      navigate('/'); //broken
+      navigate('/');
     } else {
       navigate(path);
     }
@@ -107,9 +107,6 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             <MenuItem component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
               Post An Event
             </MenuItem>
-            <MenuItem component={Link} to="/event/725ee160-88c8-4de3-bff7-257f1e973012" onClick={() => handleMenuClose('/event/8fc1e95c-3ce5-4167-a75d-3accc5403c1c')}>
-              Editor Pick
-            </MenuItem>
             <MenuItem component={Link} onClick={handleLogout}>
               Logout
             </MenuItem>
@@ -121,9 +118,7 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" onClick={() => { window.location.reload() }} sx={{
-              fontSize: '20px', marginTop: '2px'
-            }}>
+            <Button color="inherit" onClick={() => { window.location.reload(); }} sx={{ fontSize: '20px', marginTop: '2px' }}>
               Eventer
             </Button>
           </Typography>
