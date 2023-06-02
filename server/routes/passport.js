@@ -36,8 +36,9 @@ passport.use(
 router.post( '/verify_token',    
     async (req, res) => {
         console.log(req.body)
+        var ticket;
         try{
-            const ticket = await client.verifyIdToken({
+            ticket = await client.verifyIdToken({
                 idToken:  req.body["credential"],
                 audience: "588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
                 // Or, if multiple clients access the backend:
