@@ -36,12 +36,17 @@ passport.use(
 router.post( '/verify_token',    
     async (req, res) => {
         console.log(req.body)
-        const ticket = await client.verifyIdToken({
-            idToken:  req.body["credential"],
-            audience: "588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
-            // Or, if multiple clients access the backend:
-            //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-        })
+        try{
+            const ticket = await client.verifyIdToken({
+                idToken:  req.body["credential"],
+                audience: "588092924792-o3h09qv5dc5jrm4l80tgdjp62kr9e60g.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+                // Or, if multiple clients access the backend:
+                //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+            })
+        }
+        catch (err) {
+            return res.status(400).json({token})
+        }
         const payload = ticket.getPayload()
         console.log(payload);
         // const userid = payload['sub'];
