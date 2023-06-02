@@ -61,9 +61,9 @@ const EventPostPage = () => {
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <EventPageHeader />
       <Background>
-        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingLeft: '125px' }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingLeft: '10px' }}>
           {submitted ? (
-            <Box sx={{ paddingLeft: '125px' }}>
+            <Box sx={{ paddingLeft: '30px' }}>
               <Typography variant="h3" style={{ color: 'green' }}>
                 Successfully posted event!
               </Typography>
