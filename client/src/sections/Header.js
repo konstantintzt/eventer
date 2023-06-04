@@ -13,14 +13,13 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SortIcon from '@mui/icons-material/Sort';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 import Popup from 'reactjs-popup';
-import Select from 'react-select'
-import 'reactjs-popup/dist/index.css';
-import "react-datepicker/dist/react-datepicker.css";
 import { TextField, Card, CardContent, InputLabel, FormControl } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-
+import Select from 'react-select';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'reactjs-popup/dist/index.css';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -97,6 +96,13 @@ export default function SearchAppBar({ handleSearchSubmit }) {
     }
   };
 
+  const menuStyles = {
+    menu: (provided) => ({
+      ...provided,
+      zIndex: 9999,
+    }),
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky" color="primary">
@@ -116,6 +122,15 @@ export default function SearchAppBar({ handleSearchSubmit }) {
             anchorEl={menuAnchor}
             open={Boolean(menuAnchor)}
             onClose={() => handleMenuClose('')}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
           >
             <MenuItem component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
               Post An Event
@@ -138,85 +153,88 @@ export default function SearchAppBar({ handleSearchSubmit }) {
           <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>
-          <Popup trigger={          
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
+          <Popup
+            trigger={
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2 }}
+              >
+                <SortIcon />
+              </IconButton>
+            }
+            modal
+            nested
           >
-            <SortIcon />
-          </IconButton>
-        } modal nested>                
-                {
-                    close => (
+            {(close) => (
+              <Card>
+                <CardContent>
+                  <FormControl fullWidth sx={{ mb: 2 }}>
+                    <InputLabel></InputLabel>
+                    <Select
+                      options={[
+                        { value: 9, label: 'Concert' },
+                        { value: 10, label: 'Play' },
+                        { value: 11, label: 'Movie Screening' },
+                        { value: 12, label: 'Sports Game' },
+                        { value: 13, label: 'Party' },
+                      ]}
+                      value={type}
+                      onChange={(selectedOption) => setType(selectedOption)}
+                      styles={menuStyles}
+                    />
+                  </FormControl>
+                  <TextField
+                    fullWidth
+                    label="Before Date"
+                    type="date"
+                    name="date"
+                    value={afterDate}
+                    onChange={(e) => { console.log(e); setAfterDate(e.target.value) }}
+                    required
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    fullWidth
+                    label="After Date"
+                    type="date"
+                    name="date"
+                    value={beforeDate}
+                    onChange={(e) => { setBeforeDate(e.target.value) }}
+                    required
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    sx={{ mb: 2 }}
+                  />
 
-                           <Card>
-                            <CardContent>
-                          <FormControl fullWidth sx={{ mb: 2 }}>
-                            <InputLabel></InputLabel>
-                            <Select
-                                value={type}
-                                onChange={(e) => {console.log(e);setType(parseInt(e.target.value))}}
-                                >
-                                  <MenuItem value={9}>Concert</MenuItem>
-                                  <MenuItem value={10}>Play</MenuItem>
-                                  <MenuItem value={11}>Movie Screening</MenuItem>
-                                  <MenuItem value={12}>Sports Game</MenuItem>
-                                  <MenuItem value={13}>Party</MenuItem>
-                              </Select>
-                            </FormControl>
-                              <TextField
-                              fullWidth
-                              label="Before Date"
-                              type="date"
-                              name="date"
-                              value={afterDate}
-                              onChange={(e) => {console.log(e); setAfterDate(e.target.value)}}
-                              required
-                              InputLabelProps={{
-                              shrink: true,
-                              }}
-                              sx={{ mb: 2 }}
-                              />
-                              <TextField
-                              fullWidth
-                              label="After Date"
-                              type="date"
-                              name="date"
-                              value={beforeDate}
-                              onChange={(e) => {setBeforeDate(e.target.value)}}
-                              required
-                              InputLabelProps={{
-                              shrink: true,
-                              }}
-                              sx={{ mb: 2 }}
-                              />
+                  <TextField
+                    fullWidth
+                    label="Event ZIP"
+                    name="zip"
+                    value={zipCode}
+                    onChange={(e) => { setZipCode(e.target.value) }}
+                    required
+                    inputProps={{
+                      pattern: '\\d{5}',
+                    }}
+                    sx={{ mb: 2 }}
+                  />
 
-                              <TextField
-                              fullWidth
-                              label="Event ZIP"
-                              name="zip"
-                              value={zipCode}
-                              onChange={(e) => {setZipCode(e.target.value)}}
-                              required
-                              inputProps={{
-                              pattern: '\\d{5}',
-                              }}
-                              sx={{ mb: 2 }}
-                              />
-
-                              </CardContent>
-                            </Card>
-                            )
-                }
-            </Popup>
+                </CardContent>
+              </Card>
+            )}
+          </Popup>
           {/* <div style={{display: 'flex', justifyContent:'flex-end'}}>
             <DatePicker selected={startDate} onChange={(date) => setBeforeDate(date)} />
           </div> */}
 
-        <Search>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
