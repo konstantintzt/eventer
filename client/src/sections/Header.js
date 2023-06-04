@@ -12,7 +12,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SortIcon from '@mui/icons-material/Sort';
+import DatePicker from "react-datepicker";
+import Popup from 'reactjs-popup';
+import Select from 'react-select'
+import 'reactjs-popup/dist/index.css';
+import "react-datepicker/dist/react-datepicker.css";
 import { Link, useNavigate } from 'react-router-dom';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,6 +65,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar({ handleSearchSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
+  const [beforeDate, setBeforeDate] = useState(null);
+  const [afterDate, setAfterDate] = useState(null);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -99,6 +108,7 @@ export default function SearchAppBar({ handleSearchSubmit }) {
           >
             <MenuIcon />
           </IconButton>
+
           <Menu
             anchorEl={menuAnchor}
             open={Boolean(menuAnchor)}
@@ -125,7 +135,31 @@ export default function SearchAppBar({ handleSearchSubmit }) {
           <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>
-          <Search>
+          <Popup trigger={          
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <SortIcon />
+          </IconButton>
+        } modal nested>                
+                {
+                    close => (
+                            <div>
+                                Before: <DatePicker selected={beforeDate} onChange={(date) => setBeforeDate(date)} />
+                                After: <DatePicker selected={afterDate} onChange={(date) => setAfterDate(date)} />
+                            </div>
+                            )
+                }
+            </Popup>
+          {/* <div style={{display: 'flex', justifyContent:'flex-end'}}>
+            <DatePicker selected={startDate} onChange={(date) => setBeforeDate(date)} />
+          </div> */}
+
+        <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -136,9 +170,11 @@ export default function SearchAppBar({ handleSearchSubmit }) {
               onChange={handleSearchChange}
             />
           </Search>
-          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue)}>
+          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate)}>
             Search
           </Button>
+
+
         </Toolbar>
       </AppBar>
     </Box>

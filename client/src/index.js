@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { invalidToken } from './utils';
+import { Test } from './components/test.js';
 
 const App = () => {
   return (
@@ -31,19 +32,28 @@ const Home = () => {
 
   const [events, setEvents] = useState([])
 
-  const handleSearchClick = async query => {
-    if (query.length !== 0){
-
-    const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
-    {
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
+  const handleSearchClick = async (query, before, after) => {
+      var before_str = ""
+      var after_str = ""
+      var search_str = ""
+      if (query.length != 0){
+        search_str = `search=${query}`
       }
-    })
-    const data = await rawData.json()
-    setEvents([])
-    setEvents(data)
-    }
+      if (before != null){
+        before_str = `&before=${Math.floor(before.getTime())}`
+      }
+      if (after != null){
+        after_str = `&after=${Math.floor(after.getTime())}`
+      }
+      const rawData = await fetch(`http://localhost:2902/events?`+search_str+before_str+after_str,
+      {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      })
+      const data = await rawData.json()
+      setEvents([])
+      setEvents(data)
 
   }
 
@@ -91,6 +101,7 @@ const Home = () => {
 
   return (
     <div>
+      <Test/>
       <Header handleSearchSubmit={handleSearchClick}/>
       <EventGrid events={events}/>
     </div>
