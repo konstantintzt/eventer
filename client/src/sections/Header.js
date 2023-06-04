@@ -18,6 +18,7 @@ import Popup from 'reactjs-popup';
 import Select from 'react-select'
 import 'reactjs-popup/dist/index.css';
 import "react-datepicker/dist/react-datepicker.css";
+import { TextField, Card, CardContent, InputLabel, FormControl } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -67,6 +68,8 @@ export default function SearchAppBar({ handleSearchSubmit }) {
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [beforeDate, setBeforeDate] = useState(null);
   const [afterDate, setAfterDate] = useState(null);
+  const [zipCode, setZipCode] = useState(null);
+  const [type, setType] = useState(null);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -148,10 +151,64 @@ export default function SearchAppBar({ handleSearchSubmit }) {
         } modal nested>                
                 {
                     close => (
-                            <div>
-                                Before: <DatePicker selected={beforeDate} onChange={(date) => setBeforeDate(date)} />
-                                After: <DatePicker selected={afterDate} onChange={(date) => setAfterDate(date)} />
-                            </div>
+
+                           <Card>
+                            <CardContent>
+                          <FormControl fullWidth sx={{ mb: 2 }}>
+                            <InputLabel></InputLabel>
+                            <Select
+                                value={type}
+                                onChange={(e) => {console.log(e);setType(parseInt(e.target.value))}}
+                                >
+                                  <MenuItem value={9}>Concert</MenuItem>
+                                  <MenuItem value={10}>Play</MenuItem>
+                                  <MenuItem value={11}>Movie Screening</MenuItem>
+                                  <MenuItem value={12}>Sports Game</MenuItem>
+                                  <MenuItem value={13}>Party</MenuItem>
+                              </Select>
+                            </FormControl>
+                              <TextField
+                              fullWidth
+                              label="Before Date"
+                              type="date"
+                              name="date"
+                              value={afterDate}
+                              onChange={(e) => {console.log(e); setAfterDate(e.target.value)}}
+                              required
+                              InputLabelProps={{
+                              shrink: true,
+                              }}
+                              sx={{ mb: 2 }}
+                              />
+                              <TextField
+                              fullWidth
+                              label="After Date"
+                              type="date"
+                              name="date"
+                              value={beforeDate}
+                              onChange={(e) => {setBeforeDate(e.target.value)}}
+                              required
+                              InputLabelProps={{
+                              shrink: true,
+                              }}
+                              sx={{ mb: 2 }}
+                              />
+
+                              <TextField
+                              fullWidth
+                              label="Event ZIP"
+                              name="zip"
+                              value={zipCode}
+                              onChange={(e) => {setZipCode(e.target.value)}}
+                              required
+                              inputProps={{
+                              pattern: '\\d{5}',
+                              }}
+                              sx={{ mb: 2 }}
+                              />
+
+                              </CardContent>
+                            </Card>
                             )
                 }
             </Popup>
@@ -170,7 +227,7 @@ export default function SearchAppBar({ handleSearchSubmit }) {
               onChange={handleSearchChange}
             />
           </Search>
-          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate)}>
+          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate, zipCode, type)}>
             Search
           </Button>
 

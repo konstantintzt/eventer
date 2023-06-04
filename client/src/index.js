@@ -32,20 +32,33 @@ const Home = () => {
 
   const [events, setEvents] = useState([])
 
-  const handleSearchClick = async (query, before, after) => {
+  const handleSearchClick = async (query, before, after, zipCode, type) => {
+
       var before_str = ""
       var after_str = ""
       var search_str = ""
+      var zipcode_str = ""
+      var type_str = ""
       if (query.length != 0){
         search_str = `search=${query}`
       }
       if (before != null){
-        before_str = `&before=${Math.floor(before.getTime())}`
+        var temp = new Date(before) 
+        before_str = `&before=${Math.floor(temp.getTime())}`
       }
       if (after != null){
-        after_str = `&after=${Math.floor(after.getTime())}`
+        var temp = new Date(after) 
+        after_str = `&after=${Math.floor(temp.getTime())}`
       }
-      const rawData = await fetch(`http://localhost:2902/events?`+search_str+before_str+after_str,
+      if (zipCode != null && zipCode.length != 0){
+        zipcode_str = `&zip=${zipCode}`
+      }
+      if (type != null && type.length != 0){
+        type_str=`&type=${type}`
+      }
+
+
+      const rawData = await fetch(`http://localhost:2902/events?`+search_str+before_str+after_str+zipcode_str+type_str,
       {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
