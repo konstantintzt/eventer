@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "boot-server": "node index.js",
+    "boot-engine": "python ../recommender/recommender_server.py",
+    "start": "concurrently --kill-others \"npm run -s boot-server\" \"npm run -s boot-engine\""
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/konstantintzt/eventer#readme",
   "dependencies": {
+    "concurrently": "^8.1.0",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
