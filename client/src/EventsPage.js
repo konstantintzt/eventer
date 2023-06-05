@@ -58,6 +58,7 @@ export const getAllEvents = async () => {
 function EventPage() {
     const [event, setEvent] = useState(null);
     const [attendees, setAttendees] = useState(null);
+    // const { id } = useParams();
     const params = useParams();
     const id = params.id;
 
@@ -90,6 +91,7 @@ function EventPage() {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
                 });
                 const data = await response.json();
+                // const userAttending = await database.getDB().collection("attendances").countDocuments({...value, user: req.user.uuid});
                 console.log(data);
                 setAttendees(data.attendees);
                 setEvent(data.event);
@@ -154,7 +156,7 @@ function EventPage() {
                                 <Grid item xs={1}></Grid>
                                 {attendees && (
                                     <Grid item xs={4}>
-                                        <AttendingList attendees={attendees} clickfunc={addAttendance} />
+                                        <AttendingList attendees={attendees} clickfunc={addAttendance} isAttending={true}/>
                                     </Grid>
                                 )}
                             </Grid>
