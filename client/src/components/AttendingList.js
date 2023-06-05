@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button} from '@mui/material';
+import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button, Typography} from '@mui/material';
 import { styled } from '@mui/system';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
@@ -14,10 +14,18 @@ const StyledButton = styled(Button)(({theme}) => ({
   },
 }));
 
+const StyledTypography = styled(Typography)(({theme}) => ({
+  color: theme.palette.primary.main,
+}));
+
 const StyledCardHeader = styled(CardHeader)(({theme}) => ({
   color: 'white',
   backgroundColor: theme.palette.primary.main,
 }));
+
+function capitalizeString (str) {
+  return str.toLowerCase().replace(/\w{3,}/g, (match) => match.replace(/\w/, (m) => m.toUpperCase()));
+};
 
 export default function BasicList({attendees, clickfunc, isAttending}) {
   return (
@@ -27,7 +35,12 @@ export default function BasicList({attendees, clickfunc, isAttending}) {
             {attendees.map((attendee) => (
               <div>
                 <ListItem variant="body1">
-                    <ListItemText>{attendee.name}</ListItemText>
+                  { attendee.name ?
+                    <ListItemText primary={capitalizeString(attendee.name)} /> :
+                    <ListItemText
+                    disableTypography
+                    primary={<StyledTypography>Anonymous Attendee</StyledTypography>}
+                    />}
                 </ListItem>
                 <Divider variant='middle'/>
               </div>
