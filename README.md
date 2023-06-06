@@ -1,6 +1,9 @@
 # Eventer
-
 Eventer is a platform designed to help you discover, organize, and share events happening in the Los Angeles area. With a user-friendly interface and a variety of features, Eventer makes it easy for you to stay connected with the local events that interest you the most.
+
+![](/client/public/android-chrome-512x512.png)
+
+Image source and credit goes to [Dall-E 2.](https://labs.openai.com/)
 
 ## Features
 
