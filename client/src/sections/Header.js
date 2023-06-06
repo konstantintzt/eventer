@@ -55,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({ handleSearchSubmit }) {
+export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
   const navigate = useNavigate();
@@ -122,6 +122,9 @@ export default function SearchAppBar({ handleSearchSubmit }) {
               Eventer
             </Button>
           </Typography>
+          <Button color="inherit" onClick={() => handleRecommend()}>
+                                Recommend
+                            </Button>
           <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>

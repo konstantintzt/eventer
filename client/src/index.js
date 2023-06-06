@@ -31,6 +31,27 @@ const Home = () => {
 
   const [events, setEvents] = useState([])
 
+  const handleRecommend = async () => {
+
+    if (invalidToken()) return;
+
+    try {
+      const rawData = await fetch(`http://localhost:2902/recommend`,
+      {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+      })
+      const data = await rawData.json()
+      setEvents(data)
+      console.log(events)
+    }
+    catch (err) {
+      console.error(err)
+    }
+  }
+
+
   const handleSearchClick = async query => {
     if (query.length !== 0){
 
@@ -47,6 +68,7 @@ const Home = () => {
 
   }
 
+  
   useEffect(() => {
     async function fetchData() {
 
@@ -91,7 +113,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header handleSearchSubmit={handleSearchClick}/>
+      <Header handleSearchSubmit={handleSearchClick} handleRecommend={handleRecommend}/>
       <EventGrid events={events}/>
     </div>
   )
