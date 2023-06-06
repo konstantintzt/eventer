@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button, Typography} from '@mui/material';
+import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button, Typography, Avatar} from '@mui/material';
 import { styled } from '@mui/system';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
@@ -47,6 +47,10 @@ export default function BasicList({attendees, clickfunc, isAttending}) {
             ))}
         </List>
         <Divider />
+        { attendee.picture ?
+          <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
+          <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
+        }
         { isAttending ? 
         <StyledButton onClick = {clickfunc}>
           <GroupAddIcon sx={{ marginRight: '5px' }}/>
