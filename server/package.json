@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "boot-server": "node index.js",
-    "boot-engine": "python ../recommender/recommender_server.py",
+    "boot-engine": "python3 ../recommender/recommender_server.py",
     "start": "concurrently --kill-others \"npm run -s boot-server\" \"npm run -s boot-engine\""
   },
   "repository": {

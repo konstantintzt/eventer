@@ -17,11 +17,11 @@ router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }), async (r
         
         const liked_events = await database.getDB().collection("likes").find({user : req.user.uuid}).toArray()
 
-        console.log(liked_events)
+        // console.log(liked_events)
 
         if (liked_events.some(obj => obj["uuid"] == result.uuid)){
             resul = {...result, liked : 1}
-            console.log(result)
+            // console.log(result)
         }else{
             result = {...result, liked : 0}
         }
@@ -31,7 +31,7 @@ router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }), async (r
 })
 
 router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
-    console.log("new")
+    // console.log("new")
     const { error, value } = addNewEventBodySchema.validate(req.body)
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
