@@ -70,7 +70,7 @@ router.post( '/verify_token',
         else{
             console.log("inserting")
             const newuuid = uuidv4()
-            const foo = await database.getDB().collection("users").insertOne({"name": payload["name"],"email":payload["email"], uuid: newuuid})
+            const foo = await database.getDB().collection("users").insertOne({"picture": payload["picture"], "name": payload["name"],"email":payload["email"], uuid: newuuid})
             console.log(foo)
             token = jwt.sign({ uuid: newuuid }, "foobar", {
                 expiresIn: 60*60*24,

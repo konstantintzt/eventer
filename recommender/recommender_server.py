@@ -3,6 +3,7 @@ from sentence_transformers import SentenceTransformer
 from flask import Flask, redirect, url_for, request
 import numpy as np
 from utils import get_scores, get_location, compare
+
 model = SentenceTransformer('average_word_embeddings_glove.6B.300d')
 app = Flask(__name__)
 print("Model initialized.")
