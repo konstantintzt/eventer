@@ -47,7 +47,7 @@ export default function BasicList({attendees, clickfunc, isAttending}) {
             ))}
         </List>
         <Divider />
-        { attendee.profile ?
+        { attendee.picture ?
           <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
           <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
         }
