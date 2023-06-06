@@ -8,3 +8,4 @@ transformers
 sentence-transformers
 pgeocode
 python-dotenv
+pymongo[srv]

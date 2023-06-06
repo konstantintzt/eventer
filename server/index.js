@@ -5,12 +5,10 @@ const passport = require("passport")
 const session = require("express-session")
 const cors = require("cors")
 
-
 dotenv.config()
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
-
 
 async function main() {
     const database = await require("./database").connect(process.env.MONGO_URI)
@@ -27,6 +25,7 @@ async function main() {
     app.use("/event", require("./routes/event"))
     app.use("/attend", require("./routes/attend"))
     app.use("/auth", require("./routes/passport.js"))
+    app.use("/recommend", require("./routes/recommend.js"))
     app.use("/", require("./routes/404"))
     app.use('/test', express.static('public'))
     app.use("/like", require("./routes/like.js"))
