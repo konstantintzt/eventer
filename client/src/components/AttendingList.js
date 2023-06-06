@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button, Typography} from '@mui/material';
+import {List, ListItem, ListItemText, Card, CardHeader, Divider, Button, Typography, Avatar} from '@mui/material';
 import { styled } from '@mui/system';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
