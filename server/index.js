@@ -5,7 +5,6 @@ const passport = require("passport")
 const session = require("express-session")
 const cors = require("cors")
 
-
 dotenv.config()
 const app = express()
 app.use(bodyParser.json())
