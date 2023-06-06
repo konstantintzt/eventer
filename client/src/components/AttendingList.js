@@ -41,16 +41,16 @@ export default function BasicList({attendees, clickfunc, isAttending}) {
                     disableTypography
                     primary={<StyledTypography>Anonymous Attendee</StyledTypography>}
                     />}
+                  { attendee.picture ?
+                  <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
+                  <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
+                  }
                 </ListItem>
                 <Divider variant='middle'/>
               </div>
             ))}
         </List>
         <Divider />
-        { attendee.picture ?
-          <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
-          <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
-        }
         { isAttending ? 
         <StyledButton onClick = {clickfunc}>
           <GroupAddIcon sx={{ marginRight: '5px' }}/>
