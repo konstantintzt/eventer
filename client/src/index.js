@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { invalidToken } from './utils';
+import { Test } from './components/test.js';
 
 const App = () => {
   return (
@@ -31,43 +32,43 @@ const Home = () => {
 
   const [events, setEvents] = useState([])
 
-  const handleRecommend = async () => {
+  const handleSearchClick = async (query, before, after, zipCode, type) => {
 
-    if (invalidToken()) return;
+      var before_str = ""
+      var after_str = ""
+      var search_str = ""
+      var zipcode_str = ""
+      var type_str = ""
+      if (query.length != 0){
+        search_str = `search=${query}`
+      }
+      if (before != null){
+        var temp = new Date(before) 
+        before_str = `&before=${Math.floor(temp.getTime())}`
+      }
+      if (after != null){
+        var temp = new Date(after) 
+        after_str = `&after=${Math.floor(temp.getTime())}`
+      }
+      if (zipCode != null && zipCode.length != 0){
+        zipcode_str = `&zip=${zipCode}`
+      }
+      if (type != null && type.length != 0){
+        type_str=`&type=${type}`
+      }
 
-    try {
-      const rawData = await fetch(`http://localhost:2902/recommend`,
+
+      const rawData = await fetch(`http://localhost:2902/events?`+search_str+before_str+after_str+zipcode_str+type_str,
       {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
         }
       })
       const data = await rawData.json()
+      setEvents([])
       setEvents(data)
-      console.log(events)
-    }
-    catch (err) {
-      console.error(err)
-    }
-  }
-
-
-  const handleSearchClick = async query => {
-    if (query.length !== 0){
-
-    const rawData = await fetch(`http://localhost:2902/events?search=${query}`,
-    {
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
-      }
-    })
-    const data = await rawData.json()
-    setEvents([])
-    setEvents(data)
-    }
 
   }
-
   
   useEffect(() => {
     async function fetchData() {
@@ -113,7 +114,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header handleSearchSubmit={handleSearchClick} handleRecommend={handleRecommend}/>
+      <Header handleSearchSubmit={handleSearchClick}/>
       <EventGrid events={events}/>
     </div>
   )
