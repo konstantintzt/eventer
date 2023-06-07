@@ -93,7 +93,15 @@ const Home = () => {
           fetchUrl = "recommend"
           localStorage.setItem("homeState", "recommend")
         }
-        else if (localStorage.getItem("homeState") === "search" || localStorage.getItem("homeState") === null) fetchUrl = `events?${localStorage.getItem("currentQuery")}`
+        else if (localStorage.getItem("homeState") === "search" || localStorage.getItem("homeState") === null) {
+          if (localStorage.getItem("currentQuery") !== null) fetchUrl = "events?" + localStorage.getItem("currentQuery")
+          else {
+            var searchQuery = new URLSearchParams()
+            searchQuery.append("after", Math.floor(Date.now() / 1000))
+            fetchUrl = "events?" + searchQuery.toString()
+            localStorage.setItem("currentQuery", searchQuery.toString())
+          }
+        }
         console.log(fetchUrl)
         const rawData = await fetch(`http://localhost:2902/${fetchUrl}`,
         {
