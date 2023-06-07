@@ -1,8 +1,9 @@
 # Eventer
-
 Eventer is a platform designed to help you discover, organize, and share events happening in the Los Angeles area. With a user-friendly interface and a variety of features, Eventer makes it easy for you to stay connected with the local events that interest you the most.
 
-![alt text](https://github.com/konstantintzt/eventer/blob/main/blockdiagram.png)
+![](/client/public/android-chrome-512x512.png)
+
+Image source and credit goes to [Dall-E 2.](https://labs.openai.com/)
 
 ## Features
 
@@ -14,13 +15,15 @@ Eventer is a platform designed to help you discover, organize, and share events 
 
 ## Usage
 
+![alt text](https://github.com/konstantintzt/eventer/blob/main/blockdiagram.png)
+
 To get started with Eventer, simply clone the repository and run the server on your local machine.
 1. Clone the repository: `git clone https://github.com/yourusername/eventer.git`
 
 ### **Important Installation Note:**
 **Before running any of the following commands, please enter the `/server` directory and creating a brand new `.env` file with the following format:**
 
-```
+```.env
 PORT=2902
 ENGINE_PORT=2903   
 MONGO_URI="mongodb+srv://YOUR_MONGODB_URI"
