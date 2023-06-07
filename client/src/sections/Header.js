@@ -22,6 +22,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'reactjs-popup/dist/index.css';
 
 const Search = styled('div')(({ theme }) => ({
+  marginBottom: '20px',
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -62,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
+export default function SearchAppBar({ handleSearchSubmit, handleRecommend }) {
   const [searchValue, setSearchValue] = useState('');
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [beforeDate, setBeforeDate] = useState(null);
@@ -146,13 +147,13 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" onClick={() => { 
+            <Button color="inherit" onClick={() => {
               localStorage.setItem("homeState", "search")
               var searchQuery = new URLSearchParams()
               searchQuery.append("after", Math.floor(Date.now()))
               localStorage.setItem("currentQuery", searchQuery)
-              window.location.reload(); 
-              }} sx={{ fontSize: '20px', marginTop: '2px' }}>
+              window.location.reload();
+            }} sx={{ fontSize: '20px', marginTop: '2px' }}>
               Eventer
             </Button>
           </Typography>
@@ -161,10 +162,10 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
             localStorage.setItem("currentQuery", "")
             window.location.reload()
           }}>
-                                All events
+            All events
           </Button>
           <Button color="inherit" onClick={() => handleRecommend()}>
-              Recommend
+            Recommend
           </Button>
           <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
@@ -192,21 +193,21 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
                 <CardContent>
                   <FormControl fullWidth sx={{ mb: 2 }}>
 
-                  <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder=""
-              inputProps={{ 'aria-label': 'search' }}
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
-          </Search>
+                    <Search>
+                      <SearchIconWrapper>
+                        <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder=""
+                        inputProps={{ 'aria-label': 'search' }}
+                        value={searchValue}
+                        onChange={handleSearchChange}
+                      />
+                    </Search>
                     <InputLabel></InputLabel>
                     <Select
                       options={[
-                        { value: null, label: 'Any'},
+                        { value: null, label: 'Any' },
                         { value: 1, label: 'Concert' },
                         { value: 2, label: 'Play' },
                         { value: 3, label: 'Movie Screening' },
@@ -258,9 +259,9 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
                     sx={{ mb: 2 }}
                   />
 
-<Button color="primary" variant="contained" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate, zipCode, type)}>
-            Search
-          </Button>
+                  <Button color="primary" variant="contained" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate, zipCode, type)}>
+                    Search
+                  </Button>
 
                 </CardContent>
               </Card>
@@ -270,8 +271,8 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
             <DatePicker selected={startDate} onChange={(date) => setBeforeDate(date)} />
           </div> */}
 
-         
-         
+
+
 
 
         </Toolbar>
