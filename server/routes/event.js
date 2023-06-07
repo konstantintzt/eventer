@@ -5,6 +5,18 @@ const { fetchSingleEventParamsSchema, addNewEventBodySchema } = require("../requ
 const passport = require("passport")
 const router = express.Router()
 
+const isImageURL = async url => {
+    if (!url) return false
+    try {
+        const response = await fetch(url, { method: "HEAD"})
+        const contentType = response.headers.get("content-type")
+        return contentType && contentType.startsWith("image/")
+    }
+    catch (err) {
+        console.error(err)
+        return false
+    }
+}
 
 router.get("/:uuid",  passport.authenticate( 'jwt',{ session: false }), async (req, res) => {
     const { error, value } = fetchSingleEventParamsSchema.validate(req.params)
@@ -38,6 +50,8 @@ router.post("/new", passport.authenticate( 'jwt',{ session: false }), async (req
         // console.log(req.body)
         const organizer = await database.getDB().collection("users").findOne({uuid : req.user.uuid})
         console.log(organizer["name"])
+        const isImgURL = await isImageURL(value.banner)
+        if (!isImgURL) return res.status(400).json({ success: false, message: "Use an actual image URL" })
         await database.getDB().collection("events").insertOne({ ...value, organizer: organizer["name"], uuid: uuidv4(), likes : 0, liked : 0 })
         return res.status(200).json({ success: true })
     }

@@ -29,7 +29,8 @@ const addNewEventBodySchema = Joi.object({
     type:  Joi.number().integer().min(0).max(5).required(),
     date: Joi.number().min(0).max(Number.MAX_SAFE_INTEGER).required(),
     description: Joi.string().required(),
-    title: Joi.string().required()
+    title: Joi.string().required(),
+    banner: Joi.string().uri()
 }).unknown(false)
 
 module.exports = { 
