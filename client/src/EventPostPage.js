@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Card, CardContent, Box } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Typography,
+  Card,
+  CardContent,
+  Box
+} from '@mui/material';
 import Background from './components/Background';
 import Login from './Login';
 import { invalidToken } from './utils';
@@ -13,7 +24,8 @@ const EventPostPage = () => {
     description: '',
     date: '',
     zip: '',
-    type: 1
+    type: 1,
+    banner: '' // Added the "banner" field
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -43,7 +55,7 @@ const EventPostPage = () => {
       body: JSON.stringify(eventData),
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer " + localStorage.getItem("token")
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
       },
     });
 
@@ -55,7 +67,7 @@ const EventPostPage = () => {
     }
   };
 
-  if (invalidToken()) return <Login redirect="/event-post" />
+  if (invalidToken()) return <Login redirect="/event-post" />;
 
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -126,6 +138,15 @@ const EventPostPage = () => {
                       inputProps={{
                         pattern: '\\d{5}',
                       }}
+                      sx={{ mb: 2 }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Banner URL"
+                      name="banner"
+                      value={eventData.banner}
+                      onChange={handleInputChange}
+                      required
                       sx={{ mb: 2 }}
                     />
                     <FormControl fullWidth sx={{ mb: 2 }}>

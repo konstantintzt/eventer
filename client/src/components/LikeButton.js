@@ -72,7 +72,7 @@ export default function LikeButton({ id, likes, isLiked }) {
       <StyledButton onClick = { () => addLike(id)} >
       {/* <StyledButton onClick = { () => isLiked ? removeLike(id) : addLike(id)} > */}
         { isLiked ? <FavoriteIcon sx={{ marginRight: '5px' }}/> : <FavoriteBorderIcon sx={{ marginRight: '5px' }}/> }
-        { likes ? '' : '0 '} {likes} { likes === 1 ? 'like' : 'likes' }
+        {likes} { likes === 1 ? 'like' : 'likes' }
       </StyledButton>
   );
 }

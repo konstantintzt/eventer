@@ -9,7 +9,7 @@ router.post("/", passport.authenticate( 'jwt',{ session: false }),  async (req, 
     if (error) return res.status(400).json({ error: error.details[0].message })
     else {
         const event = await database.getDB().collection("events").findOne({ uuid: value.uuid })
-        console.log(event)
+        // console.log(event)
         if (event == null) return res.status(400).json({ error: "Event does not exist" })
         else {
             const like_count = await database.getDB().collection("likes").countDocuments({ uuid : value.uuid })

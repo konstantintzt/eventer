@@ -15,6 +15,8 @@ Image source and credit goes to [Dall-E 2.](https://labs.openai.com/)
 
 ## Usage
 
+![alt text](https://github.com/konstantintzt/eventer/blob/main/blockdiagram.png)
+
 To get started with Eventer, simply clone the repository and run the server on your local machine.
 1. Clone the repository: `git clone https://github.com/yourusername/eventer.git`
 
