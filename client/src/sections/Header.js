@@ -224,8 +224,8 @@ export default function SearchAppBar({ handleSearchSubmit, handleRecommend }) {
                     label="Before Date"
                     type="date"
                     name="date"
-                    value={afterDate}
-                    onChange={(e) => { console.log(e); setAfterDate(e.target.value) }}
+                    value={beforeDate}
+                    onChange={(e) => { setBeforeDate(e.target.value) }}
                     required
                     InputLabelProps={{
                       shrink: true,
@@ -237,8 +237,8 @@ export default function SearchAppBar({ handleSearchSubmit, handleRecommend }) {
                     label="After Date"
                     type="date"
                     name="date"
-                    value={beforeDate}
-                    onChange={(e) => { setBeforeDate(e.target.value) }}
+                    value={afterDate}
+                    onChange={(e) => { console.log(e); setAfterDate(e.target.value) }}
                     required
                     InputLabelProps={{
                       shrink: true,
