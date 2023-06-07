@@ -21,7 +21,7 @@ To get started with Eventer, simply clone the repository and run the server on y
 ### **Important Installation Note:**
 **Before running any of the following commands, please enter the `/server` directory and creating a brand new `.env` file with the following format:**
 
-```
+```.env
 PORT=2902
 ENGINE_PORT=2903   
 MONGO_URI="mongodb+srv://YOUR_MONGODB_URI"
