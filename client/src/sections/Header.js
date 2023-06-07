@@ -148,29 +148,41 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
           >
             <Button color="inherit" onClick={() => { 
               localStorage.setItem("homeState", "search")
-              localStorage.setItem("currentQuery", "")
+              var searchQuery = new URLSearchParams()
+              searchQuery.append("after", Math.floor(Date.now()))
+              localStorage.setItem("currentQuery", searchQuery)
               window.location.reload(); 
               }} sx={{ fontSize: '20px', marginTop: '2px' }}>
               Eventer
             </Button>
           </Typography>
+          <Button color="inherit" onClick={() => {
+            localStorage.setItem("homeState", "search")
+            localStorage.setItem("currentQuery", "")
+            window.location.reload()
+          }}>
+                                All events
+          </Button>
           <Button color="inherit" onClick={() => handleRecommend()}>
-                                Recommend
-                            </Button>
+              Recommend
+          </Button>
           <Button color="inherit" component={Link} to="/event-post" onClick={() => handleMenuClose('/event-post')}>
             Post
           </Button>
           <Popup
             trigger={
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                sx={{ mr: 2 }}
-              >
-                <SortIcon />
-              </IconButton>
+              <Button color="inherit">
+                Search
+              </Button>
+              // <IconButton
+              //   size="large"
+              //   edge="start"
+              //   color="inherit"
+              //   aria-label="open drawer"
+              //   sx={{ mr: 2 }}
+              // >
+              //   <SortIcon />
+              // </IconButton>
             }
             modal
             nested
@@ -179,14 +191,27 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
               <Card>
                 <CardContent>
                   <FormControl fullWidth sx={{ mb: 2 }}>
+
+                  <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder=""
+              inputProps={{ 'aria-label': 'search' }}
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
+          </Search>
                     <InputLabel></InputLabel>
                     <Select
                       options={[
+                        { value: null, label: 'Any'},
                         { value: 1, label: 'Concert' },
                         { value: 2, label: 'Play' },
                         { value: 3, label: 'Movie Screening' },
                         { value: 4, label: 'Sports Game' },
-                        { value: 5, label: 'Party' },
+                        { value: 5, label: 'Party' }
                       ]}
                       value={type}
                       onChange={(selectedOption) => setType(selectedOption)}
@@ -233,6 +258,10 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
                     sx={{ mb: 2 }}
                   />
 
+<Button color="primary" variant="contained" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate, zipCode, type)}>
+            Search
+          </Button>
+
                 </CardContent>
               </Card>
             )}
@@ -241,20 +270,8 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
             <DatePicker selected={startDate} onChange={(date) => setBeforeDate(date)} />
           </div> */}
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder=""
-              inputProps={{ 'aria-label': 'search' }}
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
-          </Search>
-          <Button color="inherit" onClick={() => handleSearchSubmit(searchValue, beforeDate, afterDate, zipCode, type)}>
-            Search
-          </Button>
+         
+         
 
 
         </Toolbar>
