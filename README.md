@@ -33,20 +33,20 @@ DB_NAME = "YOUR_MONGODB_DATABASE_NAME"
 Feel free to change PORT and ENGINE_PORT at your convenience, though please ensure that they're never on the same port. Also, please ensure that your MongoDB URI is valid and that you have a database with the correct name in your MongoDB cluster.
 
 ### Starting the server-side backend:
-> 1.1. Navigate to the server directory: `cd server`
+- 1.1. Navigate to the server directory: `cd server`
 
-> 1.2. Install the JS server dependencies: `npm install`
+- 1.2. Install the JS server dependencies: `npm install`
 
-> 1.3. Install the Python machine learning engine dependencies: `pip install -r requirements.txt`
+- 1.3. Install the Python machine learning engine dependencies: `pip install -r requirements.txt`
 
-> 1.4. Start the server: `npm start`
+- 1.4. Start the server: `npm start`
 
 ### Starting the client-side frontend:
-> 2.1. Navigate to the client directory: `cd client`
+- 2.1. Navigate to the client directory: `cd client`
 
-> 2.2. Install the client dependencies: `npm install`
+- 2.2. Install the client dependencies: `npm install`
 
-> 2.3. Start the client: `npm start`
+- 2.3. Start the client: `npm start`
 
 Now you're ready to explore and enjoy all the features Eventer has to offer!
 
