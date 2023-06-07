@@ -31,6 +31,20 @@ def replace_id(event):
 	event["_id"] = str(event["_id"])
 	event["likes"] = 0 if math.isnan(event["likes"]) else event["likes"]
 	return event
+
+def rename_property(events, old_name: str, new_name: str):
+	for event in events:
+		event[new_name] = event[old_name]
+		del event[old_name]
+	return events
+
+def retrieve_likes(db, events, uuid:str):
+	for like in db["likes"].find({"user": uuid}):
+		for event in events:
+			if event["uuid"] == like["uuid"]:
+				event["liked"] = 1
+	return events
+
 @app.route('/recommend',methods = ['POST'])
 def recommend():
 	# Fixed bug with server always returning status 400
@@ -39,13 +53,10 @@ def recommend():
 		db = get_database()
 		# four collections available: events, users, likes, attendances		
 		attended, available = get_attended_and_available(db, uuid)
-				
-		for i in attended:
-			i["zip_code"] = i["zip"]
-			del i["zip"]
-		for i in available:
-			i["zip_code"] = i["zip"]
-			del i["zip"]
+
+		attended = rename_property(attended, "zip", "zip_code")
+		available = rename_property(available, "zip", "zip_code")
+		available = retrieve_likes(db, available, uuid)
 						
 		scores = get_scores(model, attended, available)
 		sorted_idxs = sorted(scores, key=scores.get, reverse=True)

@@ -118,7 +118,7 @@ function EventPage() {
                                 component="img"
                                 height="400px"
                                 width="100%"
-                                src="https://images.unsplash.com/photo-1549388604-817d15aa0110"
+                                src={event.banner != null ? event.banner : "https://images.unsplash.com/photo-1549388604-817d15aa0110"}
                             // src={event.url}
                             />
                             <Grid container sx={{ px: '40px', py: '30px' }} margin="auto" xs={10}>
@@ -132,7 +132,7 @@ function EventPage() {
                                         <TableBody>
                                             <TableRow>
                                                 <HeaderCell text="Date" />
-                                                <TableCell>{new Date(event.date * 1000).toLocaleDateString()}</TableCell>
+                                                <TableCell>{new Date(event.date).toLocaleDateString(undefined, { timeZone: "UTC"})}</TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <HeaderCell text="Organizer" />

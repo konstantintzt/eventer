@@ -118,7 +118,12 @@ export default function EventPageHeader({ handleSearchSubmit, showButtons }) {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        <Button color="inherit" component={Link} to="http://localhost:3000" sx={{ fontSize: '20px', marginTop: '2px' }}>
+                        <Button color="inherit" component={Link} to="http://localhost:3000" onClick={() => {
+                            localStorage.setItem("homeState", "search")
+                            var searchQuery = new URLSearchParams()
+                            searchQuery.append("after", Math.floor(Date.now()))
+                            localStorage.setItem("currentQuery", searchQuery)
+                        }} sx={{ fontSize: '20px', marginTop: '2px' }}>
                             Eventer
                         </Button>
                     </Typography>
