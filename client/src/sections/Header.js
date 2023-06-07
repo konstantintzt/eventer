@@ -146,7 +146,11 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Button color="inherit" onClick={() => { window.location.reload(); }} sx={{ fontSize: '20px', marginTop: '2px' }}>
+            <Button color="inherit" onClick={() => { 
+              localStorage.setItem("homeState", "search")
+              localStorage.setItem("currentQuery", "")
+              window.location.reload(); 
+              }} sx={{ fontSize: '20px', marginTop: '2px' }}>
               Eventer
             </Button>
           </Typography>
@@ -178,11 +182,11 @@ export default function SearchAppBar({ handleSearchSubmit,  handleRecommend }) {
                     <InputLabel></InputLabel>
                     <Select
                       options={[
-                        { value: 9, label: 'Concert' },
-                        { value: 10, label: 'Play' },
-                        { value: 11, label: 'Movie Screening' },
-                        { value: 12, label: 'Sports Game' },
-                        { value: 13, label: 'Party' },
+                        { value: 1, label: 'Concert' },
+                        { value: 2, label: 'Play' },
+                        { value: 3, label: 'Movie Screening' },
+                        { value: 4, label: 'Sports Game' },
+                        { value: 5, label: 'Party' },
                       ]}
                       value={type}
                       onChange={(selectedOption) => setType(selectedOption)}

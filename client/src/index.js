@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles'
+import CircularProgress from '@mui/material/CircularProgress';
 import Header from './sections/Header';
 import EventGrid from './sections/EventGrid';
 import EventPostPage from './EventPostPage.js';
@@ -31,9 +32,10 @@ const App = () => {
 const Home = () => {
 
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const handleRecommend = async () => {
-
+    setLoading(true)
     if (invalidToken()) return;
 
     try {
@@ -45,7 +47,9 @@ const Home = () => {
       })
       const data = await rawData.json()
       setEvents(data)
+      setLoading(false)
       console.log(events)
+      localStorage.setItem("homeState", "recommend")
     }
     catch (err) {
       console.error(err)
@@ -54,31 +58,14 @@ const Home = () => {
 
   const handleSearchClick = async (query, before, after, zipCode, type) => {
 
-      var before_str = ""
-      var after_str = ""
-      var search_str = ""
-      var zipcode_str = ""
-      var type_str = ""
-      if (query.length != 0){
-        search_str = `search=${query}`
-      }
-      if (before != null){
-        var temp = new Date(before) 
-        before_str = `&before=${Math.floor(temp.getTime())}`
-      }
-      if (after != null){
-        var temp = new Date(after) 
-        after_str = `&after=${Math.floor(temp.getTime())}`
-      }
-      if (zipCode != null && zipCode.length != 0){
-        zipcode_str = `&zip=${zipCode}`
-      }
-      if (type != null && type.length != 0){
-        type_str=`&type=${type}`
-      }
+    var searchQuery = new URLSearchParams()
+    if (query != null && query !== "") searchQuery.append("search",query)
+    if (before != null) searchQuery.append("before", Math.floor(new Date(before).getTime() / 1000))
+    if (after != null) searchQuery.append("after", Math.floor(new Date(after).getTime() / 1000))
+    if (zipCode != null) searchQuery.append("zipcode", zipCode)
+    if (type != null) searchQuery.append("type", type.value)
 
-
-      const rawData = await fetch(`http://localhost:2902/events?`+search_str+before_str+after_str+zipcode_str+type_str,
+      const rawData = await fetch(`http://localhost:2902/events?${searchQuery.toString()}`,
       {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
@@ -87,6 +74,9 @@ const Home = () => {
       const data = await rawData.json()
       setEvents([])
       setEvents(data)
+      setLoading(false)
+      localStorage.setItem("homeState", "search")
+      localStorage.setItem("currentQuery", searchQuery.toString())
 
   }
 
@@ -98,7 +88,14 @@ const Home = () => {
       if (invalidToken()) return;
 
       try {
-        const rawData = await fetch(`http://localhost:2902/events`,
+        var fetchUrl = "events"
+        if (localStorage.getItem("homeState") === "recommend") {
+          fetchUrl = "recommend"
+          localStorage.setItem("homeState", "recommend")
+        }
+        else if (localStorage.getItem("homeState") === "search" || localStorage.getItem("homeState") === null) fetchUrl = `events?${localStorage.getItem("currentQuery")}`
+        console.log(fetchUrl)
+        const rawData = await fetch(`http://localhost:2902/${fetchUrl}`,
         {
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -106,6 +103,7 @@ const Home = () => {
         })
         const data = await rawData.json()
         setEvents(data)
+        setLoading(false)
         console.log(events)
       }
       catch (err) {
@@ -134,6 +132,14 @@ const Home = () => {
 
   if (invalidToken()) return <Login redirect="/" />
 
+  if (loading) return (
+    <div>
+      <Header handleSearchSubmit={handleSearchClick} handleRecommend={handleRecommend}/>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <CircularProgress style={{ display: "flex", justifyContent: "center", alignItems: "center" }}/>
+      </div>
+    </div>
+  )
   return (
     <div>
       <Header handleSearchSubmit={handleSearchClick} handleRecommend={handleRecommend}/>
