@@ -15,7 +15,7 @@ router.post("/", passport.authenticate( 'jwt',{ session: false }),  async (req, 
             const exists = await database.getDB().collection("attendances").countDocuments({...value, user: req.user.uuid})
             const attendee = await database.getDB().collection("users").findOne({uuid : req.user.uuid})
             if (exists == 0){
-                await database.getDB().collection("attendances").insertOne({...value, name: attendee.name, user: req.user.uuid, confirmed: Math.floor(Date.now()/1000)})
+                await database.getDB().collection("attendances").insertOne({...value, picture: attendee.picture, name: attendee.name, user: req.user.uuid, confirmed: Math.floor(Date.now()/1000)})
             }
             return res.status(200).json({ success: true })
         }

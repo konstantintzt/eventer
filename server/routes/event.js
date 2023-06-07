@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid')
 const { fetchSingleEventParamsSchema, addNewEventBodySchema } = require("../requestSchemas")
 const passport = require("passport")
 const router = express.Router()
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const isImageURL = async url => {
     if (!url) return false

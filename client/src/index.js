@@ -57,13 +57,15 @@ const Home = () => {
   }
 
   const handleSearchClick = async (query, before, after, zipCode, type) => {
-
+    console.log(before)
     var searchQuery = new URLSearchParams()
     if (query != null && query !== "") searchQuery.append("search",query)
-    if (before != null) searchQuery.append("before", Math.floor(new Date(before).getTime() / 1000))
-    if (after != null) searchQuery.append("after", Math.floor(new Date(after).getTime() / 1000))
-    if (zipCode != null) searchQuery.append("zipcode", zipCode)
-    if (type != null) searchQuery.append("type", type.value)
+    if (before != null && before !== "") searchQuery.append("before", Math.floor(new Date(before).getTime()))
+    if (after != null && after !== "") searchQuery.append("after", Math.floor(new Date(after).getTime()))
+    if (zipCode != null) searchQuery.append("zip", zipCode)
+    if (type != null && type.value != null) searchQuery.append("type", type.value)
+
+    if (searchQuery.toString() === "") return
 
       const rawData = await fetch(`http://localhost:2902/events?${searchQuery.toString()}`,
       {
@@ -97,7 +99,7 @@ const Home = () => {
           if (localStorage.getItem("currentQuery") !== null) fetchUrl = "events?" + localStorage.getItem("currentQuery")
           else {
             var searchQuery = new URLSearchParams()
-            searchQuery.append("after", Math.floor(Date.now() / 1000))
+            searchQuery.append("after", Math.floor(Date.now()))
             fetchUrl = "events?" + searchQuery.toString()
             localStorage.setItem("currentQuery", searchQuery.toString())
           }
