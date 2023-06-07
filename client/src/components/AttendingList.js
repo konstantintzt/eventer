@@ -35,16 +35,16 @@ export default function BasicList({attendees, clickfunc, isAttending}) {
             {attendees.map((attendee) => (
               <div>
                 <ListItem variant="body1">
+                  { attendee.picture ?
+                    <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
+                    <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
+                  }
                   { attendee.name ?
                     <ListItemText primary={capitalizeString(attendee.name)} /> :
                     <ListItemText
                     disableTypography
                     primary={<StyledTypography>Anonymous Attendee</StyledTypography>}
                     />}
-                  { attendee.picture ?
-                  <Avatar sx={{ marginRight: '10px' }} src={attendee.picture} /> :
-                  <Avatar sx={{ marginRight: '10px' }} src="https://i.stack.imgur.com/34AD2.jpg" />
-                  }
                 </ListItem>
                 <Divider variant='middle'/>
               </div>
