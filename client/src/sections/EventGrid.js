@@ -35,6 +35,7 @@ function EventGrid({ events }) {
                               title={event.title}
                               desc={event.desc}
                               likes={event.likes}
+                              image={event.banner}
                               onClick={() => handleEventClick(event.id)}
                           />
                           <LikeButton likes={event.likes} id = {event.uuid} isLiked={event.liked}/>

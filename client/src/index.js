@@ -123,7 +123,7 @@ const Home = () => {
     fetchData()
 
     window.addEventListener('error', e => {
-      if (e.message === 'ResizeObserver loop limit exceeded') {
+      if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'ResizeObserver loop completed with undelivered notifications.' ) {
           const resizeObserverErrDiv = document.getElementById(
               'webpack-dev-server-client-overlay-div'
           );
