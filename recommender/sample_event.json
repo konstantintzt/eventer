@@ -1,0 +1,219 @@
+[
+    {
+      "date": 1679180672,
+      "organizer": "John Doe",
+      "zip_code": "12345",
+      "uuid": "ebc7a7d1-0f77-4e8e-8cfd-3f93e7e52359",
+      "description": "Join us for an exciting discussion on artificial intelligence.",
+      "title": "AI Symposium",
+      "type": 1
+    },
+    {
+      "date": 1679195878,
+      "organizer": "Jane Smith",
+      "zip_code": "54321",
+      "uuid": "68a57a0c-284f-4b8f-b78b-15a6745f932a",
+      "description": "Learn about the latest advancements in renewable energy.",
+      "title": "Green Energy Conference",
+      "type": 2
+    },
+    {
+      "date": 1679269479,
+      "organizer": "Sam Johnson",
+      "zip_code": "98765",
+      "uuid": "a25e12a8-2f68-4b25-a58d-77a7c16f7b01",
+      "description": "Discover the future of virtual reality and its applications.",
+      "title": "VR Expo",
+      "type": 3
+    },
+    {
+      "date": 1679312656,
+      "organizer": "Emily Williams",
+      "zip_code": "56789",
+      "uuid": "32b402af-07f0-41a3-8b5a-ec31d92d238a",
+      "description": "Explore the possibilities of quantum computing and its impact on cybersecurity.",
+      "title": "Quantum Computing Summit",
+      "type": 1
+    },
+    {
+      "date": 1679394639,
+      "organizer": "Michael Brown",
+      "zip_code": "24680",
+      "uuid": "f634af78-0e5b-4d0b-9e43-22e9d4e389eb",
+      "description": "Join industry leaders in discussing the future of autonomous vehicles.",
+      "title": "Autonomous Vehicle Conference",
+      "type": 2
+    },
+    {
+      "date": 1679448312,
+      "organizer": "Sophia Lee",
+      "zip_code": "13579",
+      "uuid": "1e3f5c9f-43a0-4b2e-a25f-881d0de1ef6a",
+      "description": "Learn about the latest trends in e-commerce and digital marketing.",
+      "title": "Digital Commerce Summit",
+      "type": 3
+    },
+    {
+      "date": 1679501632,
+      "organizer": "Jacob Davis",
+      "zip_code": "97531",
+      "uuid": "efdb1d35-3c46-4c5a-9c4b-aa4a2b3a7e15",
+      "description": "Discover the future of blockchain technology and its potential applications.",
+      "title": "Blockchain Expo",
+      "type": 1
+    },
+    {
+      "date": 1679585276,
+      "organizer": "Olivia Wilson",
+      "zip_code": "46802",
+      "uuid": "78e4c346-bb3b-49ed-824a-04c8f0e4451e",
+      "description": "Join us for a comprehensive workshop on data analytics and business intelligence.",
+      "title": "Data Analytics Workshop",
+      "type": 2
+    },
+    {
+      "date": 1679626496,
+      "organizer": "Ethan Anderson",
+      "zip_code": "80210",
+      "uuid": "6d0e6db6-9e10-454e-ba3c-0be48e503b71",
+      "description": "Learn about the latest advancements in cybersecurity and protecting your digital assets.",
+      "title": "Cybersecurity Summit",
+      "type": 3
+    },
+    {
+      "date": 1679681318,
+      "organizer": "Ava Garcia",
+      "zip_code": "24680",
+      "uuid": "246f1173-f072-4961-9f02-15b64c34ee4c",
+      "description": "Join industry leaders in exploring the future of space exploration and colonization.",
+      "title": "Space Innovation Conference",
+      "type": 1
+    },
+    {
+      "date": 1679745315,
+      "organizer": "Noah Martinez",
+      "zip_code": "97531",
+      "uuid": "cf315b5e-71da-4f57-9f2d-f3b41d6489a1",
+      "description": "Discover the latest trends in mobile app development and user experience design.",
+      "title": "Mobile App Summit",
+      "type": 2
+    },
+    {
+      "date": 1679800000,
+      "organizer": "Isabella Taylor",
+      "zip_code": "46802",
+      "uuid": "5e4a6f9c-7397-48f9-aa1c-823c690254d8",
+      "description": "Learn about the intersection of art and technology in our modern society.",
+      "title": "Art Tech Symposium",
+      "type": 3
+    },
+    {
+      "date": 1679873563,
+      "organizer": "Liam Anderson",
+      "zip_code": "80210",
+      "uuid": "57df63e0-bc7c-4f4a-a9c9-cbc1603f71b1",
+      "description": "Join us for an insightful discussion on the future of renewable energy.",
+      "title": "Renewable Energy Forum",
+      "type": 1
+    },
+    {
+      "date": 1679925402,
+      "organizer": "Mia Wilson",
+      "zip_code": "12345",
+      "uuid": "2f0fd497-3e32-4c02-9af5-6fe5efb6d906",
+      "description": "Discover the latest advancements in artificial intelligence and machine learning.",
+      "title": "AI Conference",
+      "type": 2
+    },
+    {
+      "date": 1679999000,
+      "organizer": "Lucas Thomas",
+      "zip_code": "54321",
+      "uuid": "f9f924d9-2c81-4158-a111-d1f0f01e8a0a",
+      "description": "Learn about the future of virtual reality gaming and immersive experiences.",
+      "title": "VR Gaming Expo",
+      "type": 3
+    },
+    {
+      "date": 1680074256,
+      "organizer": "Sophie Clark",
+      "zip_code": "98765",
+      "uuid": "667fa6f3-3493-49f3-8c6a-090252a7450b",
+      "description": "Join industry experts in discussing the latest trends in data science and analytics.",
+      "title": "Data Science Summit",
+      "type": 1
+    },
+    {
+      "date": 1680148678,
+      "organizer": "Jack Baker",
+      "zip_code": "97531",
+      "uuid": "d95ab8ef-d392-419f-bf7b-b4c1ebe6acdb",
+      "description": "Explore the impact of augmented reality on various industries and its potential applications.",
+      "title": "AR Innovation Conference",
+      "type": 2
+    },
+    {
+      "date": 1680212555,
+      "organizer": "Amelia Lewis",
+      "zip_code": "46802",
+      "uuid": "c4f4f20e-936b-4a55-bf8d-b56e31d7f8d7",
+      "description": "Learn about the latest advancements in quantum computing and its practical applications.",
+      "title": "Quantum Computing Symposium",
+      "type": 3
+    },
+    {
+      "date": 1680276049,
+      "organizer": "Logan Moore",
+      "zip_code": "80210",
+      "uuid": "f8a8d5d6-6a0d-44ff-a30c-43295a50397e",
+      "description": "Discover the future of automation and robotics in the manufacturing industry.",
+      "title": "Manufacturing Automation Expo",
+      "type": 1
+    },
+    {
+      "date": 1680340108,
+      "organizer": "Harper Johnson",
+      "zip_code": "24680",
+      "uuid": "e970e0d4-08a2-4eb7-a767-f9dd69d8a6e3",
+      "description": "Join us for a panel discussion on the future of sustainable architecture and design.",
+      "title": "Sustainable Architecture Forum",
+      "type": 2
+    },
+    {
+      "date": 1680384232,
+      "organizer": "Aiden Garcia",
+      "zip_code": "13579",
+      "uuid": "a06c31dc-867f-4b5a-b413-686a8d8f8979",
+      "description": "Learn about the latest trends in digital marketing and social media advertising.",
+      "title": "Digital Marketing Conference",
+      "type": 3
+    },
+    {
+      "date": 1680457239,
+      "organizer": "Ella Brown",
+      "zip_code": "12345",
+      "uuid": "1aef999b-cd9d-4f71-8357-5e1402e6f5a4",
+      "description": "Discover the future of self-driving cars and their potential impact on transportation.",
+      "title": "Autonomous Vehicle Summit",
+      "type": 1
+    },
+    {
+      "date": 1680509932,
+      "organizer": "Grayson Anderson",
+      "zip_code": "54321",
+      "uuid": "ebea42da-9c7e-4c8b-8922-6a3a66d4160d",
+      "description": "Join us for an in-depth workshop on cloud computing and its practical applications.",
+      "title": "Cloud Computing Workshop",
+      "type": 2
+    },
+    {
+      "date": 1680583515,
+      "organizer": "Luna Thomas",
+      "zip_code": "98765",
+      "uuid": "3e4e72d9-6704-4e6b-a491-4c7c4ad6e868",
+      "description": "Learn about the latest advancements in cybersecurity and protecting your digital assets.",
+      "title": "Cybersecurity Conference",
+      "type": 3
+    }
+  ]
+  
