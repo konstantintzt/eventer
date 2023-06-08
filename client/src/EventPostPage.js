@@ -104,6 +104,15 @@ const EventPostPage = () => {
                       required
                       sx={{ mb: 2 }}
                     />
+                      <TextField
+                      fullWidth
+                      label="Location"
+                      name="location"
+                      value={eventData.location}
+                      onChange={handleInputChange}
+                      required
+                      sx={{ mb: 2 }}
+                    />
                     <TextField
                       fullWidth
                       label="Event Description"

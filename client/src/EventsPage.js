@@ -139,6 +139,10 @@ function EventPage() {
                                                 <TableCell>{event.organizer}</TableCell>
                                             </TableRow>
                                             <TableRow>
+                                                <HeaderCell text="Location" />
+                                                <TableCell>{event.location}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
                                                 <HeaderCell text="Zip Code" />
                                                 <TableCell>{event.zip}</TableCell>
                                             </TableRow>
