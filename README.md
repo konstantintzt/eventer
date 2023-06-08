@@ -40,6 +40,7 @@ Feel free to change PORT and ENGINE_PORT at your convenience, though please ensu
 - 1.3. Install the Python machine learning engine dependencies: `pip install -r requirements.txt`
 
 - 1.4. Start the server: `npm start`
+If you encounter any errors with `npm start`, run the commands `npm run boot-server` and `npm run boot-engine` separately. If `npm run boot-engine` also fails to run, it's likely that your system has `python` as the command to execute python as opposed to `python3`. In this scenario, please run `python ../recommender/recommender_server.py`.
 
 ### Starting the client-side frontend:
 - 2.1. Navigate to the client directory: `cd client`
