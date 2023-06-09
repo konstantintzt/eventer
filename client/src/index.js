@@ -12,7 +12,7 @@ import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './Themes';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { invalidToken } from './utils';
+import { invalidToken, API_URL } from './utils';
 import { Test } from './components/test.js';
 
 const App = () => {
@@ -39,7 +39,7 @@ const Home = () => {
     if (invalidToken()) return;
 
     try {
-      const rawData = await fetch(`http://localhost:2902/recommend`,
+      const rawData = await fetch(API_URL+"recommend",
       {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
@@ -67,7 +67,7 @@ const Home = () => {
 
     if (searchQuery.toString() === "") return
 
-      const rawData = await fetch(`http://localhost:2902/events?${searchQuery.toString()}`,
+      const rawData = await fetch(`${API_URL}events?${searchQuery.toString()}`,
       {
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token")
@@ -105,7 +105,7 @@ const Home = () => {
           }
         }
         console.log(fetchUrl)
-        const rawData = await fetch(`http://localhost:2902/${fetchUrl}`,
+        const rawData = await fetch(`${API_URL}${fetchUrl}`,
         {
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")

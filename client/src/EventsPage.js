@@ -7,7 +7,7 @@ import { styled } from '@mui/system';
 
 import Background from './components/Background';
 import AttendingList from './components/AttendingList'
-import { invalidToken } from './utils';
+import { invalidToken, API_URL } from './utils';
 import EventPageHeader from './EventPageHeader';
 
 const StyledHeaderCell = styled(TableCell)(({ theme }) => ({
@@ -45,7 +45,7 @@ function getEventType(type) {
 
 export const getAllEvents = async () => {
     try {
-        const response = await fetch('http://localhost:2902/events');
+        const response = await fetch(API_URL+"events");
         const data = await response.json();
         console.log(data);
         return data;
@@ -63,7 +63,7 @@ function EventPage() {
     const id = params.id;
 
     const addAttendance = async () => {
-        const response = await fetch('http://localhost:2902/attend', {
+        const response = await fetch(API_URL+"attend", {
             method: 'POST',
             body: JSON.stringify({ uuid: id }),
             headers: {
@@ -87,7 +87,7 @@ function EventPage() {
 
             try {
                 console.log(id);
-                const response = await fetch(`http://localhost:2902/event/${id}`, {
+                const response = await fetch(`${API_URL}event/${id}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
                 });
                 const data = await response.json();

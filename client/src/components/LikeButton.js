@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-
+import { API_URL } from '../utils'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -29,7 +29,7 @@ export default function LikeButton({ id, likes, isLiked }) {
 
   const addLike = async(id) => {
     console.log("clicked" + id)
-    const response = await fetch('http://localhost:2902/like', {
+    const response = await fetch(API_URL+"like", {
       method: 'POST',
       body: JSON.stringify({ uuid: id, like : 1}),
       headers: {

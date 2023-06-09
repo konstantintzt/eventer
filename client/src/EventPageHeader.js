@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL, CLI_URL } from './utils';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -118,7 +119,7 @@ export default function EventPageHeader({ handleSearchSubmit, showButtons }) {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        <Button color="inherit" component={Link} to="http://localhost:3000" onClick={() => {
+                        <Button color="inherit" component={Link} to={CLI_URL} onClick={() => {
                             localStorage.setItem("homeState", "search")
                             var searchQuery = new URLSearchParams()
                             searchQuery.append("after", Math.floor(Date.now()))

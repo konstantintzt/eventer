@@ -12,3 +12,6 @@ export const invalidToken = () => {
         return true
     }
 }
+
+export const API_URL = "http://localhost:2902/"
+export const CLI_URL = "http://localhost:3000/"

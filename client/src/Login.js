@@ -6,6 +6,7 @@ import rawpixel_holographic_background from './images/rawpixel_holographic-backg
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid'
 import { alpha } from '@mui/material';
+import { API_URL } from './utils';
 
 const styles = {
     patternedBackground: {
@@ -35,7 +36,7 @@ const Login = redirect => {
 
     const handleLoginSuccess = async (credentialResponse) => {
         console.log(credentialResponse);
-        const response = await fetch('http://localhost:2902/auth/verify_token', {
+        const response = await fetch(API_URL+"/verify_token", {
             method: 'POST',
             body: JSON.stringify(credentialResponse),
             headers: {

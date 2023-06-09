@@ -15,8 +15,9 @@ import Background from './components/Background';
 import Login from './Login';
 import { invalidToken } from './utils';
 import { Link, useNavigate } from 'react-router-dom';
-
 import EventPageHeader from './EventPageHeader';
+import { API_URL } from './utils';
+
 
 const EventPostPage = () => {
   const [eventData, setEventData] = useState({
@@ -50,7 +51,7 @@ const EventPostPage = () => {
 
   const addNewEvent = async (eventData) => {
     eventData.date = Math.floor(new Date(eventData.date).valueOf());
-    const response = await fetch('http://localhost:2902/event/new', {
+    const response = await fetch(API_URL+"event/new", {
       method: 'POST',
       body: JSON.stringify(eventData),
       headers: {
