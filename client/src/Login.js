@@ -36,7 +36,7 @@ const Login = redirect => {
 
     const handleLoginSuccess = async (credentialResponse) => {
         console.log(credentialResponse);
-        const response = await fetch(API_URL+"/verify_token", {
+        const response = await fetch(API_URL+"auth/verify_token", {
             method: 'POST',
             body: JSON.stringify(credentialResponse),
             headers: {

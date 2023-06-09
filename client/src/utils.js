@@ -13,5 +13,5 @@ export const invalidToken = () => {
     }
 }
 
-export const API_URL = "http://localhost:2902/"
-export const CLI_URL = "http://localhost:3000/"
+export const API_URL = "http://tzantchev.com/eventerapi/"
+export const CLI_URL = "https://faf4-2607-f010-2a7-1007-f00-7a51-63da-1410.ngrok-free.app/"
