@@ -119,7 +119,7 @@ export default function EventPageHeader({ handleSearchSubmit, showButtons }) {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        <Button color="inherit" component={Link} to={CLI_URL} onClick={() => {
+                        <Button color="inherit" component={Link} to="/" onClick={() => {
                             localStorage.setItem("homeState", "search")
                             var searchQuery = new URLSearchParams()
                             searchQuery.append("after", Math.floor(Date.now()))
