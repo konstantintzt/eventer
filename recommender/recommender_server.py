@@ -8,7 +8,7 @@ model = SentenceTransformer('average_word_embeddings_glove.6B.300d')
 app = Flask(__name__)
 print("Model initialized.")
 
-import os, operator, math
+import os, operator, math, random
 from dotenv import load_dotenv
 load_dotenv("../server/.env")
 PORT = os.getenv('ENGINE_PORT')
@@ -51,19 +51,22 @@ def recommend():
 	if request.method == 'POST':
 		uuid = json.loads(request.data.decode())["uuid"]
 		db = get_database()
-		# four collections available: events, users, likes, attendances		
+		# four collections available: events, users, likes, attendances	
 		attended, available = get_attended_and_available(db, uuid)
 
 		attended = rename_property(attended, "zip", "zip_code")
-		available = rename_property(available, "zip", "zip_code")
-		available = retrieve_likes(db, available, uuid)
-						
-		scores = get_scores(model, attended, available)
-		sorted_idxs = sorted(scores, key=scores.get, reverse=True)
-		sorted_events = []
-		for event_id in sorted_idxs:
-			sorted_events.append([replace_id(i) for i in available if i["uuid"] == event_id][0])
-		# print(sorted_events)
-		return {"ordered_events": sorted_events}
+		available = rename_property(available, "zip", "zip_code")	
+		if len(attended) == 0:
+			return {"ordered_events": [replace_id(i) for i in random.sample(available, len(available))]}
+		else:
+			available = retrieve_likes(db, available, uuid)
+
+			scores = get_scores(model, attended, available)
+			sorted_idxs = sorted(scores, key=scores.get, reverse=True)
+			sorted_events = []
+			for event_id in sorted_idxs:
+				sorted_events.append([replace_id(i) for i in available if i["uuid"] == event_id][0])
+			# print(sorted_events)
+			return {"ordered_events": sorted_events}
 
 app.run(port=PORT)
