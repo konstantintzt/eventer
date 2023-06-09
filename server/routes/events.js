@@ -21,7 +21,10 @@ router.get("/", passport.authenticate( 'jwt',{ session: false }), async (req, re
         value.search = undefined
         value.before = undefined
         value.after = undefined
-        var results = await database.getDB().collection("events").find(value).toArray()
+
+        const sort = { date: -1 };
+
+        var results = await database.getDB().collection("events").find(value).sort(sort).toArray()
         
         const liked_events = await database.getDB().collection("likes").find({user : req.user.uuid}).toArray()
 
