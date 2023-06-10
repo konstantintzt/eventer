@@ -18,7 +18,7 @@ import pgeocode, copy
 
 def get_location(zip_code: str):
     query = pgeocode.Nominatim('us').query_postal_code(str(zip_code))
-    location = query['place_name'] + ', ' + query['county_name']
+    location = str(query['place_name']) + ', ' + str(query['county_name'])
     return location
 
 def compare(model, item1: str, item2: str):
